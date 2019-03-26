@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>三点运算符</title>
+</head>
+<body>
+<script type="text/javascript">
+	// <!-- 1.用途 -->
+	// rest(可变)参数
+	// 用来取代arguments，但比arguments灵活，只能是最后部分形参参数
+	function fun(...values) {
+		console.log("arguments:"+arguments);
+		// arguments.forEach(function(item,index){
+		// 	console.log(item,index);
+		// })
+		console.log(values);
+		values.forEach(function(item,index){ 
+			console.log("item:"+item,"index:"+index);
+		})
+	}
+	fun(1,2,3);
+	// 2.扩展运算符
+	let arr1 = [2,3,4,5];
+	let arr2 =[1,...arr1,6];
+	console.log(arr2);
+	function foo(...value){
+		console.log(value);
+		console.log("...value:", ...value);
+		value.forEach(function(item,index){
+		console.log(item,index);
+	})
+	}
+foo(22,33,44);
+</script>
+</body>
+</html>

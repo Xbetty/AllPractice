@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>选择排序</title>
+  </head>
+  <body>
+    <script>
+      var arr = [1,5,3,4,2]
+      // function selectionSort (data) {
+      //   for (var i = 0; i < data.length; i++) {
+      //     console.log('data', data)
+      //     var min = data[i]
+      //     var temp
+      //     var index = i
+      //     for (var j = i+1; j < data.length; j++) {
+      //       if (data[j] < min) {
+      //         min = data[j]
+      //         index = j
+      //       }
+      //     }
+      //     temp = data[i]
+      //     data[i] = min
+      //     data[index] = temp
+      //   }
+      //   return data
+      // }
+      // console.log('选择排序selectionSort', selectionSort([1,5,3,4,2]))
+      function selectionSort (arr) {
+        for (var i = 0; i <arr.length - 1; i++){
+          var min = arr[i]
+          var index = i
+          for(var j = i + 1; i< arr.length; j++){
+            if (arr[j] < min){
+              min = arr[j]
+              index = j
+            }
+          }
+          var temp = arr[i]
+          arr[index]=temp
+          arr[i] = min
+        }
+        return arr
+      }
+      console.log(selectionSort(arr))
+    </script>
+  </body>
+</html>

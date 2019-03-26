@@ -1,0 +1,38 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/logs/logs",
+    "pages/testb/testb",
+    "pages/testone/testone"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "xzt的第一个小程序",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "position": "bottom",
+    "list": [{
+      "pagePath": "pages/index/index",
+      "text": "首页",
+      "iconPath": "images/home0.png",
+      "selectedIconPath": "images/home1.png"
+    },
+    {
+      "pagePath": "pages/testb/testb",
+      "text": "信息",
+      "iconPath": "images/image0.png",
+      "selectedIconPath": "images/image1.png"
+    },
+    {
+      "pagePath": "pages/testone/testone",
+      "text": "组件",
+      "iconPath": "images/share0.png",
+      "selectedIconPath": "images/share1.png"
+    }]
+  },
+  "color": "#000000",
+  "selectedColor": "red",
+  "borderStyle": "black"
+}

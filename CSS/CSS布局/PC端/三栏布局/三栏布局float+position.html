@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>三栏布局：方式二</title>
+	<style type="text/css">
+		*{
+			margin:0px;
+			padding: 0px;
+		}
+		.left{
+			width: 200px;
+			height: 300px;
+			position: absolute;
+			top: 0;
+			left: 0;
+			background-color: yellow;
+		}
+		.middle{
+			height: 300px;
+			margin-left: 210px;
+			margin-right: 210px;
+			background-color: red;
+		}
+		.right{
+			width: 200px;
+			height: 300px;
+			position: absolute;
+			top: 0px;
+			right: 0px;
+			background-color: green;
+		}
+	</style>
+</head>
+<body>
+	<!-- 使用position定位实现，即左右两栏使用position进行定位，中间栏使用margin进行定位 -->
+	<div class="left">左栏</div>
+	<div class="middle">中间栏</div>
+	<div class="right">右栏</div>
+	<!-- 好处是：html结构结构正常；缺点是：当父元素有内外边距时，会导致中间栏的位置出现偏差 -->
+</body>
+</html>

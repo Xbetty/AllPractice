@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<li>1</li>
+	<li>2</li>
+	<li>3</li>
+	<li>4</li>
+<script type="text/javascript">
+	// 1. join()
+  // var arr = [1,2,3,4];
+  // console.log(arr.join()); // 1,2,3,4
+  // console.log(arr.join("-")); // 1-2-3-4
+
+
+// 2. push()和pop()
+// var arr = ["Lily", "Lucky" , "Tom"]
+// var count = arr.push("Jack", "Xbetty");
+// console.log(count); // 5
+// console.log(arr); // ["Lily", "Lucky" , "Tom" , "Jack", "Xbetty"]
+// var item = arr.pop();
+// console.log(item); // Xbetty
+// console.log(arr); // ["Lily", "Lucky" , "Tom" , "Jack"]
+
+
+// 3. shift()和unshift()
+// var arr = ["Lily", "Lucky" , "Tom"]
+// var count = arr.unshift("Jack", "Xbetty");
+// console.log(count); // 5
+// console.log(arr); // [ "Jack", "Xbetty", "Lily", "Lucky" , "Tom"]
+// var item = arr.shift();
+// console.log(item); // Jack
+// console.log(arr); // ["Xbetty", "Lily", "Lucky" , "Tom"]
+
+
+ // 4. sort()
+//  var arr1 = ["a","b","c","d"]
+// console.log(arr1.sort()); // ["a","b","c","d"]
+// var arr2 = [13, 24, 51 ,3]
+// console.log(arr2.sort()); // [13, 24, 3, 51]
+// console.log(arr2); // [13, 24, 3, 51] （原数组被改变）
+
+
+// function compare(value1, value2) {
+//   if(value1 < value2) {
+//     return -1;
+//   } else if (value1 > value2) {
+//     return 1;
+//   } else {
+//     return 0;
+//   }
+// }
+// arr2 = [13, 24, 51 ,3];
+// console.log(arr2.sort(compare)); // [3, 13, 24, 51]
+
+// function compare(value1, value2) {
+//   if(value1 < value2) {
+//     return 1;
+//   } else if (value1 > value2) {
+//     return -1;
+//   } else {
+//     return 0;
+//   }
+// }
+// arr2 = [13, 24, 51 ,3];
+// console.log(arr2.sort(compare)); // [51, 24, 13, 3]
+
+
+// function compare(value1, value2) {
+//   return value1 - value2
+// }
+// arr2 = [13, 24, 51 ,3];
+// console.log(arr2.sort(compare)); // [3, 13, 24, 51]
+
+function compare(value1, value2) {
+   return value2 - value1
+}
+arr2 = [13, 24, 51 ,3];
+console.log(arr2.sort(compare)); // [51, 24, 13, 3]
+
+// 5. reverse()
+// var arr = [1,2,3,4];
+// console.log(arr.reverse()); // [4,3,2,1]
+// console.log(arr); // [4,3,2,1]（原数组改变）
+
+// 6. concat()
+// var arr = [1,2,3,4];
+// var arrCopy1 = arr.concat(5,6,[7,8])
+// console.log(arrCopy1); // [1,2,3,4,5,6,7,8]
+// console.log(arr); // [1,2,3,4]（原数组未改变）
+
+// var arrCopy2 = arr.concat([5,6,[7,8]])
+// console.log(arrCopy2); // [1,2,3,4,5,6,Array[2]]
+// console.log(arrCopy2[6]); // [7,8]
+
+// 7. slice()
+// var arr = [1,2,3,4,5,6];
+// var arrCopy1 = arr.slice(1);
+// var arrCopy2 = arr.slice(1,4);
+// var arrCopy3 = arr.slice(1,-2);
+// var arrCopy4 = arr.slice(-4,-1);
+// console.log(arr); // [1,2,3,4,5,6]（原数组不变）
+// console.log(arrCopy1); // [2,3,4,5,6]
+// console.log(arrCopy2); // [2,3,4]
+// console.log(arrCopy3); // [2,3,4]
+// console.log(arrCopy4); // [3,4,5]
+
+// 8. splice()
+
+// var arr = [1,2,3,4,5,6];
+// var arrRemoved1 = arr.splice(0,2);
+// console.log(arr); // [3,4,5,6]
+// console.log(arrRemoved1); // [1,2]
+// var arrRemoved2 = arr.splice(2,0,4,6);
+// console.log(arr); // [3,4,4,6,5,6]
+// console.log(arrRemoved2); // []
+// var arrRemoved3 = arr.splice(1,1,2,9);
+// console.log(arr); // [3,2,9,4,6,5,6]
+// console.log(arrRemoved3); // 4
+
+// 9. indexOf和lastIndexOf()
+
+// var arr = [1,2,3,4,4,3,2,1];
+// console.log(arr.indexOf(3)); // 2
+// console.log(arr.lastIndexOf(3)); // 5
+// console.log(arr.indexOf(3,2)); // 2
+// console.log(arr.lastIndexOf(3,4)); // 2
+// console.log(arr.indexOf("1")); // -1
+
+
+// 10. forEach()
+// var arr = [1,2,3,4];
+// arr.forEach(function(x,index,a){
+//   console.log(x+'|'+index+'|'+(a ===arr));
+// });
+// 1|0|true
+// 2|1|true
+// 3|2|true
+// 4|3|true
+
+// 11. map()
+// var arr = [1,2,3,4];
+// var arr2 = arr.map(function(item){
+//   return item*item;
+// });
+// console.log(arr2); // [1,4,9,16]
+
+// 12. filter()
+// var arr = [1,2,3,4,5,6];
+// var arr2 = arr.filter(function(x,index){
+//   return index % 2 === 0 || x > 5
+// });
+// console.log(arr2); // [1,3,5,6]
+
+// 13. every()
+// var arr = [1,2,3,4,5,6];
+// var arr2 = arr.every(function(x){
+//   return x < 10;
+// });
+// console.log(arr2); // true
+// var arr3 = arr.every(function(x){
+//   return x < 3;
+// });
+// console.log(arr3); // false
+
+// 14. some()
+
+// var arr = [1,2,3,4,5,6];
+// var arr2 = arr.some(function(x){
+//   return x < 3;
+// });
+// console.log(arr2); // true
+// var arr3 = arr.every(function(x){
+//   return x < 1;
+// });
+// console.log(arr3); // false
+
+// 15. reduce()和reduceRight()
+// var values = [1,2,3,4,5];
+// var sum = values.reduceRight(function(prev,cur,index,array){
+//   return prev + cur;
+// },10);
+// console.log(sum); // 25
+
+// 三、检测数组
+// var arr = new Array("张三","李四","王五");
+//   console.log(arr instanceof Array); // true
+
+// var arr = ["red","blue","green"];
+// console.log(arr.toString()); // red,blue,green
+// console.log(arr.valueOf()); // ["red", "blue", "green"]
+// console.log(arr); // ["red", "blue", "green"]
+
+
+// var arr = ["red","blue","green"];
+//   console.log(arr.toLocaleString()); // red,blue,green
+//   console.log(arr.join(',')); // red,blue,green
+
+// 伪数组转数组的方法
+ // var aLi = document.querySelectorAll('li');
+ //  var arr = [];
+ //  for (var i = 0; i < aLi.length; i++){
+ //    arr[arr.length] = aLi[i].innerHTML;
+ //  }
+ //  console.log(arr); // ["1", "2", "3", "4"]
+
+
+ // function test(){
+ //    var arg = Array.from(arguments);
+ //    arg.push(5);
+ //    console.log(arg); // 1,2,3,4,5
+ //  }
+ //  test(1,2,3,4)
+
+//  var arr =Array.prototype.slice.call({
+//   0:"like",
+//   1:12,
+//   2:true,
+//   length:3
+// });
+//  console.log(arr); // ["like", 12, true]
+</script>
+</body>
+</html>

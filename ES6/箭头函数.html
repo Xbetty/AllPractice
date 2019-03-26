@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>箭头函数</title>
+</head>
+<body>
+	<button id="btn1">测试箭头函数的按钮1</button>
+	<button id="btn2">测试箭头函数的按钮2</button>
+<script type="text/javascript">
+	//---------------------------------------
+	//ES5函数系列
+	// let fun = function () {
+	// 	console.log("我是ES5的函数")
+	// }
+	// fun();
+
+
+	//---------------------------------------
+	//ES6函数系列
+	let fun = () => console.log('我是箭头函数');
+	fun();
+	//------------形参的情况
+	//1.没有形参的情况
+	let fun1 = () => console.log('我是没有形参的箭头函数')
+	fun1();
+	//2.只有一个形参的时候,括号（）可以省略
+	// let fun2 = (a) => console.log('我有一个参数a：', a)；
+	let fun2 = a => console.log('我有一个参数a：', a);
+	fun2("哈哈哈")
+	//3.两个及两个以上的形参的时候,括号（）不能省略
+	let fun3 = (x, y) => console.log(x,y);
+	fun3(25, 36);
+	//-------------函数体的情况
+	//1.函数体只有一条语句或者是表达式的时候，大括号{}可以省略，会自动返回语句执行的结果或者是表达式的而结果
+	let fun4 = (x, y) => x + y;
+	console.log(fun4(24,36));
+	//2.函数体不止一条语句或者是表达式的情况，大括号{}不可以省略,并且要用return语句返回
+	let fun5 = (x, y) => {
+		console.log(x, y);
+		return x + y
+	}
+	console.log(fun5(25, 39))
+
+	// 箭头函数的特点:
+	// 1.简洁
+	// 2.箭头函数没有自己的this，箭头函数的this不是调用的时候决定的，而是在定义的时候处在的对象就是它的this
+	// 3.扩展：箭头函数的this看外层的是否有函数，如果有，外层函数的his就是内部箭头函数的this，如果没有，则this是window
+
+	// -----------------------测试箭头函数
+	let btn1 = document.getElementById("btn1");
+	let btn2 = document.getElementById("btn2");
+	btn1.onclick = function() {
+		alert("按钮一的this："+ this);
+	}
+	// btn2.onclick = () => {
+	// 	alert("按钮二的this："+ this);
+	// }
+	// let obj = {
+	// 	name: "箭头函数",
+	// 	getName: function(){
+	// 		btn2.onclick = () => {
+	// 			console.log("按钮二的this："+ this); // this指向obj
+	// 		}
+	// 	}
+	// }
+	// obj.getName();
+	let obj = {
+		name: "箭头函数",
+		getName: () => {
+			btn2.onclick = () => {
+				console.log("按钮二的this："+ this); // this指向window
+			}
+		}
+	}
+	obj.getName();
+</script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+  </head>
+  <body>
+    <script>
+      function MostStr (str) {
+        // 输入的字符串去空格
+        str = str.replace(/\s+/g,'');
+        // 输入的字符串去掉空格和逗号转成数组
+        var strArr = str.replace(/\s+|,/g,'').split("");
+        // 单词数组
+        var wordArr = str.split(",");
+        // 出现最多的次数
+        var maxlength = 0;
+        // 出现次数最多的字符
+        var maxStr = '';
+        // 含有次数最多的字符的单词数组
+        var existWordArr = [];
+        for (let i in strArr) {
+          var len = strArr.filter((item) => item === strArr[i]).length;
+          if(len > maxlength) {
+            maxlength = len;
+            maxStr = strArr[i];
+            existWordArr = wordArr.filter(item => item.includes(maxStr));
+          }
+        }
+        return maxStr + ',' + existWordArr.toString();
+      }
+      
+      var str = "okcoin,orange,apple"
+      console.log(MostStr(str))
+    </script>
+  </body>
+</html>

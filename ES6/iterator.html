@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<script type="text/javascript">
+	// 一、概念
+	// iterator是一种接口机制，为各种不同的数据结构提供统一的访问机制。
+	// 二、作用
+	// 为各种数据结构，提供了一个统一的、简便的访问接口；
+	// 使得数据结构的成员能够按某种次序排列；
+	// ES6创造了一个新的遍历命令for...of循环，iterator接口主要供for...of消费。
+	// 三、工作原理
+	// 创建一个指针对象（遍历器对象），指向数据结构的起始位置。
+	// 第一次调用next方法，指针自动指向数据结构的第一个成员。
+	// 接下来不断调用next方法，指针会一直往后移动，知道指向最后一个成员。
+	// 每调用next方法返回的是一个包含value和done的对象（value：当前成员的值，done：布尔值）
+	// value表示当前成员的值，done对应的布尔值表示当前的数据结构是否遍历结束
+	// 当遍历结束的时候返回的value值是undefined，done的值为true。
+	// 原生具备iterator接口的数据（可用for of遍历）
+	// 四、扩展理解
+	// 当数据结构上部署了Symbol.iterator接口，该数据就是可以用for of遍历
+	// 当使用for of去遍历目标数据的时候，该数据会自动去找Symbol.iterator属性
+	//Symbol.iterator属性指向对象的默认遍历器方法
+	function myIterator(arr) { //iterator接口
+		let nextIndex=0; // 记录指针的位置
+		return { //遍历器对象
+			next: function(){
+				return nextIndex < arr.length ? {value: arr[nextIndex++], done: false} : {value: 'undefined', done:true}
+			}
+		}
+	}
+	//准备一个数据
+	let arr = [1,2,3,4,'asd'];
+	let iteratorObj = myIterator(arr);
+	console.log(iteratorObj.next());
+	console.log(iteratorObj.next());
+	console.log(iteratorObj.next());
+	console.log(iteratorObj.next());
+	console.log(iteratorObj.next());
+	console.log(iteratorObj.next());
+
+
+
+
+	// 将iterator接口部署到指定的数据类型上，可以使用for of去循环遍历
+	// 数组，字符串，arguments，set容器，map容器
+	for (let i of arr) {
+		console.log(i)
+	}
+	let str = 'dfnajgag';
+	for(let i of str) {
+		console.log(i)
+	}
+
+
+
+
+	function fun (){
+		for (let i of arguments){
+			console.log(i)
+		}
+	}
+	fun(2,4,5,'6f','ert','fsa');
+	//对象没有iterator接口
+	// let obj = {username: 'xzt', age: 21};
+	// for(let i of obj) {
+	// 	console.log(i)
+	// }
+
+	// 等同于在在指定的数据结构内部署了iterator接口
+	// 当使用for of去遍历某一个数据结构时，首先先去找Symbol.iterator，找到了就去遍历，没有找到就不能遍历并报错xxx is not iterator
+	let targetData = {
+		[Symbol.iterator]:function(){
+			let nextIndex=0; // 记录指针的位置
+			return { //遍历器对象
+				next: function(){
+					return nextIndex < this.length ? {value: this[nextIndex++], done: false} : {value: 'undefined', done:true}
+				}
+			}
+		}
+	}
+
+	// 使用三点运算符，解构赋值，默认去调用iterator接口
+	let arr2= [1,8]
+	let arr3=[2,3,4,5,6,6]
+	arr2=[1,...arr3,8]
+	console.log(arr2)
+	let [a,b,c,d] = arr2
+	console.log(a,b,c,d)
+
+
+
+	let arr0 =['a','b','c'];
+	let iter = arr0[Symbol.iterator]();
+	iter.next();
+	iter.next();
+	iter.next();
+	
+
+</script>
+</body>
+</html>

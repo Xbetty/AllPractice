@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<script type="text/javascript">
+	var data = [];
+	for (var k =0; k<3; k++){
+		var j=k;
+		console.log(j)
+		data[k] = function (){
+			console.log(1111)
+			console.log(j)
+		}
+	}
+	data[0]();
+	data[1]();
+	data[2]();
+</script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<script type="text/javascript">
+	//变量与执行上下文有密切关系
+
+	var a = 10; //全局上下文中的变量
+	(function (){
+		var b = 20; //function上下文中的局部变量
+	})();
+	console.log(a); //10
+	// console.log(b); //报错，全局变量‘b’没有声明
+	//-------------------------------------------
+	//当前ECMAScript规范指出独立作用域只能通过‘函数（function）’代码类型的执行上下文创建。也就是说，相对于C/C++来说，ECMAScript里的for循环并不能创建一个局部的上下文。
+	for (var k in {a:1,b:2}){
+		console.log('k', k);
+	}
+	console.log('for外面:',k)//尽管循环结束，但变量k依然存在当前作用域
+
+	function foo(x,y,z){
+		//声明的函数参数数量arguments(x,y,z)
+		console.log(foo.length);
+		 // 真正传进来的参数个数(only x, y)
+  		console.log(arguments.length); // 2
+  		//参数的callee是函数自身
+  		alert(arguments.callee === foo);
+  		//参数共享
+  		alert(x===arguments[0]);
+  		console.log('x1:',x);
+  		arguments[0]=20;
+  		console.log('x2:',x);
+  		x=30;
+  		console.log(arguments[0]);
+  		//不过，没有传进来的参数z，和参数的第3个索引值是不共享的
+  		z=40;
+  		console.log(arguments[2]);
+  		arguments[2]=50;
+  		console.log('z:',z);
+  		alert(z===arguments[2]);
+  		console.log(arguments.length); // 2
+	}
+	foo(10,20);
+</script>
+</body>
+</html>

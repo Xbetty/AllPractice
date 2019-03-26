@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>理解对象以及对象的创建方式</title>
+</head>
+<body>
+<script type="text/javascript">
+	//-------------------------
+	//1.利用Object构造函数创建单个对象
+	//-------------------------
+	var person = new Object ();
+	person.name = "xzt";
+	person.age = 0
+	person.job = "student"
+	person.sayName = function () {
+		alert(this.name);
+	}
+	console.log('利用Object构造函数创建单个对象', person)
+	console.log('--------------------');
+
+
+
+	//-------------------------
+	//2.利用对象字面量创建单个对象
+	//-------------------------
+	var person1 = {
+		name: "xzt",
+		age: 1,
+		job: "student",
+		sayName: function (){
+			alert(this.name)
+		}
+	}
+	console.log('利用对象字面量创建单个对象', person1)
+	console.log('--------------------');
+	//-------------------------
+	//虽然Object构造函数或对象字面量都可以用来创建单个对象，但这些方式有个明显的缺点：使用同一个接口创建多个对象会产生大量的重复代码，为解决这个问题，人们开始使用工厂模式的一种变体。
+	//-------------------------
+
+
+	//-------------------------
+	//3.工厂模式
+	//-------------------------
+	//考虑在ECMAScript中无法创建类，开发人员就发明了一种函数，用函数来封装特定接口创建对象的细节。
+	function createPerson (name, age, job) {
+		var o = new Object ();
+		o.name = name;
+		o.age = age;
+		o.job = job;
+		o.sayName = function (){
+			alert(this.name)
+		};
+		return o;
+	}
+	var person21 = createPerson("xzt", 2, "SoftWare Engineer");
+	var person22 = createPerson("xxx", 2, "Student");
+	console.log('工厂模式21', person21);
+	console.log('工厂模式22', person22);
+	console.log('--------------------');
+	//createPerson（）函数能够根据接受的参数来构建一个包含所有必要信息的Person对象，可以无数次的调用这个函数，而每次它都会返回一个包含三个属性一个方法的对象。工厂模式虽然解决了多个相似对象的问题，但却没有解决对象识别的问题（即怎样知道一个对象的类型）。
+	//--------------------------
+	//工厂模式的优点：封装了对象的创建细节
+	//工厂模式的缺点：没有解决对象识别的问题，即不能知道对象的类型。
+	//-------------------------
+	//-------------------------
+
+
+
+	//-------------------------
+	//4.构造函数模式
+	//ECMAScript中的构造函数可以用来创建特定类型的对象。像Object和Array这样的原生构造函数，在运行时会自动出现在执行环境中。此外，也可以创建自定义的构造函数，从而定义自定义对象类型的属性和方法。
+	function Person(name, age, job){
+		this.name = name;
+		this.age = age;
+		this.job = job;
+		this.sayName = function (){
+			alert(this.name);
+		}
+	}
+	var person31 = new  Person('xzt', 3, "student");
+	var person32 = new Person('xxx', 3, "student");
+	console.log('构造函数模式', person31);
+	console.log('构造函数模式', person32);
+	console.log('--------------------');
+	//--------------------------
+	//构造函数的优点：1.封装了构造对象的细节；2.解决了实例区分的问题
+	//构造函数的缺点：1.每个方法都要在实例上创建一遍，即公有属性和方法不能公有
+	//--------------------------
+
+	//对象的constructor属性最初是用来标识对象类型的。但是提到检测对象类型，还是instanceof操作符更可靠一些。
+	//创建自定义的构造函数意味着将来可以把它的实例标识为一种特定的类型，而这正是构造函数模式胜过工厂模式的地方。
+
+
+
+	//--------------------------
+	//工厂VS构造函数
+	//--------------------------
+	//构造函数模式与工厂模式的显著区别
+	//1.构造函数没有显式的创建对象  2.构造函数直接将属性和方法付给了this对象  3.构造函数没有return语句
+
+
+
+
+	//--------------------------
+	//5.原型模式
+	//--------------------------
+	//原型模式：我们创建的每一个函数（包含普通函数和构造函数）都有一个原型（prototype）属性，这个属性是一个指针，指向一个对象，而这个对象的用途就是包含特定类型的所有实例共享的属性和方法。如果按照字面意思来理解，那么prototype就是通过调用构造函数而创建的那个对象实例的原型对象。使用原型对象的好用就是可以让所有对象实例共享它所包含的属性和方法。换句话说，就是不必子啊构造函数中定义对象实例的信息，而是将这些信息直接添加到原型对象中。
+	function Person(){
+
+	}
+	Person.prototype.name = "xzt";
+	Person.prototype.age = 4;
+	Person.prototype.job = "student";
+	Person.prototype.sayName = function(){
+		console.log('原型模式:',this.name);
+	}
+	var person41=new Person();
+	person41.sayName();
+	var person42=new Person();
+	person41.sayName();
+	// alert(person42.sayName==person41.sayName);
+	console.log('--------------------');
+	//在此，我们将sayName()方法和所有属性直接添加到了Person的prototype属性中，构造函数变成了空函数。即便如此，也仍然可以用调用构造函数来创建新对象，而且新对象还会具有相同的属性和方法。但与构造函数模式不同的是，新对象的这些属性和方法是由所有实例共享的。换句话说，person41和person42访问的都是同一组属性和同一个撒野Name（）函数。
+
+
+	//--------------------------
+	//原型知识：
+	//--------------------------
+	//1.原型对象哪里来的？
+	//函数一旦创建就会拥有原型prototype
+	//2.prototype的类型
+	//prototype是一个对象，其中一个特殊的属性是constructor，这个属性值指向这个类本身
+	//3.in操作符
+	//检测是否可以通过对象访问某个key
+	//4.通过new操作符调用构造函数产生的对象是实例，而实例拥有一个__proto__属性，这个属性指向实例所属类型的原型
+
+
+
+	//--------------------------
+	//原型模式的优缺点
+	//--------------------------
+	//优点：解决了公有属性和方法公有的问题
+	//缺点：1.构造过程中不能传递参数  2.所有的实例共享属性和方法，毫无“隐私”可言
+
+
+	//--------------------------
+	//理解原型对象
+	//--------------------------
+	//无论什么时候，只要创建了一个新函数，就会根据一组特定的规则为该函数创建一个prototype属性，这个属性指向函数的原型对象。在默认情况下，所有原型对象都会自动获得一个constructor（构造函数）属性，这个属性是一个指向prototype属性所在函数的指针。就拿前面的例子来说，Person.prototype.constructor指向Person。而通过这个构造函数，我们还可以继续为原型对象添加其他属性和方法。
+	//创建了自定义的构造函数之后，其原型对象默认只会取得constructor属性；至于其他方法，则都是从Object继承而来的。当调用构造函数创建一个新实例后，该实例的内部将包含一个指针（内部属性），指向构造函数的原型对象。ECMA-262第5版中管这个指针叫[[Prototype]]。虽然在脚本中没有标准的方式访问[[prototype]],但Firefox，Safari和Chrome在每个对象上都支持一个属性__proto__；而在其他实现中，这个属性对脚本则是完全不可见的。不过，要明确的真正重要的一点就是，这个连接存在与实例和构造函数的原型对象之间，而不是存在与实例与构造函数之间。
+
+
+
+	//--------------------------
+	//原型链查找机制
+	//--------------------------
+	//当访问一个对象某个属性（方法）时，会先从一个对象的私有属性（方法）中查找，如果找到则返回，否则通过__proto__向其原型查询，若无则通过原型的__proto__继续查找，一只找到积累Object为止。
+	//每当代码读取某个对象的某个属性时，都会执行一次搜索，目标时具有给定名字的属性。搜索首先从对象实例本身开始。如果在实例中找到了具有给定名字的属性，则返回该属性的值；如果没有找到，则继续搜索指针指向的原型对象，在原型对象中查找具有给定名字的属性。如果在原型对象中找到了这个属性，则返回该属性的值。
+
+
+	//--------------------------
+	//原型与in操作符
+	//--------------------------
+	//两种方式使用in操作符：单独使用和在for-in循环中使用。在单独使用时，in操作符会在通过对象能够访问给定属性时返回true，无论该属性存在于实例中还是原型中。
+	//由于in操作符只要通过对象能够访问到属性就能返回true，hasOwnProperty（）只在属性存在实例中才返回true，因此只要in操作符返回true而hasOwnProperty（）返回false，就可以确定属性是原型中的属性。
+	//在使用for-in循环时，返回的是所有能够通过对象进行访问的、可枚举的（enumerated）属性，其中，既存在于实例中的属性，也包括存在于原型中的属性。屏蔽了原型中不可枚举属性的实例也会在for-in循环中返回，因为根据规定，所有开发人员定义的属性都是可枚举的。
+	//----------------------
+	//要取得对象上所有可枚举的实例属性，可以使用ECMAScript5的Object.keys（）方法，这个方法接收一个对象作为参数，返回一个包含所有可枚举属性的字符串数组。
+	//如果你想要得到所有实例属性，无论它是否可以枚举，都可以使用Object.getOwnPropertyNames（）方法，结果包含了不可枚举的constructor属性。
+	//Object.keys()和Object.getOwnPropertyNames（）方法都可以用来替代for-in循环。
+
+	//--------------------------
+	//原型的动态性
+	//--------------------------
+	//由于在原型中查找值的过程是一次搜索，因此我们对原型对象所做的任何修改都能够立即从实例上反应出来，即使是先创建了实例后修改原型也是如此。
+	var friend = new Person();
+	Person.prototype.sayHi = function(){
+		alert('原型的动态性:say hi');
+	};
+	friend.sayHi();
+	//以上代码先创建了Person的一个实例，并将其保存在friend中。然后，下一条语句在Person.prototype中添加了一个方法sayHi()。即使friend实例是在添加新方法之前创建的，但它仍然可以访问这个新方法。其原因可以归结为实例与原型之间的松散连接关系。当我们调用friend.sayHi()时，首先会在实例中搜索名为sayHi的属性，在没找到的情况下，会继续搜索原型。因为实例与原型之间的连接只不过是一个指针，而非一个副本，因此就可以在原型中找到新的sayHi属性并返回保存在那里的函数。
+	//尽管可以随时为原型添加属性和方法，并且修改能够立即在所有对象实例中反应出来，但如果是重写整个原型对象，那么情况就不一样了。我们知道，调用构造函数时会为实例添加一个指向最初原型的[[Prototype]]指针，而把这个原型修改为另外一个对象就等于切断了构造函数与最初原型之间的联系。
+	//记住：实例中的指针仅指向原型，而不指向构造函数。
+	function Person5(){
+
+	}
+	var friend5 = new Person5();
+	Person5.prototype={
+		constructor:Person5,
+		name:'xzt',
+		age:21,
+		job:'student',
+		sayName: function(){
+			alert('更改原型的指向',this.name);
+		}
+	}
+	// friend5.sayName();//error
+	//在这个例子中，我们先创建了Person的一个实例，然后又重写了其原型对象。然后在调用friend5.sayName()时发生错误，因为friend指向的原型中不包含以该名字命名的属性。重写原型对象切断了现有原型与任何之前已经存在的对象实例之间的联系，它们引用的仍然时最初的原型。
+
+
+
+
+	//--------------------------
+	//6.组合使用构造函数模式和原型模式
+	//--------------------------
+	//构造函数用于定义实例属性，而原型模式用于定义方法和共享的属性。结果，每个实例都会有自己的一份实例属性的副本，但同时又共享这对方法的引用，最大限度地节省了内存。另外，这种混成模式还支持向构造函数传递参数；可谓时集两种模式之长。
+	//--------------------------
+	function Person6(name,age,job){
+		this.name=name;
+		this.age=age;
+		this.job=job;
+		this.friend=['xzt','xxx'];
+	}
+	Person6.prototype={
+		constructor:Person6,
+		sayName:function(){
+			console.log('------------------------------')
+			console.log('组合使用构造函数模式和原型模式')
+			console.log('sayname():',this.name)
+		}
+	}
+	var person61=new Person6('xzt',21,'student');
+	var person62=new Person6('xxx',22,'student');
+	person61.friend.push('van');
+	console.log('组合使用构造函数模式和原型模式')
+	console.log('person61.friend:',person61.friend);
+	console.log('person62.friend:',person62.friend);
+	// alert(person61.friend==person62.friend);
+	// alert(person61.sayName==person62.sayName);
+	// 这种够高函数与原型混成的模式，是目前在ECMAScript中使用最广泛，认知度最高的一种创建自定义类型的方法。可以说，这是用来定义引用类型的一种默认模式。
+
+
+
+
+	//--------------------------
+	//7.动态原型模式
+	//-------------------------
+	//通过检查某个应该存在的方法是否有效来决定是否需要初始化原型
+	// function Person7(name,age,job){
+	// 	//属性
+	// 	this.name=name;
+	// 	this.age=age;
+	// 	this.job=job;
+	// 	//方法
+	// 	if(typeof this.sayName ！= "function") {
+	// 		Person7.prototype.sayName=function(){
+	// 			alert(this.name)
+	// 		};
+	// 	}
+	// }
+	// var friend7=new Person7('xzt',21,'student');
+	// friend7.sayName();
+	//这里只有在sayName方法不存在的情况下，才会将它添加到原型中。这段代码只会在初次调用构造函数时才执行。此后，原型已经完成初始化，不需要再做什么修改了。
+
+	//--------------------------
+	//8.寄生构造函数模式
+	//-------------------------
+	function Person8(name,age,job){
+		var o=new Object();
+		o.name=name;
+		o.age=age;
+		o.job=job;
+		o.sayName=function(){
+			console.log('------------------------------')
+			console.log('寄生构造函数模式')
+			console.log('sayname:',this.name);
+		}
+		return o;
+	}
+	var friend8=new Person8('xzt',21,'student');
+	friend8.sayName();
+	//寄生构造函数和工厂、构造函数的区别：
+	//与工厂不同的是调用方式不同，工厂是直接调用，而此处是new操作符调用；
+	//与构造函数的不同，构造函数没有显式的return。寄生构造函数在尾部添加一个return语句，可以重写调用构造函数时返回的值。
+	//关于寄生构造函数模式，有一点需要说明，首先，返回的对象与构造函数或者与构造函数的原型属性之间没有关系，也就是说，构造函数返回的对象与在构造函数外部创建的对象没什么不同。为此，不能依赖instanceof操作符来确定对象类型。由于存在上述问题，我们建议可以在其他模式的情况下，不要使用这种模式。
+
+
+	//--------------------------
+	//9.稳妥构造函数
+	//-------------------------
+	function Person9(name,age,job){
+		//创建要返回的对象
+		var o=new Object();
+		o.name=name;
+		o.age=age;
+		o.job=job;
+		//添加方法
+		o.sayName=function(){
+			console.log('------------------------------')
+			console.log('稳妥构造函数模式')
+			console.log('sayname:',this.name);
+		}
+		//返回对象
+		return o;
+	}
+	var friend9=Person9('xzt',21,'student');
+	friend9.sayName();
+	//稳妥构造函数模式的特点：1.调用时不适用new操作符  2.函数体内部不使用this
+	//与寄生构造函数模式类似，使用稳妥构造函数模式创建的对象与构造函数之间也没有什么关系，因此instanceof操作符对这种对象也没有意义。
+	//------------------------
+	//friend9变量中保存的是一个稳妥对象，而除了调用sayName（）方法外，没有别的方法可以访问其数据成员，即使有其他代码会给这个对象添加方法或者数据成员，但也不可能有别的方法访问传入到构造函数中的原始数据。
+
+</script>
+</body>
+</html>

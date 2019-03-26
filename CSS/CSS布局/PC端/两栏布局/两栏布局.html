@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>两栏布局</title>
+	<style type="text/css">
+		*{
+			padding: 0px;
+			margin:0px;
+		}
+		.left{
+			width: 200px;
+			height: 600px;
+			background-color: red;
+			float: left;
+			display: table;
+			/*position: absolute;*/
+			/*还可以使用position来达到同样的效果*/
+			text-align: center;
+			line-height: 600px;
+			color: #fff;
+		}
+		.right{
+			margin-left: 210px;
+			height: 600px;
+			background-color: yellow;
+			text-align: center;
+			line-height: 600px;
+		}
+	</style>
+</head>
+<body>
+	<!-- 两栏布局：一栏定宽，一栏自适应。float+margin -->
+	<div class="left">左边定宽</div>
+	<div class="right">右边自适应</div>
+</body>
+</html>

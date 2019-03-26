@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>三栏布局：方式一</title>
+	<style type="text/css">
+		*{
+			margin:0px;
+			padding: 0px;
+		}
+		.left{
+			width: 200px;
+			height: 300px;
+			float: left;
+			background-color: yellow;
+		}
+		.right{
+			width: 200px;
+			height: 300px;
+			float: right;
+			background-color: green;
+		}
+		.middle{
+			height: 300px;
+			margin-left: 210px;
+			margin-right: 210px;
+			background-color: red;
+		}
+	</style>
+</head>
+<body>
+	<!-- 使用左右两栏使用float属性，中间栏用margin属性进行撑开，注意的是html的结果 -->
+	<div class="left">左栏</div>
+	<div class="right">右栏</div>
+	<div class="middle">中间栏</div>
+	<!-- 缺点：1.当宽度小于左右两边宽度之和时，右侧栏会被挤下去；2.html的结构不正确。 -->
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<script type="text/javascript">
+	(function (test) {
+		console.log('1:',test)
+	})(123);
+	(function (test) {
+		console.log('2:',test)
+	}(1234));
+	!function (test) {
+		console.log('3:',test)
+	}(12345);
+	+function (test) {
+		console.log('4:',test)
+	}(123456);
+	-function (test) {
+		console.log('5:',test)
+	}(1234567);
+	var fn=function (test) {
+		console.log('6:',test)
+	}(12345678);
+	(function fn(test){
+		console.log(test)
+	})(11111);
+	(function fn(test){
+		console.log(test)
+	}(22222));
+	!function fn(test){
+		console.log(test)
+	}(33333);
+	+function fn(test){
+		console.log(test)
+	}(44444);
+	-function fn(test){
+		console.log(test)
+	}(55555);
+	function makeCounter(){
+		var i=0;
+		return function(){
+			console.log('i:',i)
+			console.log(++i)
+		}
+	}
+	var counter = makeCounter();
+	counter();
+	counter();
+	counter();
+	var counter2 = makeCounter();
+	counter2();
+	counter2();
+	counter2();
+	// console.log(i);
+	// 创建一个立即执行的匿名函数
+// 该函数返回一个对象，包含你要暴露的属性
+// 如下代码如果不使用立即执行函数，就会多一个属性i
+// 如果有了属性i，我们就能调用counter.i改变i的值
+// 对我们来说这种不确定的因素越少越好
+
+var counter3 = (function(){
+  var i = 0;
+
+  return {
+    get: function(){
+    	console.log('get:',i)
+      return i;
+    },
+    set: function( val ){
+      i = val;
+      console.log('set:',i)
+    },
+    increment: function() {
+      return ++i;
+    }
+  };
+}());
+
+// counter其实是一个对象
+
+counter3.get(); // 0
+counter3.set( 3 );
+console.log(counter3.increment()); // 4
+console.log(counter3.increment()); // 5
+console.log(counter3.i); // undefined i并不是counter的属性
+// i; // ReferenceError: i is not defined (函数内部的是局部变量)
+</script>
+</body>
+</html>

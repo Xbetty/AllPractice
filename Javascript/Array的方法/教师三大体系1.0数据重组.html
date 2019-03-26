@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<script type="text/javascript">
+		var response = {
+			// 总课时数
+			all_class_hours: {	
+				label: '总课时数',
+				data: {
+					branch: 150, // 社团
+					platform: 180, // 平台
+					teacher: 120, // 老师
+					tp_rate: 0.9 // 老师/平台
+				}
+			},
+			// 近四周课时数
+			bm_class_hours: {
+				label:'近四周课时数',
+				data: {
+					branch: 150, // 社团
+					platform: 180, // 平台
+					teacher: 120, // 老师
+					tp_rate: 0.9 // 老师/平台
+				}
+			},
+			// 近四周正式课课时数
+			bm_formal_class_hours: {
+				label:'近四周正式课课时数',
+				data: {
+					branch: 150, // 社团
+					platform: 180, // 平台
+					teacher: 120, // 老师
+					tp_rate: 0.9 // 老师/平台
+				}
+			},
+			// 被换师率
+			change_teacher: {
+				label:'被换师率',
+				data: {
+					branch: 150, // 社团
+					platform: 180, // 平台
+					teacher: 120, // 老师
+					tp_rate: 0.9 // 老师/平台
+				}
+			},
+			// 课后反馈填写率
+			class_after_feedback: {
+				label: '课后反馈填写率',
+				data: {
+					branch: 150, // 社团
+					platform: 180, // 平台
+					teacher: 120, // 老师
+					tp_rate: 0.9 // 老师/平台
+				}
+			},
+			// 试卷分析接单率
+			exam_paper_receipt_desire: {
+				label:'课后反馈填写率',
+				data: {
+					branch: 150, // 社团
+					platform: 180, // 平台
+					teacher: 120, // 老师
+					tp_rate: 0.9 // 老师/平台
+				}
+			},
+			// 正式课接单率
+			formal_receipt_desire{
+				label:'正式课接单率',
+				data: {
+					branch: 150, // 社团
+					platform: 180, // 平台
+					teacher: 120, // 老师
+					tp_rate: 0.9 // 老师/平台
+				}
+			},
+			// 空闲时间填写率
+			freetime: {
+				label:'空闲时间填写率',
+				data: {
+					branch: 150, // 社团
+					platform: 180, // 平台
+					teacher: 120, // 老师
+					tp_rate: 0.9 // 老师/平台
+				}
+			},
+			// 无迟到率
+			no_late: {
+				label:'无迟到率',
+				data: {
+					branch: 150, // 社团
+					platform: 180, // 平台
+					teacher: 120, // 老师
+					tp_rate: 0.9 // 老师/平台
+				}
+			},
+			// 无请假率
+			no_leave:{
+				label:'无请假率',
+				data: {
+					branch: 150, // 社团
+					platform: 180, // 平台
+					teacher: 120, // 老师
+					tp_rate: 0.9 // 老师/平台
+				}
+			},
+			// 无早退率
+			no_leave_early:{
+				label:'无早退率',
+				data: {
+					branch: 150, // 社团
+					platform: 180, // 平台
+					teacher: 120, // 老师
+					tp_rate: 0.9 // 老师/平台
+				}
+			},  
+			// 无旷课率
+			no_truancy: {
+				label:'无早退率',
+				data: {
+					branch: 150, // 社团
+					platform: 180, // 平台
+					teacher: 120, // 老师
+					tp_rate: 0.9 // 老师/平台
+				}
+			},
+			// 	试听课接单率
+			tutor_receipt_desire:{
+				label:'无早退率',
+				data: {
+					branch: 150, // 社团
+					platform: 180, // 平台
+					teacher: 120, // 老师
+					tp_rate: 0.9 // 老师/平台
+				}
+			}
+		// 111111111111111111111111111111111111
+		// // 信用体系
+		// // 无早退率，无旷课率，无迟到率，无请假率
+		// var a = ['no_leave_early','no_truancy','no_late','no_leave']
+		// // 能力体系
+		// // 总课时数，近4周正式课课时数，近4周课时数，近4周被换师率
+		// var b = ['all_class_hours','bm_formal_class_hours','bm_class_hours','change_teacher']
+		// // 动力体系
+		// // 试卷分析接单意愿，空闲时间填写率，课后反馈填写率，试听课接单意愿，正式课接单意愿
+		// var c = ['exam_paper_receipt_desire','freetime','class_after_feedback','tutor_receipt_desire','formal_receipt_desire']
+		// var Arr = [a,b,c]
+		// for (let i in a){
+		// 	console.log(i+':'+a[i])
+		// 	// var a_obj = response[a[i]]
+		// 	// console.log('a_obj：'+a_obj)
+		// 	a[i]= response[a[i]]
+		// }
+		// for(let i in b) {
+		// 	console.log(i+':'+b[i])
+		// 	b[i]=response[b[i]]
+		// }
+		// for(let i in c) {
+		// 	console.log(i+':'+c[i])
+		// 	c[i]=response[c[i]]
+		// }
+		// console.log('Arr:',Arr)
+
+
+
+
+		// 222222222222222222222222222
+		// 信用体系
+		// 无早退率，无旷课率，无迟到率，无请假率
+		// var a = {label:'信用体系',data:['no_leave_early','no_truancy','no_late','no_leave']}
+		// // 能力体系
+		// // 总课时数，近4周正式课课时数，近4周课时数，近4周被换师率
+		// var b = {label:'能力体系',data:['all_class_hours','bm_formal_class_hours','bm_class_hours','change_teacher']}
+		// // 动力体系
+		// // 试卷分析接单意愿，空闲时间填写率，课后反馈填写率，试听课接单意愿，正式课接单意愿
+		// var c = {label:'动力体系',data:['exam_paper_receipt_desire','freetime','class_after_feedback','tutor_receipt_desire','formal_receipt_desire']}
+		// var Arr = [a,b,c]
+		// var a_arr =a.data
+		// for (let i in a_arr){
+		// 	a_arr[i]=  response[a_arr[i]]
+		// }
+		// var b_arr =b.data
+		// for(let i in b_arr) {
+		// 	b_arr[i]=response[b_arr[i]]
+		// }
+		// var c_arr =c.data
+		// for(let i in c_arr) {
+		// 	c_arr[i]=response[c_arr[i]]
+		// }
+		// console.log('Arr:',Arr)
+
+
+
+
+		var a = {label:'信用体系',data:['no_leave_early','no_truancy','no_late','no_leave']}
+		// 能力体系
+		// 总课时数，近4周正式课课时数，近4周课时数，近4周被换师率
+		var b = {label:'能力体系',data:['all_class_hours','bm_formal_class_hours','bm_class_hours','change_teacher']}
+		// 动力体系
+		// 试卷分析接单意愿，空闲时间填写率，课后反馈填写率，试听课接单意愿，正式课接单意愿
+		var c = {label:'动力体系',data:['exam_paper_receipt_desire','freetime','class_after_feedback','tutor_receipt_desire','formal_receipt_desire']}
+		var Arr = [a,b,c]
+		for(let i in Arr){
+			var arr = Arr[i].data
+			for(var j in arr){
+				arr[j] = response[arr[j]]
+			}
+		}
+		// var a_arr =a.data
+		// for (let i in a_arr){
+		// 	a_arr[i]=  response[a_arr[i]]
+		// }
+		// var b_arr =b.data
+		// for(let i in b_arr) {
+		// 	b_arr[i]=response[b_arr[i]]
+		// }
+		// var c_arr =c.data
+		// for(let i in c_arr) {
+		// 	c_arr[i]=response[c_arr[i]]
+		// }
+		console.log('Arr:',Arr)
+
+
+
+		// 33333333333333333333333333
+		// 信用体系
+		// 无早退率，无旷课率，无迟到率，无请假率
+		// var a = {'信用体系':['no_leave_early','no_truancy','no_late','no_leave'],'能力体系':['all_class_hours','bm_formal_class_hours','bm_class_hours','change_teacher'],'动力体系':['exam_paper_receipt_desire','freetime','class_after_feedback','tutor_receipt_desire','formal_receipt_desire']}
+		// // 能力体系
+		// 总课时数，近4周正式课课时数，近4周课时数，近4周被换师率
+		// var b = {'能力体系':['all_class_hours','bm_formal_class_hours','bm_class_hours','change_teacher']}
+		// // 动力体系
+		// // 试卷分析接单意愿，空闲时间填写率，课后反馈填写率，试听课接单意愿，正式课接单意愿
+		// var c = {'动力体系':['exam_paper_receipt_desire','freetime','class_after_feedback','tutor_receipt_desire','formal_receipt_desire']}
+		// var Arr = [a,b,c]
+
+
+		// var a = {'信用体系':['no_leave_early','no_truancy','no_late','no_leave'],'能力体系':['all_class_hours','bm_formal_class_hours','bm_class_hours','change_teacher'],'动力体系':['exam_paper_receipt_desire','freetime','class_after_feedback','tutor_receipt_desire','formal_receipt_desire']}
+		// // 能力体系
+		// let afterArr = []
+		// for(let deal in a) {
+		// 	console.log(deal+':'+a[deal])
+		// 	var obj = {}
+		// 	obj.name = deal
+		// 	obj.data = []
+		// 	a[deal].forEach(item => {
+		// 		console.log('item',item)
+		// 		var o = {}
+		// 		o.name =item
+		// 		o.data = response[item]
+		// 		obj.data.push(o)
+		// 	})
+		// 	afterArr.push(obj)
+		// }
+		// console.log('afterArr', afterArr)
+	</script>
+</body>
+</html>

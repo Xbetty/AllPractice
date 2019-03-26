@@ -1,0 +1,8 @@
+{
+    "code": "0000",
+    "data": [
+        {"name":"xzt","address":"江西南昌","time":"2018-11-15 11:22:33","sex":"男","hobby":"吃零食","personal":"lalala"},
+        {"name":"xxx","address":"江西南昌","time":"2018-11-15 11:22:33","sex":"男","hobby":"吃零食","personal":"lalala"},
+        {"name":"zzz","address":"江西南昌","time":"2018-11-15 11:22:33","sex":"男","hobby":"吃零食","personal":"lalala"}
+    ]
+}

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<script type="text/javascript">
+	function a (){
+		this.x=10;
+	}
+	a.prototype.getx=function(){
+
+	}
+	function b (){
+		this.x=100
+	}
+	b.prototype=new a();
+	var n = new b();
+	console.log('a.prototype1',a.prototype)
+	b.prototype.x=3000;
+	console.log('b.prototype:',b.prototype)
+	console.log('n.prototype1',n.prototype)
+	console.log('n.x1:',n.x);
+	n.x=1000;
+	console.log('n.x2:',n.x);
+	n.prototype={
+		constructor: n,
+		x:20000
+	}
+	alert(n.constructor)
+	console.log('n.prototype2',n.prototype)
+	console.log('n.x3:',n.x);
+</script>
+</body>
+</html>

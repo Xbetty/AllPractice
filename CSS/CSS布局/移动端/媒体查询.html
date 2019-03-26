@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>媒体查询</title>
+	<style type="text/css">
+		@media screen and (min-width: 750px){
+			.media{
+				height: 100px;
+				background-color: red;
+			}
+		}
+		@media screen and (max-width: 750px){
+			.media{
+				height: 200px;
+				background-color: green;
+			}
+		}
+	</style>
+</head>
+<body>
+	<!-- 两栏和三栏布局，一般只能在PC中去使用，在移动端，由于屏幕尺寸有限，很难这样操作 -->
+	<!-- 如果你需要一张网页能够在PC和移动端都能按照不同的设计稿显示出来，那么你需要做的就是去设置媒体查询 -->
+	<!-- 媒体查询的css标识符是@media，它的媒体类型可以分为：
+			1.all，所有媒体
+			2.braille 盲文触觉设备
+			3.embossed 盲文打印机
+			4.print 手持设备
+			5.projection 打印预览
+			6.screen 彩屏设备
+			7.speech '听觉'类似的媒体类型
+			8.tty 不适用像素的设备
+			9.TV 电视 
+			@media screen {
+			  p.test {font-family:verdana,sans-serif;font-size:14px;}
+			}
+			@media print {
+			  p.test {font-family:times,serif;font-size:10px;}
+			}
+			@media screen,print {
+			  p.test {font-weight:bold;}
+			}
+			/*移动端样式*/
+			@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+			  /* Styles */
+			}
+
+	 -->
+	<div class="media">媒体查询：750px</div>
+	<!-- 媒体查询的主要原理：它像是给整个css样式设置了断点，通过给定的条件去判断，在不同的条件下，显示不同的样式。
+			例如:手机端的尺寸在750px，而pc端则是大于750px的，我们可以将样式写成以上
+	 -->
+</body>
+</html>

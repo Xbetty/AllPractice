@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+lalalalala
+<script type="text/javascript">
+	console.log('here we go');
+	new Promise( resolve => {
+		setTimeout( () =>{
+			resolve('hello');
+		},2000);	
+	})
+	// .then( value => {
+	// 	console.log(value);
+	// 	return new Promise( resolve => {
+	// 		setTimeout( () => {
+	// 			resolve('world')
+	// 		})
+	// 	})
+	// })
+	.then( value => {
+		console.log(value+' world')
+	})
+</script>
+</body>
+</html>

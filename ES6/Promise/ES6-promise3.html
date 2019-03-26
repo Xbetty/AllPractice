@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+第三个测试（then里不返回Promise）
+<script type="text/javascript">
+	console.log("second");
+	let promise = new Promise( resolve => {
+		setTimeout(() => {
+			console.log('start');
+			resolve('hello!');
+		},1000);
+	})
+	.then( value => {
+		console.log(value);
+		console.log('everyone');
+		(function () {
+			return new Promise(resolve => {
+				setTimeout(() => {
+					console.log("Mr.Laurence");
+					resolve("Merry Xmas");
+				},2000);
+			});
+		}());
+		return false;
+	})
+	.then( value => {
+		console.log(value +' world')
+	})
+	
+</script>
+</body>
+</html>
