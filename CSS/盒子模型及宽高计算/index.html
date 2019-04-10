@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>盒子模型</title>
+	<style type="text/css">
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		div {
+			width: 200px;
+			height: 200px;
+			border: 5px solid red;
+			padding: 30px;
+			margin: 50px;
+			overflow: hidden;
+		}
+		.content-box {
+			background-color: pink;
+		}
+		.border-box {
+			color: white;
+			background-color: black;
+			box-sizing: border-box;
+		}
+	</style>
+</head>
+<body>
+	<div id="content_box" class="content-box">哈喽，我是标准盒子模型哈喽，我是标准盒子模型哈喽，我是标准盒子模型哈喽，我是标准盒子模型哈喽，我是标准盒子模型哈喽，我是标准盒子模型哈喽，我是标准盒子模型哈喽，我是标准盒子模型哈喽，我是标准盒子模型哈喽，我是标准盒子模型哈喽，我是标准盒子模型哈喽，我是标准盒子模型哈喽，我是标准盒子模型哈喽，我是标准盒子模型哈喽，我是标准盒子模型哈喽，我是标准盒子模型哈喽，我是标准盒子模型哈喽，我是标准盒子模型哈喽，我是标准盒子模型哈喽，我是标准盒子模型哈喽，我是标准盒子模型哈喽，我是标准盒子模型</div>
+	<div id="border_box" class="border-box">哈喽，我是IE盒子模型哈喽，我是标准盒子模型哈喽，我是标准盒子模型哈喽，我是标准盒子模型哈喽，我是标准盒子模型哈喽，我是标准盒子模型哈喽，我是标准盒子模型哈喽，我是标准盒子模型哈喽，我是标准盒子模型哈喽，我是标准盒子模型哈喽，我是标准盒子模型哈喽，我是标准盒子模型哈喽，我是标准盒子模型哈喽，我是标准盒子模型哈喽，我是标准盒子模型哈喽，我是标准盒子模型哈喽，我是标准盒子模型哈喽，我是标准盒子模型哈喽，我是标准盒子模型哈喽，我是标准盒子模型哈喽，我是标准盒子模型哈喽，我是标准盒子模型哈喽，我是标准盒子模型</div>
+	<script type="text/javascript">
+		window.onload = function () {
+			/*
+			盒子模型的宽高计算方式：https://blog.csdn.net/swl979623074/article/details/78056282/
+				1. 每一个盒子模型都可以分为：content,padding,border,margin四个部分
+				2. 盒子模型分为两种： 标准盒子模型和IE盒子模型
+					区别： 
+						（1）标准盒子模型中content中包含content；
+						（2）IE盒子模型中content中包含content，padding，border
+				3. 类型：前端宽高计算总共分为对屏幕，窗口和文档（DOM节点）的计算
+					（1）屏幕:
+						这里的屏幕指的是电脑显示器，每个屏幕的宽高都是固定值
+			*/
+				// ---------------------------------------
+				// -------------------电脑屏幕，包含任务栏
+				console.log('-----------------------------电脑屏幕-包含任务栏width/height')
+				console.log('电脑屏幕的宽度-包含任务栏', screen.width) // 1366
+				// 电脑屏幕的高度，包含任务栏的高度
+				console.log('电脑屏幕的高度-包含任务栏的高度', screen.height) // 768
+
+
+				// ---------------------------------------
+				// -------------------电脑屏幕，不包含任务栏
+				console.log('-----------------------------电脑屏幕-不包含任务栏availWidth/availHeight')
+				console.log('电脑屏幕的宽度-不包含任务栏', screen.availWidth) // 1366
+				// 电脑屏幕的高度，不包含任务栏的高度
+				console.log('电脑屏幕的高度-不包含任务栏的高度', screen.availHeight) // 728
+
+
+				/* 注意：
+					height与availHeight的区别:height的高度包括屏幕下端的任务栏的高度，availHeight不包括任务栏的高度
+				*/
+
+
+				// ---------------------------------------
+				// -------------------电脑屏幕，未被系统部件占用的
+				// 未被系统部件占用的最上方的像素值（只读）
+				console.log('-----------------------------电脑屏幕-未被系统部件占用availTop/availLeft')
+				console.log('电脑屏幕的宽度-未被系统部件占用的最上方的像素值', screen.availTop) // 0
+				// 未被系统部件占用的最左侧的像素值（只读）
+				console.log('电脑屏幕的高度-未被系统部件占用的最左侧的像素值', screen.availLeft) // 0
+
+
+
+				/*
+				2）窗口:
+					这里的窗口指的就是浏览器页面，窗口的大小就是窗口实际缩放的大小，单位为像素
+				*/
+				// ---------------------------------------
+				// -------------------窗口可视区域（能够看得见的屏幕，比如缩小之后，宽度和高度都在变化）
+				console.log('-----------------------------窗口可视区域innerWidth/innerHeight')
+				console.log('窗口可视区域的宽度', window.innerWidth) // 1366
+				console.log('窗口可视区域的高度', window.innerHeight) // 625
+				// ---------------------------------------
+				// -------------------窗口可视区域,包括工具条与滚动条
+				console.log('-----------------------------窗口可视区域(包括工具条与滚动条)outerWidth/outerHeight')
+				console.log('窗口可视区域(包括工具条与滚动条)的宽度', window.outerWidth) // 1366
+				console.log('窗口可视区域(包括工具条与滚动条)的高度', window.outerHeight) // 728
+				// ---------------------------------------
+				// -------------------窗口左上角距离电脑屏幕的距离
+				console.log('-----------------------------窗口左上角距离电脑屏幕的距离screenTop/screenLeft')
+				console.log('窗口左上角距离电脑屏幕顶端的距离', window.screenTop) // 0
+				console.log('窗口左上角距离电脑屏幕左端的距离', window.screenLeft) // 0
+
+
+				/* 注意：
+					innerWidth(innerHeight)和outerWidth(outerHeight),区别是他们是否包含工具条和滚动条。
+				*/
+
+
+
+				/*
+				3）文档（DOM节点）:
+					这里的文档（body）是指整个的HTML页面，当然也可以用去计算DOM节点的宽高。
+				*/
+				var content_box = document.getElementById('content_box')
+				var border_box = document.getElementById('border_box') 
+				
+				// ---------------------------------------
+				// -------------------节点的可视区域clientWidth/clientHeight（即body在页面上能看的见部分）的宽度(包括box-content,padding)
+
+				/* 注意：
+					clientWidth和clientHeight在计算时，只计算content和padding的值。
+				*/
+
+				console.log('-----------------------------节点的可视区域clientWidth/clientHeight----即body在页面上呢个看见的部分，包括box-content,padding，不包括边框')
+				console.log('标准盒子模型clientWidth：', content_box.clientWidth) // 260
+				console.log('标准盒子模型clientHeight：', content_box.clientHeight) // 260
+				console.log('IE盒子模型的clientWidth：', border_box.clientWidth) // 190
+				console.log('IE盒子模型的clientHeight：', border_box.clientHeight) // 190
+
+				// ---------------------------------------
+				// -------------------节点的可视区域(同于clientWidth/clientHeight，但是包含边框的宽度(包括padding,box-content,border))offsetWidth/offsetclientHeight
+
+				/* 注意：
+					offsetWidth和offsetHeight在计算时，计算content和padding和border的值。
+				*/
+				console.log('-----------------------------节点的可视区域offsetWidth/offsetclientHeight')
+				console.log('标准盒子模型offsetWidth：', content_box.offsetWidth) // 270
+				console.log('标准盒子模型clientHeight：', content_box.offsetHeight) // 270
+				console.log('IE盒子模型的offsetWidth：', border_box.offsetWidth) // 200
+				console.log('IE盒子模型的offsetHeight：', border_box.offsetHeight) // 200
+
+				// ---------------------------------------
+				// -------------------border的宽度和高度（clientTop/clientLeft）
+
+				/* 注意：
+					clientTop和clientLeft是用来计算盒子的border的宽度的，虽然从名称上看它们并不像与border有任何关系。
+				*/
+				console.log('-----------------------------border的宽度和高度（clientTop/clientLeft）')
+				console.log('标准盒子模型clientTop：', content_box.clientTop) // 5
+				console.log('标准盒子模型clientLeft：', content_box.clientLeft)// 5
+				console.log('IE盒子模型clientTop：', border_box.clientTop)
+				// 5
+				console.log('IE盒子模型的clientLeft：', border_box.clientLeft)
+				// 5
+
+				// ---------------------------------------
+				// -------------------getBoundingClientRect（）
+				/*
+				getBoundingClientRect（）会返回一个clientRect对象。这个对象包含包含六个属性：
+					（1）width: 返回的是盒子的宽度，包括content，padding，border。需要注意的是它不包含margin
+					（2）height：返回的是盒子的高度，包括content，padding，border。需要注意的是它不包含margin。
+					（3）top：返回的是盒子左上角距离浏览器工具条的垂直高度。注意：这里的左上角的border的左上角。
+					（4）bottom：返回的是盒子左下角距离浏览器工具条的垂直高度。注意：这里的左下角是border的左下角。
+					（5）left：返回的是盒子左上角距离浏览器最左侧的水平长度。注意：这里的左上角是border的左上角。
+					（6）right：返回的是盒子左上角距离浏览器最右侧的水平长度。注意：这里的左上角是border的左上角。
+				*/ 
+				var content_box_bound = content_box.getBoundingClientRect()
+				console.log(`content_box.getBoundingClientRect（）---width: ${content_box_bound.width},height: ${content_box_bound.height},top: ${content_box_bound.top},bottom: ${content_box_bound.bottom},left: ${content_box_bound.left},right: ${content_box_bound.right}`)
+				// width: 270,height: 270,top: 50,bottom: 320,left: 50,right: 320
+				var border_box_bound = border_box.getBoundingClientRect()
+				console.log(`border_box.getBoundingClientRect（）---width: ${border_box_bound.width},height: ${border_box_bound.height},top: ${border_box_bound.top},bottom: ${border_box_bound.bottom},left: ${border_box_bound.left},right: ${border_box_bound.right}`)
+				// width: 200,height: 200,top: 370,bottom: 570,left: 50,right: 250
+
+
+				/*
+				4. 滚动
+					滚动与文档之间的计算关系：
+						可滚动的高度 = DOM文档的高度 - DOM的高度（仅包含content的高度）
+				*/ 
+				console.log('-----------------------------滚动高度的获取scrollTop/scrollLeft/scrollWidth/scrollHeight')
+				console.log('body的scrollTop(滚动方向的滚动条距离文档顶端的距离)', document.body.screenTop)
+				console.log('body的scrollLeft(滚动方向的滚动条距离文档左端的距离)', document.body.screenLeft)
+				// 文档的高度 包含content padding
+				console.log('DOM的scrollWidth', content_box.scrollWidth)
+				console.log('DOM的scrollHeight)', content_box.scrollHeight)
+			}
+	</script>
+</body>
+</html>
