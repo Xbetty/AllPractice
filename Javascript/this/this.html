@@ -5,37 +5,37 @@
 </head>
 <body>
 <script type="text/javascript">
-	// var foo = {x:10};
-	// var bar= {
-	// 	x:20,
-	// 	test:function() {
-	// 		// body...
-	// 		alert(this===bar);//true
-	// 		alert("this1:"+this.x);//20
-	// 		this==foo;//错误，任何时候不能改变this的值
-	// 		alert("this2:"+this.x);//如果不出错的话，应该是10，而不是20
-	// 	}
-	// };
-	// //在进入上下文的时候
-	// //this被当成bar对象
-	// bar.test();//true 20
-	// foo.test=bar.test;
-	// //不过，这里的this依然不会是foo
-	// //尽管调用的是相同的func
-	// foo.test();//false,10
+	var foo = {x:10};
+	var bar= {
+		x:20,
+		test:function() {
+			// body...
+			alert(this===bar);//true
+			alert("this1:"+this.x);//20
+			this==foo;//错误，任何时候不能改变this的值
+			alert("this2:"+this.x);//如果不出错的话，应该是10，而不是20
+		}
+	};
+	//在进入上下文的时候
+	//this被当成bar对象
+	bar.test();//true 20
+	foo.test=bar.test;
+	//不过，这里的this依然不会是foo
+	//尽管调用的是相同的func
+	foo.test();//false,10
 
-	var foo = {
-  bar: function () {
-    alert(this);
-  }
-};
- 
-foo.bar(); // Reference, OK => foo
-(foo.bar)(); // Reference, OK => foo
- 
-(foo.bar = foo.bar)(); // global?
-(false || foo.bar)(); // global?
-(foo.bar, foo.bar)(); // global?
+	// var foo = {
+	//   bar: function () {
+	//     alert(this);
+	//   }
+	// };
+	 
+	// foo.bar(); // Reference, OK => foo
+	// (foo.bar)(); // Reference, OK => foo
+	 
+	// (foo.bar = foo.bar)(); // global?
+	// (false || foo.bar)(); // global?
+	// (foo.bar, foo.bar)(); // global?
 
 </script>
 </body>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<script type="text/javascript">
+		var t = {
+		    n: {
+		        k: 1,
+		        y: 2,
+		        d: {
+		            a: 1,
+		            b: 2
+		        }
+		    },
+		    b: 3
+		};
+		console.log('-----------------')
+		console.log('t:', t)
+		/*
+		要求打印出以下结果：
+		b: 3
+		n.d.a: 1
+		n.d.b: 2
+		n.k: 1
+		n.y: 2
+
+		*/ 
+		// -------------------------------
+		// 方法一：
+		function zip1 (obj, key) {
+			const result = {}
+			for (var prop in obj) {
+				const k = key ? `${key}.${prop}` : prop;
+				if (Object.prototype.toString.call(obj[prop]) === '[object object]') {
+					const o = zip1(obj[prop], k);
+					Object.assign(result, o);
+				} else {
+					result[k] = obj[prop]
+				}
+			}
+			return result
+		}
+		console.log('-----------------')
+		console.log(zip1(t))
+		// -------------------------------
+		// 方法二
+		const zip2 = (obj, paths=[], json) => {
+			for (const key in obj) {
+				const leaf = obj[key]
+				const path = paths.concat(key)
+				if(Object.prototype.toString.call(leaf) === '[Object Object]') {
+					zip2(leaf, path, json)
+				} else {
+					json[path.join('.')] = leaf
+				}
+			}
+			return json
+		}
+		console.log('-----------------')
+		console.log(zip2(t,[],{}))
+	</script>
+</body>
+</html>
