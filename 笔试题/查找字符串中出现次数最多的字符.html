@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>js查找字符串中出现次数最多的字符</title>
+</head>
+<body>
+	<script type="text/javascript">
+		// 参考：https://www.cnblogs.com/leiyangs/p/7490665.html
+		var str = 'qwertttttyuioplkjhgftt'
+		// ---------------------------------------
+		// 方法一：循环obj
+		function fn1 (str) {
+			let obj = {}
+			for (let i in str) {
+				if (obj[str[i]]) {
+					obj[str[i]]++
+				} else {
+					obj[str[i]] = 1
+				}
+			}
+			let keys = Object.keys(obj) // 获取对象中所有key的值返回数组
+			console.log('-----------------------------------')
+			console.log('keys', keys)
+			let values = Object.values(obj) // 获取对象中所有的value返回数组
+			console.log('values', values)
+			// Math.max可以找出传入参数的最大值，如：Math.max(1，2)，这里可使用es6中的解构，也可以使用Math.math.apply(Math,values)可认为是apply（Math.max， arr）
+			// 然后，arr是一个参数列表，对于max方法，其参数是若干个数，即Math.max（a,b,c,d,...）
+			let maxValue = Math.max(...values) 
+			console.log('maxValue', maxValue)
+			console.log(keys[values.indexOf(maxValue)], maxValue)
+		}
+		fn1(str)
+
+
+
+		// ---------------------------------------
+		// 方法二：使用reduce方法
+		var fn2Array = str.split('')
+		var fn2 = fn2Array.reduce(function (prev,next) {
+			if (next in prev) {
+				prev[next] ++
+			} else {
+				prev[next] = 1
+			}
+			return prev
+		}, {})
+		console.log('-----------------------------------')
+		console.log(fn2)
+
+		// ---------------------------------------
+		// 方法三：正则
+		let fn3 = (str) => {
+			str = str.split('').sort().join()
+			var s = str.match(/(\w+)(\1)/g)
+			if (s === null) {
+				return str[0]
+			}
+			s = s.map(e => e=e+e[0])
+			var out = s.sort((a,b) => b.length-a.length)
+			console.log('-----------------------------------')
+			console.log(out[0][0], out[0].length)
+		}
+		fn3(str)
+	</script>
+</body>
+</html>

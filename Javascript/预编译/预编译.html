@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>预编译</title>
+</head>
+<body>
+	<script type="text/javascript">
+		/*
+			JS的特点：1.单线程 2.解释型语言（翻译一句执行一句）
+			JS运行三部曲：
+				一. 语法分析（通篇扫描是否有语法错误但不执行）
+				二. 预编译
+					1. 预编译前奏：
+						（1）imply globa暗示全局变量：即任何变量，如果变量未经声明就赋值，此变量就为全局对象所有。
+							eg: a = 123
+							eg: var a = b =123 (b未经声明就赋值，为暗示全局变量)
+						（2）一切声明的全局变量，全是windo的属性
+							eg: var a = 123; ===> window.a = 123;
+
+
+					2. 函数声明整体提升
+					3. 变量声明提升
+
+					4. 预编译四部曲：
+						（1）创建AO对象
+						（2）找形参和变量声明，将变量和形参名作为AO属性名，值为undefined
+						（3）将实参值和形参统一
+						（4）在函数体里面找函数声明，值赋予函数体
+
+
+				三. 解释执行
+		*/
+
+
+		// ------------------------------------
+		// demo1
+		console.log('--------------1.----------------')
+		function fn1 (a) {
+			/*
+				AO {
+				a: function(){},
+				b: undefined,
+				d: function(){}
+		 	}
+			*/ 
+			console.log(a) // function(){}
+			var a = 123
+			/*
+				AO {
+				a: 123,
+				b: undefined,
+				d: function(){}
+		 	}
+			*/ 
+			console.log(a) // 123
+			function a() {} // 预编译看过的不会再看
+			/*
+				AO {
+				a: 123,
+				b: undefined,
+				d: function(){}
+		 	}
+			*/ 
+			console.log(a) // 123
+			var b = function () {}
+			/*
+				AO {
+				a: 123,
+				b: function(){},
+				d: function(){}
+		 	}
+			*/ 
+			console.log(b) // function(){}
+			function d() {}
+			/*
+				AO {
+				a: 123,
+				b: function(){},
+				d: function(){}
+		 	}
+			*/ 
+			
+
+		}
+		fn1(1)
+		/*
+		 预编译发生在函数执行的前一刻
+		 1.创建AO对象Activation Object（执行期上下文）
+		 	AO {}
+		 2. 找形参和变量声明，将变量和形参名作为AO属性名，值为undefined
+		 	AO {
+				a: undefined,
+				b: undefined
+		 	}
+		 3. 将实参值和形参统一(将实参的值放在形参中)
+		 	AO {
+				a: 1,
+				b: undefined
+		 	}
+		 4. 在函数体里面找函数声明，值赋予函数体
+		 	AO {
+				a: function(){},
+				b: undefined,
+				d: function(){}
+		 	}
+
+		*/
+
+
+		// ------------------------------------
+		// demo2
+		console.log('--------------2.----------------')
+		function fn2 (a,b) {
+			/*
+				AO {
+					a: 1,
+					b: function(){},
+					c: undefimed,
+					d: function(){}
+				}
+			*/
+			
+			console.log(a) // 1
+			c = 0
+			/*
+				AO {
+					a: 1,
+					b: function(){},
+					c: 0,
+					d: function(){}
+				}
+			*/
+			var c
+			a = 3
+			/*
+				AO {
+					a:3,
+					b: function(){},
+					c: 0,
+					d: function(){}
+				}
+			*/
+			b = 2
+			/*
+				AO {
+					a: 3,
+					b: 2,
+					c: 0,
+					d: function(){}
+				}
+			*/
+			console.log(b) // function () {}
+			function b() {}
+			function d() {}
+			/*
+				AO {
+					a: 3,
+					b: 2,
+					c: 0,
+					d: function(){}
+				}
+			*/
+			console.log(b) // function () {}
+		}
+		fn2(1)
+		/*
+		AO {
+			a: undefimed,
+			b: undefined,
+			c: undefimed
+		}
+		AO {
+			a: 1,
+			b: undefined,
+			c: undefimed
+		}
+		AO {
+			a: 1,
+			b: function(){},
+			c: undefimed,
+			d: function(){}
+		}
+
+		*/
+
+
+		// ------------------------------------
+		// demo3
+		console.log('--------------3.----------------')
+		function fn3 (a, b) {
+			/*
+				AO {
+					a: function(){}
+					b: undefined
+				}
+			*/ 
+			
+			console.log(a) // function(){}
+			console.log(b) // undefined
+			var b = 234
+			/*
+				AO {
+					a: function(){}
+					b: 234
+				}
+			*/ 
+			console.log(b) // 234
+			a = 123
+			/*
+				AO {
+					a: 123
+					b: 234
+				}
+			*/ 
+			console.log(a)  // 123
+			function a() {}
+			var a
+			b = 234
+			var b = function () {}
+			/*
+				AO {
+					a: 123
+					b: function(){}
+				}
+			*/ 
+			console.log(a) // 123
+			console.log(b) // function(){}
+		}
+		fn3(1)
+		/*
+			AO {
+				a: function(){}
+				b: undefined
+			}
+		*/ 
+
+
+		// ------------------------------------
+		// demo4 全局对象
+		/*
+		注： 任何全局上的变量都是window的属性
+		var a = 123
+		 1. 生成了一个GO对象Global Object
+		 GO {
+			a: 123
+		 }
+		 GO === Window
+		*/
+
+		console.log('---------------4.---------------')
+		function fn4() {
+			var a = b = 123
+			/*
+				GO {
+					b: 123
+				}
+				AO {
+					a: 123
+				}
+			*/
+			console.log(a) // 123
+			console.log(window.a) // undefined
+			console.log(b) // 123
+		}
+		fn4()
+		/*
+			GO {
+				b: 123
+			}
+			AO {
+				a: undefined
+			}
+		*/
+
+		// ------------------------------------
+		// demo5
+		/*
+			GO {
+				fn5: function(){}
+			}
+		*/
+		console.log('--------------5.----------------')
+		console.log(fn5) // function(){}
+		function fn5(fn5) {
+			/*
+				AO {
+					fn5: function(){}
+				}
+			*/
+			console.log(fn5) // function(){}
+			var fn5 = 234
+			/*
+				AO {
+					fn5: 234
+				}
+			*/
+			console.log(fn5) // 234
+			function fn5() {}
+
+		}
+		/*
+			AO {
+				fn5: function(){}
+			}
+		*/
+		fn5(1)
+		var fn5 = 123
+
+		/*
+			GO {
+				fn5: undefined
+			}
+			GO {
+				fn5: function(){}
+			}
+		*/
+
+		// ------------------------------------
+		// demo6
+		console.log('-------------6.-----------------')
+		global6 = 100
+		function fn6() {
+			/*
+				AO {
+					global6: undefined
+				}
+			*/
+			console.log(global6) // undefined
+			global6 = 200
+			/*
+				AO {
+					global6: 200
+				}
+			*/
+			console.log(global6) // 200
+			var global6 = 300
+		}
+		fn6()
+		var global6
+		/*
+			GO {
+				global6: 100,
+				fn6: function(){}
+			}
+			AO {
+				global6: undefined
+			}
+		*/
+
+
+		// ------------------------------------
+		// demo7
+		console.log('-------------7.-----------------')
+		function fn7() {
+			/*
+				AO {
+					b7: undefined
+				}
+			*/
+			console.log(b7) // undefined
+			if (a7) {
+				var b7 = 100
+			}
+			console.log(b7) // undefined
+			c7 = 234
+			console.log(c7) // 234
+		}
+		var a7
+		fn7()
+		a7 = 10
+		console.log(c7) // 234
+		/*
+			GO {
+				a7: undefined,
+				fn7: function(){},
+				c7: undefined
+			}
+		*/
+
+
+		// ------------------------------------
+		// demo8
+		console.log('--------------8.----------------')
+		function fn8() {
+			/*
+				AO {
+					foo: function(){}
+				}
+			*/
+			return foo //function(){}
+			foo = 10
+			function foo (){}
+			var foo = 11
+		}
+		console.log(fn8()) // function(){}
+
+
+
+		// ------------------------------------
+		// demo9
+		console.log('--------------9.----------------')
+		console.log(fn9()) // 11
+		function fn9() {
+			/*
+				AO {
+					foo: function(){}
+				}
+			*/
+			foo = 10
+			function foo() {}
+			var foo = 11
+			return foo // 11
+		}
+
+	</script>
+</body>
+</html>
