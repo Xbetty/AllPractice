@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>给字符串加千分符</title>
+</head>
+<body>
+	<script type="text/javascript">
+		/*
+			题目： 如何给字符串加千分符？
+
+			例如：42342342342 -> 42,342,342,342
+		*/
+		var str = "1234567890"
+
+		// ---------------------------------------
+		// 方法一：将字符串转为数组，再对其切分重组
+		console.log('----------------1-------------------')
+		function fn1(str) {
+			// 转换为数组
+			var arr = str.split('')
+			console.log('arr1', arr)
+			var result = []
+			while (arr.length > 3) {
+				result.push(arr.splice(-3,3).join(''))
+				console.log('arr2', arr)
+			}
+			result.push(arr.join(''))
+			console.log('result', result) // ["890", "567", "234", "1"]
+			// 最终结果
+			return result.reverse().join(',')
+		}
+		console.log('fn1:', fn1(str))
+
+		// ---------------------------------------
+		// 方法二：正则表达式
+		console.log('----------------2-------------------')
+		function fn2(str) {
+			// 仅仅对位置进行匹配
+			// (?=):前向声明   (?!):反前向声明
+			// ?=n 匹配任何其后紧接指定字符串n的字符串  
+			// ?!n 匹配任何其后没有紧接指定字符串n的字符串
+			// \b 匹配单词边界
+			// \d 查找数字
+			// n{x} 匹配包含x个n的序列的字符串
+			// n+  匹配任何包含至少一个n的字符串
+			// n$ 匹配任何结尾为n的字符串
+			let re = /(?=(?!\b)(\d{3})+$)/g
+			return str.replace(re, ',')
+		}
+		console.log('fn2:', fn2(str))
+
+
+	</script>
+</body>
+</html>

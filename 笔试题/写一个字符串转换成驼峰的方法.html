@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>写一个字符串转换成驼峰的方法</title>
+</head>
+<body>
+	<script type="text/javascript">
+		/*
+			题目： 写一个字符串转换成驼峰的方法？
+
+			例如：border-bottom-color -> borderBottomColor
+		*/
+
+		let str =  "border-bottom-color"
+
+
+
+		// ---------------------------------------
+		// 方法一：
+		console.log('---------------1--------------------')
+		function fn1 (str){
+			// 用'-'切分为一个数组
+			let arr = str.split('-')
+			// 首字母大写
+			for (let i = 1; i < arr.length; i++) {
+				arr[i] = arr[i].charAt(0).toUpperCase() + arr[i].substring(1)
+			}
+			// 将字符串拼接后返回
+			return arr.join('')
+		}
+		console.log(fn1(str))
+
+
+		// ---------------------------------------
+		// 方法二：使用reduce方法
+		console.log('---------------2--------------------')
+		function fn2(str) {
+			return str.split('-').reduce((prev,cur,index) => {
+				console.log('prev', prev)
+				console.log('cur', cur)
+				console.log('index', index)
+				return prev + cur.charAt(0).toUpperCase()+cur.substring(1)
+			})
+		}
+		console.log(fn2(str))
+
+
+		// ---------------------------------------
+		// 方法三：使用正则表达式
+		console.log('---------------3--------------------')
+		function fn3 (str) {
+			// 定义正则表达式 （\w查找单词字符）
+			 let re =  /-(\w)/g
+			 return str.replace(re, ($0, $1) => {
+			 	/*
+				备注：replace()方法的第二个参数可以是一个函数
+					参数一：$0正则的整体 -b -c
+					参数二：$1正则当中子项的第一个（用括号括起来的叫做子项）b c
+			 	*/
+			 	console.log('$0', $0)
+			 	console.log('$1', $1)
+			 	return $1.toUpperCase()
+			 })
+		}
+		console.log(fn3(str))
+	</script>
+</body>
+</html>
