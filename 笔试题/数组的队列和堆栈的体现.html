@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>数组的队列和堆栈的体现</title>
+</head>
+<body>
+	<script type="text/javascript">
+		// 1. 实现队列
+		console.log('-----------------')
+		function fn1() {
+			// 创建一个数组来模拟队列
+			var a = new Array()
+			console.log('a', a)
+			console.log('入队：')
+			// unshift: 在数组的开头添加一个或更多元素，并返回新的长度
+			a.unshift(1)
+			console.log('a1:', a) // [1]
+			a.unshift(2)
+			console.log('a2:', a) // [2, 1]
+			a.unshift(3)
+			console.log('a3:', a) // [3, 2, 1]
+			a.unshift(4)
+			console.log('a4:', a) // [4, 3, 2, 1]
+			console.log('出队，先进先出：')
+			console.log('a44', a) // [4, 3, 2, 1]
+			a.pop()
+			console.log('a33', a) // [4, 3, 2]
+			a.pop()
+			console.log('a22', a) // [4, 3]
+			a.pop()
+			console.log('a11', a) // [4]
+		}
+		fn1()
+	</script>
+</body>
+</html>
