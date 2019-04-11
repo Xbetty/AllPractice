@@ -9,6 +9,7 @@
 		var str = 'qwertttttyuioplkjhgftt'
 		// ---------------------------------------
 		// 方法一：循环obj
+		console.log('----------------1-------------------')
 		function fn1 (str) {
 			let obj = {}
 			for (let i in str) {
@@ -19,7 +20,7 @@
 				}
 			}
 			let keys = Object.keys(obj) // 获取对象中所有key的值返回数组
-			console.log('-----------------------------------')
+			
 			console.log('keys', keys)
 			let values = Object.values(obj) // 获取对象中所有的value返回数组
 			console.log('values', values)
@@ -33,9 +34,69 @@
 
 
 
+
+		// ---------------------------------------
+		// 方法四：对象+charAt()
+		console.log('---------------4--------------------')
+		function fn4 (str) {
+			var obj = {}
+			for (var i = 0; i < str.length; i++) {
+				var char = str.charAt(i)
+				if(obj[char]) {
+					obj[char] ++ // 次数加1
+				} else {
+					obj[char] = 1 // 若第一次出现，次数记为1
+				}
+			}
+			console.log('obj', obj) // 输出的是完整的对象，记录每一个字符及其出现的次数
+			// 遍历对象，找出出现次数最多的字符的次数
+			var max = 0
+			for (var key in obj) {
+				if (max < obj[key]) {
+					max = obj[key] // max始终存储次数最大的那个
+				}
+			}
+			for (var key in obj) {
+				if (obj[key]=== max) {
+					console.log('出现次数最多的字符是：', key)
+					console.log('出现的次数是：', max)
+
+				}
+			}
+		}
+		fn4(str)
+
+		// ---------------------------------------
+		// 方法五：对象+数组
+		console.log('---------------5--------------------')
+		function fn5 (str) {
+			var obj = {}
+			for (let i = 0; i< str.length; i ++) {
+				let cur  = str[i] //当前字符
+				if (!obj[cur]){
+					obj[cur] = []
+				}
+				obj[cur].push(cur)
+			}
+			console.log('obj', obj)
+			// 统计次数
+			let fn5num = 0
+			let fn5char = ''
+			for (item in obj) {
+				if (fn5num < obj[item].length) {
+					fn5num = obj[item].length
+					fn5char = obj[item][0]
+				}
+			}
+			console.log(`字符最多的是${fn5char}，出现了${fn5num}次`);
+		}
+
+		fn5(str)
+
 		// ---------------------------------------
 		// 方法二：使用reduce方法
 		var fn2Array = str.split('')
+		console.log('---------------2--------------------')
 		var fn2 = fn2Array.reduce(function (prev,next) {
 			if (next in prev) {
 				prev[next] ++
@@ -44,23 +105,36 @@
 			}
 			return prev
 		}, {})
-		console.log('-----------------------------------')
-		console.log(fn2)
+		console.log('fn2:', fn2)
+
+		let fn2num = 0
+		let fn2char = ''
+		// 统计次数
+		for (let item in fn2) {
+			if(fn2num < fn2[item]) {
+				fn2num = fn2[item]
+				fn2char = item
+			}
+		}
+		
+		console.log(`字符最多的是${fn2char}，出现了${fn2num}次`)
 
 		// ---------------------------------------
 		// 方法三：正则
+		console.log('----------------3-------------------')
 		let fn3 = (str) => {
-			str = str.split('').sort().join()
+			str = str.split('').sort().join('')
 			var s = str.match(/(\w+)(\1)/g)
 			if (s === null) {
 				return str[0]
 			}
 			s = s.map(e => e=e+e[0])
 			var out = s.sort((a,b) => b.length-a.length)
-			console.log('-----------------------------------')
 			console.log(out[0][0], out[0].length)
 		}
 		fn3(str)
+
+
 	</script>
 </body>
 </html>
