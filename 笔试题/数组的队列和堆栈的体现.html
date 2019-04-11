@@ -23,6 +23,7 @@
 			console.log('a4:', a) // [4, 3, 2, 1]
 			console.log('出队，先进先出：')
 			console.log('a44', a) // [4, 3, 2, 1]
+			 //pop：从数组中把最后一个元素删除，并返回这个元素的值
 			a.pop()
 			console.log('a33', a) // [4, 3, 2]
 			a.pop()
@@ -31,6 +32,34 @@
 			console.log('a11', a) // [4]
 		}
 		fn1()
+
+		// 2. 实现堆栈
+		console.log('-----------------')
+		function fn2() {
+			// 创建一个数组来模拟队列
+			var a = new Array()
+			console.log('a', a)
+			console.log('入栈：')
+			 //push: 在数组的末尾添加一个或更多元素，并返回新的长度
+			a.push(1)
+			console.log('a1:', a) // [1]
+			a.push(2)
+			console.log('a2:', a) // [1, 2]
+			a.push(3)
+			console.log('a3:', a) // [1, 2, 3]
+			a.push(4)
+			console.log('a4:', a) // [1, 2, 3, 4]
+			console.log('出栈，后进先出：')
+			console.log('a44', a) // [1, 2, 3, 4]
+			 //pop：从数组中把最后一个元素删除，并返回这个元素的值
+			a.pop()
+			console.log('a33', a) // [1, 2, 3]
+			a.pop()
+			console.log('a22', a) // [1, 2]
+			a.pop()
+			console.log('a11', a) // [1]
+		}
+		fn2()
 	</script>
 </body>
 </html>
