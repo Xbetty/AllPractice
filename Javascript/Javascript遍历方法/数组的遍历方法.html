@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>数组的遍历方法</title>
+</head>
+<body>
+	<script type="text/javascript">
+		var arr = ['a','b','c','d']
+		// JavaScript遍历的常用的遍历方法是for循环和for-in，ES5的时候加上了forEach方法（IE9以下不支持）
+		// for循环和for-in能正确响应break，continue和return语句，但是forEach不行
+		// 0.使用for循环
+		console.log('----------------0')
+		for (var i = 0; i < arr.length; i++) {
+			console.log(i, arr[i])
+			/*
+				0 "a"
+				1 "b"
+				2 "c"
+				3 "d"
+			*/
+		}
+		// 1.使用forEach遍历，三个参数依次是数组元素，索引，数组本身
+		console.log('----------------1')
+		arr.forEach(function(val, index, array){
+			console.log(val, index, array)
+			/*
+				a 0 ['a','b','c','d']
+				b 1 ['a','b','c','d']
+				c 2 ['a','b','c','d']
+				d 3 ['a','b','c','d']
+			*/
+		}) 
+
+
+		// 2.使用for...in遍历
+		// for-in循环是为了遍历对象而设计的，事实上，for-in也能用来遍历数组，但定义的索引是字符串类型的。如果数组具有一个可枚举的方法，也会被for-in遍历到。
+		console.log('----------------2')
+		for (var i in arr) {
+			console.log(i, ':', arr[i])
+			/*
+				0: a
+				1: b
+				2: c
+				3: d
+			*/
+		}
+
+		// 3.使用for-of遍历
+		// ES6中，新增了for-of遍历方法。它被设计用来遍历各种类数组集合。
+		// 不仅支持数组，还支持大多类数组对象，例如DOM NodeList对象，也支持字符串遍历，他将字符串视为一系列的unicode字符来进行遍历。
+		console.log('----------------3')
+		// 数组类型
+		// for-of遍历数组，不带索引，value即为数组元素
+		for (var value of arr) {
+			console.log(value)
+			/*
+				a
+				b
+				c
+				d
+			*/
+		}
+		// 类数组类型
+		// for-of遍历Map对象
+		let iterable = new Map([["a", 1], ["b", 2], ["c", 3]])
+		for (var [key,value] of iterable) {
+			console.log(value)
+			/*
+				1
+				2
+				3
+			*/
+		}
+		// for-of 遍历字符串
+		let str = "china 中国"
+		for (let val of str) {
+			console.log(val)
+			/*
+				c
+				h
+				i
+				n
+				a
+
+				中
+				国
+			*/
+		}
+	</script>
+</body>
+</html>
