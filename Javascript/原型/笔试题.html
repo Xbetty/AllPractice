@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>原型、原型链、call、apply</title>
+</head>
+<body>
+	<script type="text/javascript">
+
+		//   11111111111111111111111111
+		/*
+		 a.sayName() 
+		 sayName()里面的this指向的是，谁调用的这个方法，this就指向谁
+		*/
+		console.log('--------------------------1')
+		Person1.prototype = {
+			name : 'a',
+			sayName : function () {
+				console.log(this.name)
+			}
+		}
+
+		function Person1() {
+			this.name = 'b'
+		}
+		var person1 = new Person1()
+		person1.sayName() // b
+		Person1.prototype.sayName() // a
+
+
+
+
+
+		// 2222222222222222222
+		console.log('--------------------------2')
+		Person2.prototype={
+			height: 100
+		}
+		function Person2 () {
+			this.eat = function () {
+				this.height ++
+				console.log(this.height)
+			}
+		}
+		var person2 = new Person2()
+		person2.eat()
+
+
+		/*
+		call/apply： 
+		作用： 改变this指向
+		区别： 后面传的参数形式不同
+		*/
+		// 3333333333333333 call
+		
+		console.log('--------------------------3 call')
+		function Person3 (name, age, sex) {
+			this.name = name
+			this.age = age
+			this.sex = sex
+		}
+		function  Student3 (name, age, sex, tel, grade) {
+			// var this = {}
+			Person3.call(this, name, age, sex) 
+			this.tel = tel
+			this.grade = grade
+		}
+		var studen3 = new Student3('sunny', 123, 'male', 139, 2017)
+
+
+		console.log('--------------------------4 call')
+		function Wheel4 (wheelSize, style) {
+			this.wheelSize = wheelSize
+			this.style = style
+		}
+		function Sit4 (c, sitColor) {
+			this.c = c
+			this.sitColor = sitColor
+		}
+		function Model4 (height, width, len) {
+			this.height = height
+			this.width = width
+			this.len = len
+		}
+		function Car4(wheelSize, style, c, sitColor, height, width, len) {
+			Wheel4.call(this, wheelSize, style)
+			Sit4.call(this, c, sitColor)
+			Model4.call(this, height, width, len)
+		}
+		var car4 = new Car4(100, '花里胡哨', '真皮','red',1800,1900,4900)
+
+		console.log('--------------------------5 apply')
+		/*
+		call和apply的区别：
+		call: 需要把实参按照形参的个数传进去
+		apply： 需要传一个arguments
+		*/
+		function Car5(wheelSize, style, c, sitColor, height, width, len) {
+			Wheel4.apply(this, [wheelSize, style])
+			Sit4.apply(this, [c, sitColor])
+			Model4.apply(this, [height, width, len])
+		}
+		var car5 = new Car4(100, '花里胡哨', '真皮','red',180000,190000,490000)
+	</script>
+</body>
+</html>
