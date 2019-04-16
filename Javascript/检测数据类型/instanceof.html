@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>instanceof的实现</title>
+</head>
+<body>
+	<script type="text/javascript">
+		function instanceofData (L,R) {
+			// L表示左表达式，R表示右表达式
+			var R_Prototype = R.prototype // 取R的显式原型
+			L = L.__proto__ // 取L的隐式原型
+			while (true) {
+				if (L === null) 
+					// 已经找到顶层
+					return false
+				if (R_Prototype === L) {
+					// 当O严格等于L时，返回true
+					return true
+				}
+				console.log('R_Prototype', R_Prototype)
+			console.log('L', L)
+				L = L.__proto__ // 继续向上一层原型链查找
+			}
+		}
+	</script>
+</body>
+</html>

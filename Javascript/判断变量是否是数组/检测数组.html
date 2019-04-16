@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>判断一个变量是不是数组</title>
+</head>
+<body>
+	<script type="text/javascript">
+		function fn () {
+			console.log(Array.isArray(arguments)) // false；因为arguments是类数组，但不是数组
+			console.log(Array.isArray([1,2,3,4])) // true
+			console.log(arguments instanceof Array) // false
+			console.log([1,2,3,4] instanceof Array) // true
+			console.log(Object.prototype.toString.call(arguments)) // [Object Arguments]
+			console.log(Object.prototype.toString.call([1,2,3,4])) // [Object Array]
+			console.log(arguments.constructor === Array) // false
+			arguments.constructor = Array
+			console.log(arguments.constructor === Array) // true
+			console.log(Array.isArray(arguments)) // false
+		}
+		fn(1,2,3,4)
+	</script>
+</body>
+</html>
