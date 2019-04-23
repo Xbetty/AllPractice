@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>双向绑定原理简易版</title>
+</head>
+<body>
+	<script type="text/javascript">
+		// get set
+		var person = {
+			_name: 'xzt',
+			get name() {
+				return this._name
+			},
+			set name(value) {
+				this._name = 'my name is ' + value
+			}
+		}
+		person.name = 'xxx'
+		console.log(person.name) // my name is xxx
+
+		// 发布订阅者模式
+		// 1
+		// class Event {
+		// 	constructor() {
+		// 		this.listennerList = []
+		// 	}
+		// 	listen(listenner) {
+		// 		this.listennerList.push(listenner)
+		// 	}
+		// 	trigger() {
+		// 		for (var i = 0; i < this.listennerList.length; i++) {
+		// 			this.listennerList[i].call(this)
+		// 		}
+		// 	}
+		// }
+		// var myEvent = new Event()
+		// myEvent.listen(function(){
+		// 	console.log('1我订阅了这个事件')
+		// })
+		// myEvent.listen(function(){
+		// 	console.log('2我也订阅了这个事件')
+		// })
+		// myEvent.trigger()
+		// 1我订阅了这个事件 2我也订阅了这个事件
+
+		// 2
+		class Event {
+			constructor() {
+				this.listennerList = []
+			}
+			listen(listenner) {
+				this.listennerList.push(listenner)
+			}
+			trigger() {
+				for (var i = 0; i < this.listennerList.length; i++) {
+					this.listennerList[i].update()
+				}
+			}
+		}
+		var myEvent = new Event()
+		var xiaoming = {
+			update() {
+				console.log('我是小明，我订阅了这个事件')
+			}
+		}
+		myEvent.listen(xiaoming)
+		var xiaohong = {
+			update() {
+				console.log('我是小红，我订阅了这个事件')
+			}
+		}
+		myEvent.listen(xiaohong)
+		myEvent.trigger()
+		// 我是小明，我订阅了这个事件 我是小红，我订阅了这个事件
+	</script>
+</body>
+</html>
