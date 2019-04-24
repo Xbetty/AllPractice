@@ -20,23 +20,26 @@
 	// 	yield 'generator'; //状态值为generator
 	// }
 	// 3.generator函数返回的是指针对象，而不会执行函数内部逻辑
-
+	console.log('-----------myGenerator')
 	function* myGenerator(){
 		console.log("开始执行")
 		let y1= yield 'hello';// yield默认返回undefined
-		console.log(y1)
+		console.log('y1', y1)
 		console.log('暂停后，再次执行')
 		yield 'generator'
 		console.log('遍历完毕')
 		return '改变返回的结果'
 	}
-	let mg = myGenerator(); //返回的是指针对象
-	console.log(mg)// 遍历器对象
-	console.log(mg.next()); // 函数执行，遇到yield暂停
-	console.log(mg.next('gello')); //函数再次启动
-	console.log(mg.next());
+	let mg = myGenerator(); // ----返回的是指针对象
+	console.log('mg', mg) // myGenerator  ----------遍历器对象
+	console.log(mg.next()); // 开始执行 // {value: "hello", done: false} ---- 函数执行，遇到yield暂停
+	console.log(mg.next('gello')); // y1 gello// 暂停后，再次执行 // 暂停后继续执行 // {value: "generator", done: false} ----函数再次启动
+	// 参数可作为yield启动的返回值，yield启动的返回值默认为undefined
+	console.log(mg.next()); // 遍历完毕 // {value: "改变返回的结果", done: true}
+	console.log(mg.next()); // {value: undefined, done: true}
 
 	//对象的symbol.iterator属性，指向遍历器对象
+	console.log('-----------symbol.iterator')
 	let obj ={
 		username: 'xzt',
 		age: 29
@@ -55,15 +58,19 @@
 	// 1.发送ajax请求获取新闻内容
 	// 2.新闻内容获取成功后再次发送请求，获取对应的新闻评论功能
 	// 3.新闻内容获取失败则不需要再次发送请求
+	console.log('----------getNews')
 	function getNews(url){
 		$.get(url,function(data){
 			console.log(data);
-			let url2 = 'http://localhost:3000' +data.commentsUrl
-			sx.next(url2
-				)
+			let commentsUrl = data.commentsUrl
+			let url2 = 'http://localhost:3000' + commentsUrl
+			// 当获取新闻内容成功，发送请求获取对应的评论内容
+			// 调用next传参会作为上次暂停yield的返回值
+			sx.next(url2)
 		})
 	}
 	function* sendXml(){
+		// url作为next传参进来的数据
 		let url = yield getNews('http://localhost:3000/news?id=3');
 		yield getNews(url)
 	}

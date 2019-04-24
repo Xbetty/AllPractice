@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>深度克隆练习</title>
+</head>
+<body>
+	<script type="text/javascript">
+		function checkType (target) {
+			return Object.prototype.toString.call(target)
+		}
+		function clone (target) {
+			var result, type = checkType(target)
+			console.log('type', type)
+			console.log('target', target)
+			if (type === '[object Object]') {
+				result = {}
+			} else if (type === '[object Array]') {
+				result = []
+			} else {
+				return target
+			}
+			for (let i in target) {
+				let value = target [i]
+				if (checkType(value) === '[object Object]' || checkType(value) === '[object Array]') {
+					result[i] = clone(value)
+				} else {
+					result[i] = value
+				}
+			}
+			return result
+		}
+		var arr = [1,3,[2,4],{name:'xzt'}]
+		var copyArr = clone (arr)
+		copyArr[2].push(5)
+		copyArr[3].name = 'xxx'
+		console.log('arr', arr)
+		console.log('copyArr', copyArr)
+	</script>
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>深度克隆</title>
+</head>
+<body>
+	<script type="text/javascript">
+		/*
+		思考：
+			如何实现深度拷贝（克隆）
+			待拷贝的数据里有对象/数组
+			拷贝的数据里不能有对象/数组
+			即使有对象/数组，可以继续遍历对象/数组拿到里面的每一项值，一直到拿到的是基本数据类型，然后再去赋值，就是深度拷贝了
+		*/
+		/*
+		知识点储备：
+			如何判断数据类型？
+			1. typeof返回的数据类型：String，Number，Boolean，Undefined，Object，Function
+			2. Object.prototype.toString.call(obj)
+		*/
+		console.log('----------Object.prototype.toString.call()')
+		let result = 'abcd'
+		result = null
+		result = [1,3]
+		console.log(typeof Object.prototype.toString.call(result)) // string
+		console.log(Object.prototype.toString.call(result)) // [object Array]
+		console.log(Object.prototype.toString.call(result).slice(8, -1)) // Array
+
+		// for in循环 对象（属性名） 数组（下标）
+		console.log('------------for-in')
+		let obj = {
+			username: 'xzt',
+			age: 10
+		}
+		for (let i in obj){
+			console.log(i) // username  age
+		}
+		let arr = [1,3,'123']
+		for (let i in arr) {
+			console.log(i) // 0 1 2
+		}
+
+		// 深度克隆
+		console.log('-------------深度克隆实现')
+		// 定义检测数据类型的功能函数
+		function checkType (target) {
+			return Object.prototype.toString.call(target).slice(8, -1)
+		}
+		// 实现深度克隆 ---> 对象/数组
+		function clone(target) {
+			// 判断拷贝的数据类型
+			// 初始化变量result 成为最终克隆的数据
+			let result, targetType = checkType(target)
+			if (targetType === 'Object') {
+				result = {}
+			} else if (targetType === 'Array') {
+				result = []
+			} else {
+				return target
+			}
+			console.log('targetType', targetType)
+			console.log('target', target)
+			// 遍历目标数据
+			for (let i in target) {
+				// 获取遍历数据结构的每一项值
+				let value = target[i]
+				// 判断目标结构里的每一项值是否存在对象/数组
+				if (checkType(value) === 'Object' || checkType(value) === 'Array') {
+					// 对象/数组里嵌套了对象/数组
+					// 继续遍历获取到的value值
+					result[i] = clone(value)
+				} else {
+					// 获取到的value值是基本的数据类型或者是函数
+					result[i] = value
+				}
+			}
+			return result
+		} 
+		// 数组
+		let arrClone = [1,2,{username:'xzt',age: 13},[2,3,4]]
+		let copyArrClone = clone(arrClone)
+		console.log('arrClone', arrClone) // [1,2,{username:'xzt',age: 13},[2,3,4]]
+		console.log('copyArrClone', copyArrClone)
+		// [1,2,{username:'xzt',age: 20},[2,3,4]]
+		copyArrClone[2].age = 20
+		console.log('copyArrClone1', copyArrClone)
+		// [1,2,{username:'xzt',age: 20},[2,3,4]]
+		// 对象
+		let objClone = {username: 'xxx', age: 22}
+		let copyObjClone = clone(objClone)
+		console.log('objClone', objClone) 
+		// {username: 'xxx', age: 22}
+		console.log('copyObjClone', copyObjClone)
+		// {username: 'xxx', age: 22}
+		copyObjClone.username = 'xiaot'
+		copyObjClone.age = 11
+		console.log('copyObjClone1', copyObjClone)
+		// {username: 'xiaot', age: 22}
+	</script>
+</body>
+</html>
