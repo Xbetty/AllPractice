@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Set和Map数据结构</title>
+</head>
+<body>
+	<!-- 
+		1. Set容器: 无序不可重复的多个value的集合体
+			Set()
+			Set(array)
+			add(value)
+			delete(value)
+			has(value)
+			clear()
+			size
+		2. Map容器: 无序的key不重复的多个key-value的集合体
+			Map()
+			Map(array)
+			set(key, value)
+			get(key)
+			delete(key)
+			has(key)
+			clear()
+			size
+	 -->
+	 <script type="text/javascript">
+	 	// Set数据结构的使用
+	 	console.log('----------------------Set')
+	 	let set = new Set([1,2,4,5,2,3,6])
+	 	console.log('set', set) // [1,2,3,4,5,6]
+	 	set.add(7)
+	 	console.log(set.size, set) // 7 [1,2,3,4,5,6,7]
+	 	console.log(set.has(8)) // false
+	 	console.log(set.has(7)) // true
+	 	set.clear()
+	 	console.log(set) //  []
+
+	 	// Map数据结构的使用
+	 	console.log('---------------------Map')
+	 	let map = new Map([['aaa', 'username', 25],[36, 'age']])
+	 	console.log('map', map) // [['aaa', 'username'],['36','age']]
+	 	map.set(78, 'hahaha') 
+	 	console.log('map', map) // [['aaa', 'username'],['36','age'], [78, 'hahaha']]
+	 	map.delete(36)
+	 	console.log('map', map) // [['aaa', 'username'],[78, 'hahaha']]
+
+	 	// for (let value of target){}循环遍历
+	 	/*
+			1. 遍历数组
+			2. 遍历Set
+			3. 遍历Map
+			4. 遍历字符串
+			5. 遍历伪数组
+	 	*/
+	 	let arrForOf = [1,2,4,5,5,6,2]
+	 	let arr1 = arrForOf
+	 	arrForOf = []
+	 	let setFor = new Set(arr1)
+	 	for(let i of setFor) {
+	 		arrForOf.push(i)
+	 	}
+	 	console.log('arr1', arrForOf) //  [1, 2, 4, 5, 6]
+	 	console.log('arr', arrForOf) //  [1, 2, 4, 5, 6]
+
+	 </script>
+</body>
+</html>

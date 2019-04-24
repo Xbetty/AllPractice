@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>圣杯布局</title>
+	<style type="text/css">
+		.container {
+			background-color: #eee;
+			padding: 0 150px 0 100px;
+			/*清除浮动带来的高度塌陷*/
+			overflow: hidden; 
+		}
+		.main, .left, .right {
+			min-height: 200px;
+			float: left;
+			position: relative;
+		}
+		.main {
+			background-color: pink;
+			width: 100%;
+		}
+		.left{
+			background-color: red;	
+			width: 100px;
+			margin-left: -100%;
+			left: -100px;
+		}
+		.right{
+			background-color: yellow;
+			right: -150px;
+			width: 150px;
+			margin-left: -150px;			
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<!-- 保证main被优先渲染，就需要将main的位置放在前面 -->
+		<div class="main">main</div>
+		<div class="left">left</div>
+		<div class="right">right</div>
+	</div>
+</body>
+</html>
