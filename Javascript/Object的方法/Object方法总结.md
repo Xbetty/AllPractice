@@ -1,0 +1,202 @@
+[Object常用方法总结](https://www.cnblogs.com/mopagunda/p/8328084.html)
+#### 1. Object.assign(target,source1,source2,...)
+
+> - 该方法主要用于对象的合并，将源对象source的所有可枚举属性合并到目标对象target上,此方法只拷贝源对象的自身属性，不拷贝继承的属性。
+Object.assign方法实行的是浅拷贝，而不是深拷贝。也就是说，如果源对象某个属性的值是对象，那么目标对象拷贝得到的是这个对象的引用。同名属性会替换。
+
+> - Object.assign只能进行值的复制，如果要复制的值是一个取值函数，那么将求值后再复制。
+
+> - Object.assign可以用来处理数组，但是会把数组视为对象。
+```
+const target = {
+		x: 0,
+		y: 1
+	}
+	const source = {
+		x: 1,
+		z: 2,
+		fun: {
+			number: 1
+		}
+	}
+	Object.assign(target, source);
+	console.log('target:',target);
+	// target  {x : 1, y : 1, z : 2, fn : {number : 1}}    // 同名属性会被覆盖
+    // source  {x : 1, z : 2, fn : {number : 1}}
+    target.fun.number = 2;
+    console.log("target",target);  // 拷贝为对象引用
+    // source  {x : 1, z : 2, fn : {number : 2}}
+    
+    
+    //-----------------------
+    function Person() {
+    	this.name = 1;
+    }
+    Person.prototype.country = 'china';
+    let student = new Person();
+    student.age=29;
+    const young = {instrest: 'sport'};
+    Object.assign(young, student);
+    console.log('young:',young);
+    // young {instest : 'sport' , age : 29, name: 1}               
+    // 只能拷贝自身的属性，不能拷贝prototype
+```
+
+#### 2. Object.create(prototype[,propertiesObject])
+使用指定的原型对象及其属性去创建一个新的对象
+```
+console.log('2. Object.create(prototype[,propertiesObject])')
+var parent = {
+	x:1,
+	y:1
+}
+var child = Object.create(parent,{
+	z:{ 
+	//z会成为创建对象的属性
+		writeable:true,
+		configurable: true,
+		value:'newAdd'
+	}
+})
+console.log('child:',child) // {z:"newAdd"}
+```
+
+#### 3. Object.defineProperties(obj,props)
+直接在一个对象上定义新的属性或修改现有属性，并返回该对象。
+```
+var obj ={x:2};
+Object.defineProperties(obj,{
+	"property1":{
+		value: true,
+		writeable:true
+	},
+	"property2":{
+		value: 'hello',
+		writeable:false
+	}
+})
+console.log("obj:",obj)  // {x:2, property1: true, property2: "Hello"}
+```
+
+#### 4. Object.defineProperty(obj,prop,descriptor)
+在一个对象上定义一个新属性，或者修改一个对象的现有属性， 并返回这个对象。
+```
+var object ={}
+Object.defineProperty(object, 'is' , {
+	value: function(x, y) {
+	    if (x === y) {
+	      // 针对+0 不等于 -0的情况
+	      return x !== 0 || 1 / x === 1 / y;
+	    }
+	    // 针对NaN的情况
+	    return x !== x && y !== y;
+	  },
+  configurable: true,
+  enumerable: false,
+  writable: true 
+}); 
+console.log('object:',object) // is:f(x,y){}
+```
+> 注意：不能同时设置(writable，value) 和 get，set方法，否则浏览器会报错 ： Invalid property descriptor. Cannot both specify accessors and a value or writable attribute
+
+#### 5. Object.keys(obj)
+返回一个由一个给定对象的自身可枚举属性组成的数组，数组中属性名的排列顺序和使用 for...in 循环遍历该对象时返回的顺序一致 （两者的主要区别是 一个 for-in 循环还会枚举其原型链上的属性）。
+```
+let arr = ["a", "b", "c"];
+console.log('Object.keys(arr):',Object.keys(arr));
+// ['0', '1', '2']
+ 
+/* Object 对象 */
+let obj1 = { foo: "bar", baz: 42 },
+    keys = Object.keys(obj1);
+console.log('keys:',keys);
+// ["foo","baz"] 
+```
+
+#### 6. Object.values()
+方法返回一个给定对象自己的所有可枚举属性值的数组，值的顺序与使用for...in循环的顺序相同 ( 区别在于 for-in 循环枚举原型链中的属性 )。  
+
+Object.values会过滤属性名为 Symbol 值的属性。
+```
+var an_obj = { 100: 'a', 2: 'b', 7: 'c' };
+console.log('Object.values(an_obj):',Object.values(an_obj)); // ['b', 'c', 'a']
+ 
+var obj2 = { 0: 'a', 1: 'b', 2: 'c' };
+console.log('Object.values(obj2):',Object.values(obj2)); // ['a', 'b', 'c']
+
+```
+
+#### 7. Object.entries()
+返回一个给定对象自身可枚举属性的键值对数组，其排列与使用 for...in 循环遍历该对象时返回的顺序一致（区别在于 for-in 循环也枚举原型链中的属性）。
+```
+const obj3 = { foo: 'bar', baz: 42 };
+console.log('Object.entries(obj3):',Object.entries(obj3)); // [ ['foo', 'bar'], ['baz', 42] ]
+ 
+const simuArray = { 0: 'a', 1: 'b', 2: 'c' };
+console.log('Object.entries(simuArray):',Object.entries(simuArray)); // [ ['0', 'a'], ['1', 'b'], ['2', 'c'] ]
+```
+
+#### 8. Object.is()
+```
+// 判断两个值是否相同。
+// 如果下列任何一项成立，则两个值相同：
+// 两个值都是 undefined
+// 两个值都是 null
+// 两个值都是 true 或者都是 false
+// 两个值是由相同个数的字符按照相同的顺序组成的字符串
+// 两个值指向同一个对象
+// 两个值都是数字并且
+// 都是正零 +0
+// 都是负零 -0
+// 都是 NaN
+// 都是除零和 NaN 外的其它同一个数字
+console.log('8. Object.is()')
+Object.is('foo', 'foo');     // true
+Object.is(window, window);   // true
+ 
+Object.is('foo', 'bar');     // false
+Object.is([], []);           // false
+ 
+var test = { a: 1 };
+Object.is(test, test);       // true
+ 
+Object.is(null, null);       // true
+ 
+// 特例
+Object.is(0, -0);            // false
+Object.is(-0, -0);           // true
+Object.is(NaN, 0/0);         // true
+```
+
+#### 9. hasOwnProperty()
+判断对象自身属性中是否具有指定的属性。
+（自有属性指的是直接赋予该对象的属性，不需要从原型链上进行查找的属性）
+```
+var obj9 = {
+	age: 19,
+	prototype: {
+		name: 'xxx'
+	}
+}
+console.log(obj9.hasOwnProperty('name')) // false
+```
+
+#### 10. Object.getOwnPropertyDescriptor(obj, prop)
+返回指定对象上一个自有属性对应的属性描述符。
+
+如果指定的属性存在于对象上，则返回其属性描述符对象（property descriptor），否则返回 undefined。
+```
+var arr10 = ['name', 'age']
+arr10.forEach(function(val) {
+	console.log(Object.getOwnPropertyDescriptor(obj9, val))
+	/*
+	(name) undefined 
+	(age) {
+		value: 19,
+		writable: true,
+		enumerable: true,
+		configurable: true
+	}
+	*/
+})
+```
