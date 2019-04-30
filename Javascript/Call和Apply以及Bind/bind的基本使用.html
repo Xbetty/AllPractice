@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>bind的基本使用</title>
+</head>
+<body>
+	<button id="btn">click</button>
+	<script type="text/javascript">
+		// bind 的基本使用
+		var x = 10
+		function show () {
+			console.log(this.x)
+		}
+		show() // 10
+		var DuyiO = {
+			x: 20
+		}
+		// Function
+		var newShow = show.bind(DuyiO)
+		newShow() // 20
+
+
+
+		// 单对象编程
+		// index.js
+		var list = {}
+
+	</script>
+</body>
+</html>
