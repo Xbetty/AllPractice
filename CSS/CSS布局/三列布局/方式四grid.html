@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>方式四grid布局</title>
+	<style type="text/css">
+		.layout-grid{
+			display: grid;
+			width: 100%;
+			/*grid-template-rows指定的每个值可以创建每行的高度。行的高度可以是任何非负值。*/
+			grid-template-rows: 100px; 
+			/*grid-template-columns指定的每个值来创建每列的列宽*/
+			grid-template-columns: 300px auto 300px;
+		}
+		.left{
+			background-color: red;
+		}
+		.center{
+			background-color: blue;
+		}
+		.right{
+			background-color: green;
+		}
+	</style>
+</head>
+<body>
+	<!-- 新技术，对就浏览器兼容不太好，代码简洁。 -->
+	<div class="layout-grid">
+		<div class="left">left</div>
+		<div class="center">center</div>
+		<div class="right">right</div>
+	</div>
+</body>
+</html>

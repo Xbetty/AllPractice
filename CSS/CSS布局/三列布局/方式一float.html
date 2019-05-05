@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>方式一：float</title>
+	<style type="text/css">
+		.left{
+			background-color: blue;
+			width: 200px;
+			float: left;
+		}
+		.right{
+			background-color: blue;
+			width: 200px;
+			float: right;
+		}
+		.center{
+			background-color: red;
+		}
+
+	</style>
+</head>
+<body>
+	<!-- 兼容性较好，一般需要清除浮动 -->
+	<div class="layout-float">
+		<div class="left">左边</div>
+		<div class="right">右边</div>
+		<div class="center">中间</div>
+		<!-- 注意： center要放在最后。center这个元素是块级元素，占据一行，如果center放在中间，right元素 会在下一行向右浮动。-->
+	</div>
+</body>
+</html>

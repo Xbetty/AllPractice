@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>方式二table布局</title>
+	<style type="text/css">
+		.layout-table{
+			width: 100%;
+			display: table;
+			height: 100px;
+		}
+		.layout-table div{
+			display: table-cell;
+		}
+		.left{
+			width: 200px;
+			background-color: green;
+		}
+		.right{
+			width: 200px;
+			background-color: red;
+		}
+		.center{
+			background-color: blue;
+		}
+	</style>
+</head>
+<body>
+	<!-- 兼容性较好，SEO不太友好 -->
+	<div class="layout-table">
+		<div class="left">left</div>
+		<div class="center">这是中间</div>
+		<div class="right">right</div>
+	</div>
+
+</body>
+</html>

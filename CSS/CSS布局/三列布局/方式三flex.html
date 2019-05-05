@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>方式三flex布局</title>
+	<style type="text/css">
+		.layout-flexbox{
+			display: flex;
+		}
+		.left{
+			width: 200px;
+			background-color: red;
+		}
+		.center{
+			flex: 1;
+			background-color: green;
+		}
+		.right{
+			width: 200px;
+			background-color: blue;
+		}
+	</style>
+</head>
+<body>
+	<!-- 没什么明显缺点，且移动端友好 -->
+	<div class="layout-flexbox">
+		<div class="left">left</div>
+		<div class="center">center</div>
+		<div class="right">right</div>
+	</div>
+</body>
+</html>

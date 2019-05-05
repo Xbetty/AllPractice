@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>方式五绝对定位</title>
+	<style type="text/css">
+		.layout-absolute div{
+			position: absolute;
+		}
+		.left{
+			left: 0;
+			width: 200px;
+			background-color: blue;
+		}
+		.center{
+			left: 200px;
+			right: 200px;
+			background-color: green;
+		}
+		.right{
+			width: 300px;
+			right: 0;
+			background-color: red;
+		}
+	</style>
+</head>
+<body>
+	<!-- 优缺点：方便易用，脱离文档流，可使用性较差 -->
+	<div class="layout-absolute">
+		<div class="left">left</div>
+		<div class="center">center</div>
+		<div class="right">right</div>
+	</div>
+</body>
+</html>
