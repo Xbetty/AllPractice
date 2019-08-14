@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>椭圆运动效果</title>
+	<style type="text/css">
+		body {
+			background-color: #000;
+		}
+		.butterfly {
+			width: 150px;
+			height: 142px;
+			margin: 0 auto;
+			transform-origin: center 150%;
+			-webkit-transform-origin: center 150%;
+			animation: circle 2s infinite linear;
+			-webkit-animation: circle 2s infinite linear;
+		}
+		.butterfly img {
+			width: 100%;
+			height: auto;
+		}
+		figure {
+			margin-left: 200px;
+			animation: updown 1s infinite ease-in-out alternate;
+			-webkit-animation: updown 1s infinite ease-in-out alternate;
+
+		}
+		@-webkit-keyframes circle {
+			to {
+				transform: rotate(-1turn);
+				-webkit-transform: rotate(-1turn);
+			}
+		}
+		@keyframes circle {
+			to {
+				transform: rotate(-1turn);
+				-webkit-transform: rotate(-1turn);
+			}
+		}
+		@-webkit-keyframes updown {
+			to {
+				transform: translateY(200px);
+				-webkit-transform: translateY(200px);
+			}
+		}
+		@keyframes updown {
+			to {
+				transform: translateY(200px);
+				-webkit-transform: translateY(200px);
+			}
+		}
+	</style>
+</head>
+<body>
+	<figure>
+		<div class="butterfly">
+			<img src="http://p7.qhimg.com/t01a4c54ef5309e561c.png">
+		</div>
+	</figure>
+</body>
+</html>

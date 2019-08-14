@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>常用动画属性-animation（气泡loading效果）</title>
+	<style type="text/css">
+		.spinner {
+			width: 28px;
+			height: 28px;
+			background-color: green;
+			border-radius: 50%;
+			margin:100px auto;
+			/*
+			语法：
+			animation: name duration timing-function delay iteration-count direction;
+
+			animation属性是一个简写属性，用于设置六个动画属性：
+				animation-name  规定需要绑定到选择器的keyfram名称
+				animation-duration 规定完成动画所花费的时间，以秒或毫秒计
+				animation-timing-function 规定动画的速度曲线
+				animation-delay 规定在动画开始之前的延迟
+				animation-iteration-count 规定动画应该播放的次数
+				animation-direction 规定是否应该轮流反向播放动画
+
+			*/
+			-webkit-animation: fadeout 1.0s infinite ease-in-out;
+			animation: fadeout 1.0s infinite ease-in-out;
+		}
+		@-webkit-keyframes fadeout {
+			from {
+				transform: scale(0.0);
+			}
+			to {
+				transform: scale(1.0);
+				opacity: 0;
+			}
+		}
+		@keyframes fadeout {
+			from {
+				transform: scale(0.0)
+			}
+			to {
+				transform: scale(1.0)
+				opacity: 0;
+			}
+
+		}
+	</style>
+</head>
+<body>
+	<div class="spinner"></div>
+</body>
+</html>

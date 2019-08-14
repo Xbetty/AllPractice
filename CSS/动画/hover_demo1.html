@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>css3 hover</title>
+	<style type="text/css">
+		.demo, .mask, .img, .border {
+			width: 300px;
+			height: 300px;
+			border-radius: 50%;
+		}
+		.demo {
+			position: relative;
+			display: block;
+		}
+		.img {
+			background: url('http://ww3.sinaimg.cn/mw690/9c7cd2cdjw1e60hntjcq2j211y0lcq5e.jpg');
+			background-size: cover;
+			background-position: 50% 50%;
+		}
+		.mask, .border {
+			position: absolute;
+			top: 0;
+			left: 0;
+		}
+		.mask {
+			text-align: center;
+			color: rgba(255,255,255,0);
+			transition: all .5s ease-in;
+		}
+		.info {
+			margin-top: 50%;
+			transform: translateY(-50%);
+		}
+		.border {
+			border: 10px solid #072256;
+			border-left-color: #E07514;
+			border-top-color: #E07514;
+			box-sizing: border-box;
+			transition: all .5s ease-in;
+		}
+		.demo:hover .mask{
+			background-color: rgba(0, 0, 0, .5);
+			color: rgba(255,255,255,1);
+		}
+		.demo:hover .border {
+			transform: rotate(180deg);
+		}
+	</style>
+</head>
+<body>
+	<a href="#" class="demo">
+		<div class="img"></div>
+		<div class="mask">
+			<div class="info">
+				<h3>BEAUTIFUL DAY</h3>
+				<p>Description goes here</p>
+			</div>
+		</div>
+		<div class="border"></div>
+	</a>
+</body>
+</html>

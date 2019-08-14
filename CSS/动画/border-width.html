@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>border-width效果</title>
+	<style type="text/css">
+		.image-layer {
+			width: 500px;
+			height: 300px;
+			overflow: hidden;
+			position: absolute;
+			top: 0;
+			left: 0;
+		}
+		.image-layer img {
+			width: 100%;
+			cursor: pointer;
+		}
+		.image-layer:before {
+			content: '';
+			position: absolute;
+			top: 0;
+			right: 0;
+			border-style: solid;
+			border-width: 0;
+			border-color: rgba(0,0,0,.2) #fff;
+			border-radius: 0, 0, 0, 4px;
+		  box-shadow: 0 1px 1px rgba(0,0,0,0.3), -1px 1px 1px rgba(0,0,0,0.2);
+		  -webkit-transition: all 0.4s ease-out;
+		  transition:all 0.4s ease-out;
+		}
+		.image-layer:hover:before {
+			border-right-width: 80px;
+			border-bottom-width: 80px;
+
+		}
+	</style>
+</head>
+<body>
+	<div class="image-layer">
+		<img src="http://p6.qhimg.com/d/inn/3f563406/table.jpg"/>
+	</div>
+</body>
+</html>

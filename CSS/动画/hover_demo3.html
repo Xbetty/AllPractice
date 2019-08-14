@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>hover照片墙效果</title>
+	<style type="text/css">
+		body {
+			background-color: #222;
+		}
+		.cardfan {
+			width: 300px;
+			height: 200px;
+			margin: 2em auto;
+		}
+		.cardfan > img {
+			position: absolute;
+			border: 10px solid #fff;
+			box-sizing: border-box;
+			box-shadow: 4px 4px 3px rgba(0,0,0,0.2);
+			-webkit-transform-origin: center 400px;
+			/*旋转原点很重要*/
+			transform-origin: center 400px;
+			-webkit-transition: transform .7s ease;
+			transition: transform .7s ease;
+			-webkit-transition: transform .7s ease;
+
+		}
+		.cardfan img:first-child {
+			-webkit-transform: rotate(5deg);
+			-webkit-transform: rotate(5deg);
+		}
+		.cardfan img:last-child {
+			transform: rotate(-5deg);
+			-webkit-transform: rotate(-5deg);
+		}
+		.cardfan:hover img:first-child {
+			transform: rotate(15deg);
+			-webkit-transform: rotate(15deg);
+		}
+		.cardfan:hover img:last-child {
+			transform: rotate(-15deg);
+			-webkit-transform: rotate(-15deg);
+		}
+	</style>
+</head>
+<body>
+	<div class="cardfan">
+		<img src="http://p3.qhimg.com/t0166077e858154cdb6.jpg" alt="" width="300" height="200"/>
+	  <img src="http://p7.qhimg.com/t01c9fca4f9a05cd8c4.jpg" alt="" width="300" height="200"/>
+	  <img src="http://p0.qhimg.com/t01fad64ae21ddd6221.jpg" alt="" width="300" height="200"/>
+	</div>
+</body>
+</html>

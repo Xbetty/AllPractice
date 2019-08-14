@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>鼠标hover特效</title>
+	<style type="text/css">
+		body {
+			background: #000;
+		}
+		.container {
+			width: 400px;
+			height: 400px;
+			background: url(http://p3.qhimg.com/t0134c65e59012a1257.png) no-repeat center;
+			background-size: cover;
+			border: 1em solid rgba(255,255,255,.8);
+			margin: 50px auto;
+		}
+		.container img {
+			display: block;
+			width: 300px;
+			height: 284px;
+			opacity: 0;
+			transform: translate(-100px,-100px);
+			transition: opacity 1s ease-in-out .5s, transform 1s ease-in-out;
+			-webkit-transition: opacity 1s ease-in-out .5s, transform 1s ease-in-out;
+		}
+		.container:hover img {
+			opacity: 1;
+			transform: translate(0px,0px);
+			-webkit-transform: translate(0px,0px);
+			transition: opacity 1s ease-in-out, transform 1s ease-in-out .1s;
+			-webkit-transition: opacity 1s ease-in-out, -webkit-transform 1s ease-in-out .1s;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<img src="http://p4.qhimg.com/t0160e6a92121691e22.png">
+	</div>
+</body>
+</html>

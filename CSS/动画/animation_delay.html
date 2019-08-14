@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>实用动画技巧animation-delay为负值（loading效果）</title>
+	<style type="text/css">
+		/*
+			animation-delay： 定义动画何时开始
+				默认0：立即执行动画
+				正值： 延时指定时间后，开始执行动画
+				负值： 立即执行，但跳过指定时间后进入动画
+		*/
+		.spinner {
+			width: 50px;
+			height: 50px;
+			margin: 100px auto;
+			text-align: center;
+		}
+		.spinner > div {
+			display: inline-block;
+			width: 6px;
+			height: 100%;
+			background-color: green;
+			-webkit-animation: strechdelay 1.2s infinite ease-in-out;
+		}
+		.spinner .line2 {
+			-webkit-animation-delay: -1.1s;
+		}
+		.spinner .line3 {
+			-webkit-animation-delay: -1.0s;
+		}
+		.spinner .line4 {
+			-webkit-animation-delay: -0.9s;
+		}
+		.spinner .line5 {
+			-webkit-animation-delay: -0.8s;
+		}
+		@-webkit-keyframes strechdelay {
+			0%,40%,100% {
+				-webkit-transform: scaleY(.4);
+			}
+			20% {
+				-webkit-transform: scaleY(1);
+			}
+		}
+	</style>
+</head>
+<body>
+	<div class="spinner">
+		<div class="line1"></div>
+		<div class="line2"></div>
+		<div class="line3"></div>
+		<div class="line4"></div>
+		<div class="line5"></div>
+	</div>
+</body>
+</html>
