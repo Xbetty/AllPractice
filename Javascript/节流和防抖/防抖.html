@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>防抖</title>
+	<style type="text/css">
+		#container {
+			width: 100%;
+			height: 100px;
+			line-height: 100px;
+			text-align: center;
+			background-color: #444;
+			font-size: 30px;
+		}
+	</style>
+</head>
+<body>
+	<div id="container">1</div>
+	<button id="button">点击取消debounce</button>
+
+	<script type="text/javascript">
+		var count = 1;
+		var container = document.getElementById('container');
+
+		function getUserAction(e) {
+			/*
+				1. 不使用debounce函数的时候，this的值为：<div id="container"></div>
+				2. 如果使用debounce函数，this就会指向Window对象
+			*/
+			console.log('getUserAction', this)
+			/*
+				1. 不使用debounce函数的时候，会打印出MouseEvent对象
+				2. 使用debounce函数，却只会打印undefined
+			*/
+			console.log('e', e)
+			container.innerHTML = count ++
+		}
+
+		// container.onmousemove = getUserAction;
+		// window.onresize = getUserAction;
+
+		// 解决问题的两种方案： 1. debounce防抖 2. throttle节流
+
+		// 防抖
+		/**
+			防抖的原理：你尽管触发事件，但是我一定在事件触发n秒后才执行，如果你在一个事件触发的n秒内又触发了这个事件，那我就以新的事件的时间为准，n秒后才执行，总之，就是要等你触发完事件n秒后不再触发事件，我才执行。
+		*/
+
+		// 第一版 （解决了事件重复指向的问题，出现this指向问题）
+		function debounce(func, wait) {
+			var timeout;
+			return function () {
+				clearTimeout(timeout);
+				timeout = setTimeout(func, wait);
+			}
+		}
+		// 第二版（解决this指向问题，丢失了事件对象e）
+		function debounce(func, wait) {
+			var timeout;
+			return function () {
+				var context = this;
+
+				clearTimeout(timeout);
+				timeout = setTimeout(function(){
+					func.apply(context)
+				}, wait);
+			}
+		}
+		// 第三版 （修复this指向和event对象的问题）
+		function debounce(func, wait) {
+			var timeout;
+			return function () {
+				var context = this;
+				var args = arguments;
+
+				clearTimeout(timeout);
+				timeout = setTimeout(function(){
+					func.apply(context, args)
+				}, wait);
+			}
+		}
+		// 第四版 (立即执行)
+		// 不希望非得等到事件停止触发后才执行，希望立即执行函数，然后等到停止触发n秒后，才可以重新触发执行。
+		function debounce(func, wait, immediate) {
+			var timeout;
+			return function () {
+				var context = this;
+				var args = arguments;
+
+				clearTimeout(timeout);
+
+				if (immediate) {
+					// 如果已经执行过，不再执行
+					var callNow = !timeout;
+					timeout = setTimeout(function(){
+						timeout = null;
+					}, wait);
+					if (callNow) func.apply(context, args)
+				} else {
+					timeout = setTimeout(function(){
+						func.apply(context, args)
+					}, wait);
+				}
+				
+			}
+		}
+		// 第五版 （返回值）
+		// getUserAction函数可能是有返回值的，所以我们也要返回函数的执行结果，但是当immediate为false的时候，因为使用了setTimeOut，我们将func.apply(context, args)的返回值赋给变量，最后再return的时候，值将会一直是undefined，所以我们只在immediate为true的时候返回函数的执行结果。
+		function debounce(func, wait, immediate) {
+			var timeout, result;
+			return function() {
+				var context = this;
+				var args = arguments;
+
+				clearTimeout(timeout);
+				if (immediate) {
+					// 如果已经执行过，就不再执行
+					var callNow = !timeout;
+					timeout = setTimeout(function() {
+						timeout = null
+					}, wait);
+					if (callNow) {
+						result = func.apply(context, args);
+					}
+				} else {
+					timeout = setTimeout(function(){
+						func.apply(context, args);
+					}, wait)
+				}
+				return result;
+			}
+		}
+		
+		// 第六版 （取消防抖）
+		function debounce(func, wait, immediate) {
+			var timeout, result;
+			var debounced = function() {
+				var context = this;
+				var args = arguments;
+
+				clearTimeout(timeout);
+				if (immediate) {
+					// 如果已经执行过，就不再执行
+					var callNow = !timeout;
+					timeout = setTimeout(function() {
+						timeout = null
+					}, wait);
+					if (callNow) {
+						result = func.apply(context, args);
+					}
+				} else {
+					timeout = setTimeout(function(){
+						func.apply(context, args);
+					}, wait)
+				}
+				return result;
+			}
+
+			debounced.cancel = function () {
+				clearTimeout(timeout);
+				timeout = null;
+			}
+
+			return debounced;
+		}
+
+		var setUserAction = debounce(getUserAction, 100, true);
+		container.onmousemove = setUserAction;
+
+		document.getElementById('button').addEventListener('click', function(){
+			console.log('cancel');
+			setUserAction.cancel();
+		})
+	</script>
+</body>
+</html>
