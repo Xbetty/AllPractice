@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>CSS Sprite雪碧图使用场景</title>
+</head>
+<body>
+	<!-- 
+		1. 静态图片，不随用户信息的变化而变化
+		2. 小图片，图片容量比较小
+		3. 加载量比较大
+		ps：一些大图不建议拼成雪碧图
+	 -->
+
+	 <!-- 实现原理：CSS background-position -->
+	 <!-- 
+	 	控制一个层，可显示的区域范围大小
+	 	通过一个窗口，进行背景图的滑动
+	  -->
+
+	  <!-- 实现方式：1. PS手动拼图（记录坐标点）2. 使用sprite工具自动生成（CssGaga）-下载地址：http://www.99css.com/archives/1524 -->
+	  <div>
+	  	<ul>
+	  		<li class="cat-1">
+	  			<i></i>
+	  			<h3>服饰内衣</h3>
+	  		</li>
+	  		<li class="cat-2">
+	  			<i></i>
+	  			<h3>运动户外</h3>
+	  		</li>
+	  		<li class="cat-3">
+	  			<i></i>
+	  			<h3>珠宝手表</h3>
+	  		</li>
+	  		<li class="cat-4">
+	  			<i></i>
+	  			<h3>手机数码</h3>
+	  		</li>
+	  		<li class="cat-5">
+	  			<i></i>
+	  			<h3>服饰内衣</h3>
+	  		</li>
+	  		<li class="cat-6">
+	  			<i></i>
+	  			<h3>服饰内衣</h3>
+	  		</li>
+	  		<li class="cat-7">
+	  			<i></i>
+	  			<h3>服饰内衣</h3>
+	  		</li>
+	  		<li class="cat-8">
+	  			<i></i>
+	  			<h3>服饰内衣</h3>
+	  		</li>
+	  	</ul>
+	  </div>
+
+</body>
+</html>

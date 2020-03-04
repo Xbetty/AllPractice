@@ -1,0 +1,57 @@
+<!--
+ * @Author: your name
+ * @Date: 2019-11-04 17:33:31
+ * @LastEditTime: 2019-11-05 14:30:47
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \AllPractice\Javascript\js事件执行机制\JavaScript执行机制.html
+ -->
+<!DOCTYPE html>
+<html>
+<head>
+	<title>JavaScript执行机制</title>
+</head>
+<body>
+	<script type="text/javascript">
+		// 参考链接： https://juejin.im/post/59e85eebf265da430d571f89
+
+		/* part 1 */
+		// setTimeout(function() {
+		// 	console.log('1. 定时器开始啦')
+		// })
+		// new Promise(function(resolve) {
+		// 	console.log('2. 马上执行for循环啦')
+		// 	for (var i=0;i<10000;i++){
+		// 		i === 99 && resolve()
+		// 	}
+		// }).then(function(){
+		// 	console.log('3. 执行then函数啦')
+		// })
+		// console.log('4. 代码执行结束')
+		/* 运行结果： 
+					2. 马上执行for循环啦
+					4. 代码执行结束
+					3. 执行then函数啦
+					1. 定时器开始啦
+		 */
+
+		/* part 2 */
+		setTimeout(function(){
+			console.log('1. setTimeout')
+		})
+		new Promise(function(resolve) {
+			console.log('2. promise')
+		}).then(function(){
+			console.log('3. then')
+		})
+		console.log('4. console')
+		/* 运行结果： 
+					2. promise
+					4. console
+					3. then
+					1. setTimeout
+		 */
+		
+	</script>
+</body>
+</html>
