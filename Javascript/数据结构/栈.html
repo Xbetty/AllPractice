@@ -1,0 +1,72 @@
+<!--
+ * @Author: xiongziting
+ * @Date: 2020-03-18 14:38:02
+ * @LastEditors: xiongziting
+ * @LastEditTime: 2020-03-18 18:06:37
+ * @Description: 栈
+ * @FilePath: \AllPractice\Javascript\数据结构\栈.html
+ -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      /*
+          栈是一种特殊的列表，栈内的元素只能通过列表的一端访问，这一端称为栈顶。
+          栈被称为一种后入先出（LIFO，last-in-first-out）的数据结构。
+    */
+      /*
+        对栈的两种主要操作是将一个元素压入栈和将一个元素弹出栈。
+        入栈使用push()防范，出栈使用pop()方法。
+        另一个常用的操作是预览栈顶的元素。pop()方法虽然可以访问栈顶的元素，但是调用该方法后，栈顶元素也从栈中永久性删除了。
+        peek()方法则只返回栈顶元素，而不删除它。
+    */
+      function Stack() {
+        this.dataSource = []; // 保存栈内元素
+        this.top = 0; // 栈顶位置
+        this.push = push;
+        this.pop = pop;
+        this.peek = peek;
+        this.clear = clear;
+        this.length = length;
+      }
+
+      function push(element) {
+        // 当向栈中压入一个新元素时，需要将其保存在数组中变量top所对应的位置，然后将top值加1，将其指向数组中下一个空位置。
+        this.dataSource[this.top++] = element;
+        // 需要特别注意++的位置，它放在this.top的后面，这样新入栈的元素就被放在top的当前值对应的位置，然后再将变量top的值加1，指向下一个位置。
+      }
+
+      function pop() {
+        return this.dataSource[--this.top];
+      }
+
+      function peek() {
+        return this.dataSource[this.top - 1];
+        // 如果对于一个空栈调用peek()方法，结果为undefined。这是因为栈是空的，栈顶没有任何元素。
+      }
+
+      //   length()方法通过返回变量top值的方式返回栈内的元素个数
+      function length() {
+        return this.top;
+      }
+
+      //   将变量top的值设为0，清空一个栈
+      function clear() {
+        this.top = 0;
+      }
+
+      var nameStack = new Stack();
+      nameStack.push('张三');
+      nameStack.push('李四');
+      nameStack.push('王五');
+      console.log('nameStack', nameStack);
+      console.log('length', nameStack.length());
+      console.log('peek', nameStack.peek());
+    </script>
+  </body>
+</html>
