@@ -1,0 +1,152 @@
+<!--
+ * @Author: xiongziting
+ * @Date: 2020-03-04 15:30:29
+ * @LastEditors: xiongziting
+ * @LastEditTime: 2020-03-05 16:29:48
+ * @Description: 
+ * @FilePath: \AllPractice\Javascript\算法\index.html
+ -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- 累加和累积 -->
+
+    <script>
+      // 累加：将一系列的数据加到一个变量里面。最后得到累加的结果
+      // 1. 将1到100的数求累加和
+      function getSum1() {
+        var sum = 0;
+        for (let i = 0; i <= 100; i++) {
+          sum += i;
+        }
+        console.log('1到100个数相加的结果为:', sum);
+      }
+      getSum1(); // 1到100个数相加的结果为: 5050
+      // 2. 小球从高处落下，每次返回到原来一半，求第十次小球落地时小球走过的路程
+      function getSum2() {
+        var h = 100;
+        var s = 0;
+        for (var i = 0; i < 10; i++) {
+          h = h / 2;
+          s += h;
+        }
+        s = s * 2 + 100;
+        console.log('第十次小球落地时小球走过的路程:', s);
+      }
+      getSum2(); // 第十次小球落地时小球走过的路程: 299.8046875
+
+      function getSum2_xzt() {
+        var h = 100;
+        var s = 0;
+        for (var i = 0; i < 10; i++) {
+          s += h + h / 2;
+          h = h / 2;
+          if (i === 9) {
+            s += h;
+          }
+        }
+        console.log('第十次小球落地时小球走过的路程xzt:', s);
+      }
+      getSum2_xzt(); // 第十次小球落地时小球走过的路程xzt: 299.8046875
+    </script>
+
+    <script>
+      // 累积：将一系列的数据累积到一个变量里面，得到累积的结果。
+      //   常见的就是n的阶乘
+      function getMulti() {
+        var n = 100;
+        var result = 1;
+        for (let i = 1; i <= n; i++) {
+          result *= i;
+        }
+        console.log('100的阶乘为', result);
+      }
+      getMulti(); // 100的阶乘为 9.33262154439441e+157
+    </script>
+
+    <script>
+      // 递归：所谓递归就是在函数内部又去调用自己
+      // 阶乘
+      function fact(n) {
+        if (n === 1) {
+          return 1;
+        }
+        return n * fact(n - 1);
+      }
+      console.log(fact(5)); // 120
+    </script>
+
+    <script>
+      //   穷举：遇到一个问题，找不到更好的解决方法，（找不到数学公式或者规律）时，使用“最笨”的办法，利用计算机计算速度快的特点，将所有可能性全部列出来，并将我们想要的结果记录下来
+      function bruteForce() {
+        for (var cock = 0; cock <= 20; cock++) {
+          for (var hen = 0; hen <= 33; hen++) {
+            var chihen = 100 - cock - hen;
+            if (cock * 5 + hen * 3 + chihen / 3 === 100) {
+              console.log(
+                '公鸡一共：' + cock + '鸡母一共：' + hen + '小鸡一共：' + chihen
+              );
+            }
+          }
+        }
+      }
+      bruteForce();
+    </script>
+
+    <script>
+      // 迭代法：也就是辗转法
+      // 规律：就是可以不断地用旧的值得到新的值，直到我们想要的结果
+      /*
+        遇到了迭代的问题怎么解决：
+        1. 找到迭代的变量（旧的值）
+        2. 确定迭代的关系
+        3. 知道想要的结果是什么（结束循环的条件-知道最终结果以及循环的次数）
+    */
+      var num1 = Number(prompt('请输入一个数'));
+      var num2 = Number(prompt('请输入一个数'));
+      var result = GCD(num1, num2);
+      alert(result);
+      /*
+       * 函数的功能：得到最大公约数
+       * 函数名：GCD
+       * 函数的参数：俩个整数
+       * 返回值：最大公约数*/
+      /*
+       * 如果num1<num2则交换，确保num1是交大的
+       * 计算余数
+       * 当num1（除数），对num2（被除数）的余数不为0，重复一下步骤
+       * num2=>num1,
+       * 余数=>num2
+       * 重新计算余数
+       * 最终的到最大公约数，也就是num2的值*/
+      function GCD(num1, num2) {
+        if (num1 < num2) {
+          var t = num1;
+          num1 = num2;
+          num2 = t;
+        }
+        var remainder = num1 % num2;
+        while (remainder != 0) {
+          num1 = num2;
+          num2 = remainder;
+          remainder = num1 % num2;
+        }
+        return num2;
+      }
+    </script>
+
+    <script>
+      // 递推
+      //   找到数学规律：通过公式计算到下一项的值，一直到我们要的结果为止
+      // 例如：兔子产子：通过前两项得到下一项
+      
+    </script>
+  </body>
+</html>

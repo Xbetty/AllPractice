@@ -1,42 +1,72 @@
+<!--
+ * @Author: xiongziting
+ * @Date: 2019-08-14 09:38:43
+ * @LastEditors: xiongziting
+ * @LastEditTime: 2020-03-04 15:02:34
+ * @Description: 
+ * @FilePath: \AllPractice\Javascript\this\this.html
+ -->
 <!DOCTYPE html>
 <html>
-<head>
-	<title></title>
-</head>
-<body>
-<script type="text/javascript">
-	var foo = {x:10};
-	var bar= {
-		x:20,
-		test:function() {
-			// body...
-			alert(this===bar);//true
-			alert("this1:"+this.x);//20
-			this==foo;//错误，任何时候不能改变this的值
-			alert("this2:"+this.x);//如果不出错的话，应该是10，而不是20
-		}
-	};
-	//在进入上下文的时候
-	//this被当成bar对象
-	bar.test();//true 20
-	foo.test=bar.test;
-	//不过，这里的this依然不会是foo
-	//尽管调用的是相同的func
-	foo.test();//false,10
+  <head>
+    <title></title>
+  </head>
+  <body>
+    <script type="text/javascript">
+      var foo = { x: 10 };
+      var bar = {
+        x: 20,
+        test: function() {
+          // body...
+          alert(this === bar); //true
+          alert('this1:' + this.x); //20
+          this == foo; //错误，任何时候不能改变this的值
+          alert('this2:' + this.x); //如果不出错的话，应该是10，而不是20
+        }
+      };
+      //在进入上下文的时候
+      //this被当成bar对象
+      bar.test(); //true 20
+      foo.test = bar.test;
+      //不过，这里的this依然不会是foo
+      //尽管调用的是相同的func
+      foo.test(); //false,10
 
-	// var foo = {
-	//   bar: function () {
-	//     alert(this);
-	//   }
-	// };
-	 
-	// foo.bar(); // Reference, OK => foo
-	// (foo.bar)(); // Reference, OK => foo
-	 
-	// (foo.bar = foo.bar)(); // global?
-	// (false || foo.bar)(); // global?
-	// (foo.bar, foo.bar)(); // global?
+      // var foo = {
+      //   bar: function () {
+      //     alert(this);
+      //   }
+      // };
 
-</script>
-</body>
+      // foo.bar(); // Reference, OK => foo
+      // (foo.bar)(); // Reference, OK => foo
+
+      // (foo.bar = foo.bar)(); // global?
+      // (false || foo.bar)(); // global?
+      // (foo.bar, foo.bar)(); // global?
+
+      // ES6箭头函数
+      var name = 'outer';
+      var obj = {
+        name: 'inner',
+        func: () => {
+          console.log(this.name);
+        }
+      };
+      var obj2 = {
+        name: 'inner',
+        func: function() {
+          console.log(this.name);
+        }
+      };
+      /*
+	第一个使用了箭头函数，由于箭头函数的this与其所在环境中的this相同，也就是obj的this相同，
+	而obj处于全局环境的活动对象中，this指向全局对象，这里指window，所以输出outer。
+
+	注意：obj对象的this与它属性中的this不一样。第二个使用了寻常函数，作为obj2的一个属性，func方法中的this指向了所在对象。输出inner。
+	*/
+      obj.func(); // outer
+      obj2.func(); // inner
+    </script>
+  </body>
 </html>
