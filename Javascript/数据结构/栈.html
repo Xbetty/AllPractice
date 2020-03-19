@@ -2,7 +2,7 @@
  * @Author: xiongziting
  * @Date: 2020-03-18 14:38:02
  * @LastEditors: xiongziting
- * @LastEditTime: 2020-03-18 18:06:37
+ * @LastEditTime: 2020-03-19 11:52:35
  * @Description: 栈
  * @FilePath: \AllPractice\Javascript\数据结构\栈.html
  -->
@@ -16,15 +16,15 @@
   <body>
     <script>
       /*
-          栈是一种特殊的列表，栈内的元素只能通过列表的一端访问，这一端称为栈顶。
-          栈被称为一种后入先出（LIFO，last-in-first-out）的数据结构。
-    */
+            栈是一种特殊的列表，栈内的元素只能通过列表的一端访问，这一端称为栈顶。
+            栈被称为一种后入先出（LIFO，last-in-first-out）的数据结构。
+      */
       /*
-        对栈的两种主要操作是将一个元素压入栈和将一个元素弹出栈。
-        入栈使用push()防范，出栈使用pop()方法。
-        另一个常用的操作是预览栈顶的元素。pop()方法虽然可以访问栈顶的元素，但是调用该方法后，栈顶元素也从栈中永久性删除了。
-        peek()方法则只返回栈顶元素，而不删除它。
-    */
+          对栈的两种主要操作是将一个元素压入栈和将一个元素弹出栈。
+          入栈使用push()防范，出栈使用pop()方法。
+          另一个常用的操作是预览栈顶的元素。pop()方法虽然可以访问栈顶的元素，但是调用该方法后，栈顶元素也从栈中永久性删除了。
+          peek()方法则只返回栈顶元素，而不删除它。
+      */
       function Stack() {
         this.dataSource = []; // 保存栈内元素
         this.top = 0; // 栈顶位置
@@ -65,8 +65,76 @@
       nameStack.push('李四');
       nameStack.push('王五');
       console.log('nameStack', nameStack);
-      console.log('length', nameStack.length());
-      console.log('peek', nameStack.peek());
+      console.log('length', nameStack.length()); // 3
+      console.log('peek', nameStack.peek()); // 王五
+      var popped = nameStack.pop();
+      console.log('the popped element is:' + popped);
+      console.log('peek', nameStack.peek()); // 李四
+      nameStack.push('熊一');
+      console.log('peek', nameStack.peek()); // 熊一
+      nameStack.clear();
+      console.log('length', nameStack.length()); // 0
+      console.log('peek', nameStack.peek()); // undefined
+      nameStack.push('熊一');
+      console.log('peek', nameStack.peek()); // 熊一
+      console.log('length', nameStack.length()); // 1
+
+      // 判断回文
+      /*
+          使用栈，可以轻松判断一个字符串是否是回文。
+          我们将拿到的字符串的每个字符按从左至右的顺序压入栈。当字符串中的字符都入栈后，栈内就保存了一个反转后的字符串，最后的字符在栈顶，第一个字符在栈底。
+          字符串完整压入栈内后，通过持续弹出栈中的每个字母就可以得到一个新的字符串，该字符串刚好与原来的字符串顺序相反。我们只需要比较这两个字符串即可，如果他们相等，就是一个回文。
+        */
+      function isPalindrome(word) {
+        var s = new Stack();
+        for (var i = 0; i < word.length; ++i) {
+          s.push(word[i]);
+        }
+        var rword = '';
+        while (s.length() > 0) {
+          rword += s.pop();
+        }
+        if (word == rword) {
+          return true;
+        } else {
+          return false;
+        }
+      }
+      var word1 = 'hello';
+      if (isPalindrome(word1)) {
+        console.log(word1 + ' is a palindrome');
+      } else {
+        console.log(word1 + ' is not a palindrome'); // hello is not a palindrome
+      }
+      var word2 = 'racecar';
+      if (isPalindrome(word2)) {
+        console.log(word2 + ' is a palindrome'); // racecar is a palindrome
+      } else {
+        console.log(word2 + ' is not a palindrome');
+      }
+
+      // 递归演示
+      function factorial(n) {
+        if (n === 0) {
+          return 1;
+        } else {
+          return n * factorial(n - 1);
+        }
+      }
+      console.log('factorial(5)', factorial(5)); // 120
+      // 使用栈模拟递归进程
+      function fact(n) {
+        var s = new Stack();
+        while (n > 1) {
+          s.push(n--);
+        }
+        var product = 1;
+        while (s.length() > 0) {
+          product *= s.pop();
+        }
+        return product;
+      }
+      console.log('fact(5):', fact(5)); // 120
     </script>
   </body>
 </html>
