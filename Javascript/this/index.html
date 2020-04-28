@@ -1,0 +1,73 @@
+<!--
+ * @Author: xiongziting
+ * @Date: 2020-04-21 16:29:25
+ * @LastEditors: xiongziting
+ * @LastEditTime: 2020-04-21 16:47:10
+ * @Description: 
+ * @FilePath: \AllPractice\Javascript\this\index.html
+ -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var age = 10;
+      var person = {
+        age: 20,
+        getAge() {
+          var age = 30;
+          return this.age;
+        },
+      };
+      console.log(age, age * 2); // 10 20
+      person.getAge(); //  20
+
+      var b = person.getAge;
+      b(); // 10
+
+      person.getAge(); // 20
+      (1, person.getAge)();
+      (1, person.getAge.bind(person))();
+      (person.getAge, person.getAge)();
+      (person.getAge = person.getAge)();
+      person.getAge.call();
+      person.getAge.call(person);
+      function getAge2() {
+        this.age = 40;
+        console.log(person.getAge());
+      }
+      getAge2();
+      console.log(age);
+      function getAge3() {
+        this.age = 50;
+        this.getAge4 = () => {
+          console.log(person.getAge.call(this));
+        };
+      }
+      new getAge3().getAge4();
+      console.log(age);
+      function getAge4() {
+        this.age = 60;
+        this.getAge5 = () => {
+          console.log(person.getAge.call(this));
+        };
+      }
+      new getAge4().getAge5();
+      console.log(age);
+      var age2 = 10;
+      var person2 = {
+        age2: 20,
+        getAge2: () => {
+          var age2 = 30;
+          return this.age2;
+        },
+      };
+      console.log(person2.getAge2.call());
+      console.log(person2.getAge2.call(person2));
+    </script>
+  </body>
+</html>
