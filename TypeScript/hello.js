@@ -2,7 +2,7 @@
  * @Author: xiongziting
  * @Date: 2020-04-28 10:29:09
  * @LastEditors: xiongziting
- * @LastEditTime: 2020-04-28 16:36:47
+ * @LastEditTime: 2020-04-30 11:37:57
  * @Description: 第一个ts练习
  * @FilePath: \AllPractice\TypeScript\hello.ts
  */
@@ -126,4 +126,57 @@ var myNumber5;
 myNumber5 = 'xzt';
 console.log(myNumber5.length);
 myNumber5 = 7;
-// console.log(myNumber5.length); // hello.ts:147:23 - error TS2339: Property 'length' does not exist on type 'number'.
+var person = {
+    name: 'xxx',
+    age: 25
+};
+var person3 = {
+    name: 'xzt'
+};
+var person4 = {
+    name: 'xzt',
+    age: 25
+};
+var person6 = {
+    name: 'xzt',
+    gender: 'female'
+};
+var person7 = {
+    name: 'xzt',
+    age: 23,
+    gender: 'female'
+};
+var person8 = {
+    id: 1997,
+    name: 'xzt',
+    gender: 'femal'
+};
+// person8.id = 18087; // hello.ts:250:9 - error TS2540: Cannot assign to 'id' because it is a read-only property.
+// let person9: Person5 = {
+//   name: 'xzt',
+//   gender: 'female',
+// };
+// // Property 'id' is missing in type '{ name: string; gender: string; }' but required in type 'Person5'.
+// person9.id = 1997; // hello.ts:256:9 - error TS2540: Cannot assign to 'id' because it is a read-only property.
+/**
+ * 数组
+ */
+var tsArray = [1, 1, 2, 3, 4, 5];
+tsArray.push(8);
+// tsArray.push('8'); // hello.ts:264:14 - error TS2345: Argument of type '"8"' is not assignable to parameter of type 'number'.
+// let tsArray1: number[] = [1, '1', 2, 3, 4, 5]; // hello.ts:265:30 - error TS2322: Type 'string' is not assignable to type 'number'.
+// 数组泛型
+var tsArray2 = [1, 1, 2, 3, 4, 5];
+var array = [1, 2, 3, 4, 5];
+// 类数组
+// function sum() {
+//   let args: number[] = arguments; // hello.ts:278:7 - error TS2740: Type 'IArguments' is missing the following properties from type 'number[]': pop, push, concat, join, and 15 more.
+// }
+function sum1() {
+    var args = arguments;
+}
+function sum2() {
+    var args = arguments;
+}
+// any在数组中的应用
+var anyArray = ['xzt', 23, { url: 'http://localhost:8080' }];

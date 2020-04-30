@@ -2,7 +2,7 @@
  * @Author: xiongziting
  * @Date: 2020-04-28 10:29:09
  * @LastEditors: xiongziting
- * @LastEditTime: 2020-04-28 16:36:47
+ * @LastEditTime: 2020-04-30 11:37:57
  * @Description: 第一个ts练习
  * @FilePath: \AllPractice\TypeScript\hello.ts
  */
@@ -145,3 +145,150 @@ myNumber5 = 'xzt';
 console.log(myNumber5.length);
 myNumber5 = 7;
 // console.log(myNumber5.length); // hello.ts:147:23 - error TS2339: Property 'length' does not exist on type 'number'.
+
+/**
+ * 对象的类型-接口
+ */
+interface Person {
+  name: string;
+  age: number;
+}
+
+let person: Person = {
+  name: 'xxx',
+  age: 25,
+};
+
+// 约束了person的形状必须和接口Person一致。
+// 定义的变量比接口少了一些属性是不允许的
+// let person1: Person = {
+//   name: 'xzt', // hello.ts:164:5 - error TS2741: Property 'age' is missing in type '{ name: string; }' but required in type 'Person'.
+// };
+
+// 多一些属性也是不允许的：
+// let person2: Person = {
+//   name: 'xzt',
+//   age: 23,
+//   gender: 'female', // hello.ts:172:3 - error TS2322: Type '{ name: string; age: number; gender: string; }' is not assignable to type 'Person'. Object literal may only specify known properties, and 'gender' does not exist in type 'Person'.
+// };
+
+/**
+ * 可选属性
+ */
+interface Person1 {
+  name: string;
+  age?: number;
+}
+let person3: Person1 = {
+  name: 'xzt',
+};
+let person4: Person1 = {
+  name: 'xzt',
+  age: 25,
+};
+
+// 不允许添加未定义的属性
+// let person5: Person1 = {
+//   name: 'xzt',
+//   age: 23,
+//   gender: 'female', // Type '{ name: string; age: number; gender: string; }' is not assignable to type 'Person1'. Object literal may only specify known properties, and 'gender' does not exist in type 'Person1'.
+// };
+
+/**
+ * 任意属性
+ */
+interface Person2 {
+  name: string;
+  age?: number;
+  [propName: string]: any;
+}
+
+let person6: Person2 = {
+  name: 'xzt',
+  gender: 'female',
+};
+
+// interface Person3 {
+//     name: string;
+//     age?: number;
+//     [propName: string]: string;
+// }
+// let tom: Person = {
+//     name: 'Tom',
+//     age: 25,
+//     gender: 'male'
+// };
+// Type '{ name: string; age: number; gender: string; }' is not assignable to type 'Person'. Object literal may only specify known properties, and 'gender' does not exist in type 'Person'.
+
+interface Person4 {
+  name: string;
+  age?: number;
+  [propName: string]: string | number;
+}
+let person7: Person4 = {
+  name: 'xzt',
+  age: 23,
+  gender: 'female',
+};
+
+/**
+ * 只读属性
+ */
+
+interface Person5 {
+  readonly id: number;
+  name: string;
+  age?: number;
+  [propName: string]: any;
+}
+
+let person8: Person5 = {
+  id: 1997,
+  name: 'xzt',
+  gender: 'femal',
+};
+// person8.id = 18087; // hello.ts:250:9 - error TS2540: Cannot assign to 'id' because it is a read-only property.
+
+// let person9: Person5 = {
+//   name: 'xzt',
+//   gender: 'female',
+// };
+// // Property 'id' is missing in type '{ name: string; gender: string; }' but required in type 'Person5'.
+// person9.id = 1997; // hello.ts:256:9 - error TS2540: Cannot assign to 'id' because it is a read-only property.
+
+/**
+ * 数组
+ */
+let tsArray: number[] = [1, 1, 2, 3, 4, 5];
+tsArray.push(8);
+// tsArray.push('8'); // hello.ts:264:14 - error TS2345: Argument of type '"8"' is not assignable to parameter of type 'number'.
+// let tsArray1: number[] = [1, '1', 2, 3, 4, 5]; // hello.ts:265:30 - error TS2322: Type 'string' is not assignable to type 'number'.
+
+// 数组泛型
+let tsArray2: Array<number> = [1, 1, 2, 3, 4, 5];
+
+// 用接口表示数组
+interface NumberArray {
+  [index: number]: number;
+}
+let array: NumberArray = [1, 2, 3, 4, 5];
+
+// 类数组
+// function sum() {
+//   let args: number[] = arguments; // hello.ts:278:7 - error TS2740: Type 'IArguments' is missing the following properties from type 'number[]': pop, push, concat, join, and 15 more.
+// }
+
+function sum1() {
+  let args: {
+    [index: number]: number;
+    length: number;
+    callee: Function;
+  } = arguments;
+}
+
+function sum2() {
+  let args: IArguments = arguments;
+}
+
+// any在数组中的应用
+let anyArray: any[] = ['xzt', 23, { url: 'http://localhost:8080' }];
