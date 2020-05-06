@@ -2,12 +2,12 @@
  * @Author: xiongziting
  * @Date: 2020-04-28 10:29:09
  * @LastEditors: xiongziting
- * @LastEditTime: 2020-04-30 11:37:57
+ * @LastEditTime: 2020-05-06 16:04:27
  * @Description: 第一个ts练习
- * @FilePath: \AllPractice\TypeScript\hello.ts
+ * @FilePath: \AllPractice\TypeScript\hello.js
  */
 function sayHello(person) {
-    return 'hello, ' + person;
+  return 'hello, ' + person;
 }
 var user = 'Tom';
 /**
@@ -43,13 +43,18 @@ var infinityNumber = Infinity;
 var myName = 'Tom';
 var myAge = 25;
 // 模板字符串
-var sentence = "Hello, my name is " + myName + ".\nI'll be " + (myAge + 1) + " years old next month.";
+var sentence =
+  'Hello, my name is ' +
+  myName +
+  ".\nI'll be " +
+  (myAge + 1) +
+  ' years old next month.';
 /**
  * 空值
  */
 // Javascript中没有空值（Void）的概念，在Typescript中，可以用void表示没有任何返回值的函数：
 function alertName() {
-    alert('My name is Tom');
+  alert('My name is Tom');
 }
 // 声明一个void类型的变量没有什么用，因为你只能将他赋值给undefined和null：
 var unusable = undefined;
@@ -119,7 +124,7 @@ myNumber4 = 23;
 //     return something.length; // hello.ts:136:22 - error TS2339: Property 'length' does not exist on type 'string | number'. Property 'length' does not exist on type 'number'.
 // }
 function getString(something) {
-    return something.toString();
+  return something.toString();
 }
 // 联合类型的变量在被赋值的时候，会根据类型推论的规则推断出一个类型：
 var myNumber5;
@@ -127,29 +132,29 @@ myNumber5 = 'xzt';
 console.log(myNumber5.length);
 myNumber5 = 7;
 var person = {
-    name: 'xxx',
-    age: 25
+  name: 'xxx',
+  age: 25,
 };
 var person3 = {
-    name: 'xzt'
+  name: 'xzt',
 };
 var person4 = {
-    name: 'xzt',
-    age: 25
+  name: 'xzt',
+  age: 25,
 };
 var person6 = {
-    name: 'xzt',
-    gender: 'female'
+  name: 'xzt',
+  gender: 'female',
 };
 var person7 = {
-    name: 'xzt',
-    age: 23,
-    gender: 'female'
+  name: 'xzt',
+  age: 23,
+  gender: 'female',
 };
 var person8 = {
-    id: 1997,
-    name: 'xzt',
-    gender: 'femal'
+  id: 1997,
+  name: 'xzt',
+  gender: 'femal',
 };
 // person8.id = 18087; // hello.ts:250:9 - error TS2540: Cannot assign to 'id' because it is a read-only property.
 // let person9: Person5 = {
@@ -173,10 +178,77 @@ var array = [1, 2, 3, 4, 5];
 //   let args: number[] = arguments; // hello.ts:278:7 - error TS2740: Type 'IArguments' is missing the following properties from type 'number[]': pop, push, concat, join, and 15 more.
 // }
 function sum1() {
-    var args = arguments;
+  var args = arguments;
 }
 function sum2() {
-    var args = arguments;
+  var args = arguments;
 }
 // any在数组中的应用
 var anyArray = ['xzt', 23, { url: 'http://localhost:8080' }];
+/**
+ * 函数的类型
+ */
+// 函数声明
+// function sum3(x, y) {
+//   return x + y;
+// }
+// function sum4(x, y) {
+//   return x + y;
+// }
+// 注意，输入多余的（或者少于要求的）参数，是不被允许的：
+// function sum5(x, y) {
+//   return x + y;
+// }
+// sum5(1, 2, 3);
+
+// 函数表达式
+// let sum6 = function (x: number, y: number): number {
+//   return x + y;
+// };
+
+// let sum7: (x: number, y: number) => number = function (x: number, y: number) {
+//   return x + y;
+// };
+
+// 可选参数
+function buildName(firstName: string, lastName?: string) {
+  if (lastName) {
+    return firstName + ' ' + lastName;
+  } else {
+    return firstName;
+  }
+}
+let tomcat = buildName('Tom', 'Cat');
+let tom = buildName('Tom');
+
+// 参数默认值
+function buildName1(firstName: String, lastName: string = 'cat') {
+  return firstName + '' + lastName;
+}
+let tomcat = buildName1('Tom', 'Cat');
+let tom = buildName1('Tom');
+
+function buildName2(firstName: string = 'Tom', lastName: string) {
+  return firstName + ' ' + lastName;
+}
+let tomcat1 = buildName2('Tom', 'Cat');
+let cat = buildName2(undefined, 'Cat');
+
+// 重载
+function reverse(x: number | String): number | string {
+  if (typeof x === 'number') {
+    return Number(x.toString().split(''.reverse().join()));
+  } else if (typeof x === 'string') {
+    return x.split('').reverse().join();
+  }
+}
+
+function reverse1(x: number): number;
+function reverse1(x:string):string;
+function reverse1(x:number|string):number|string{
+    if(typeof x === 'number'){
+        return Number(x.toString().split('').reverse().join())
+    } else if(typeof x === 'string'){
+        return x.split('').reverse().join('')
+    }
+}

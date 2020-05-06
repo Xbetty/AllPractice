@@ -2,7 +2,7 @@
  * @Author: xiongziting
  * @Date: 2020-04-28 10:29:09
  * @LastEditors: xiongziting
- * @LastEditTime: 2020-04-30 11:37:57
+ * @LastEditTime: 2020-05-06 14:50:03
  * @Description: 第一个ts练习
  * @FilePath: \AllPractice\TypeScript\hello.ts
  */
@@ -292,3 +292,21 @@ function sum2() {
 
 // any在数组中的应用
 let anyArray: any[] = ['xzt', 23, { url: 'http://localhost:8080' }];
+
+/**
+ * 函数的类型
+ */
+// 函数声明
+// function sum3(x, y) {
+//   return x + y;
+// }
+
+// function sum4(x: number, y: number) {
+//   return x + y;
+// }
+
+// 注意，输入多余的（或者少于要求的）参数，是不被允许的：
+// function sum5(x: number, y: number): number {
+//   return x + y;
+// }
+// sum5(1, 2, 3);
