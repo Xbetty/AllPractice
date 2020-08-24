@@ -1,0 +1,38 @@
+<!--
+ * @Author: xiongziting
+ * @Date: 2020-07-23 17:47:35
+ * @LastEditors: xiongziting
+ * @LastEditTime: 2020-07-29 10:28:52
+ * @Description: 
+ * @FilePath: \AllPractice\Javascript\函数柯里化\index.html
+-->
+
+<html>
+  <title></title>
+  <body>
+    <script>
+      // 正常正则验证字符串 reg.test(text)
+      // 函数封装后
+      function check(reg, txt) {
+          return ret.test(txt)
+      }
+
+      check(/\d+/g, 'test'); // false
+      check(/[a-z+/g], 'test'); // true
+
+      // Currying后
+      function curryingCheck(reg){
+          return function(txt){
+              return reg.text(txt);
+          }
+      };
+
+      var hasNumber = curryingCheck(/\d+/g);
+      var hasLetter = curryingCheck(/[a-z]+/g);
+
+      hasNumber('test1'); // true
+      hasNumber('testtest'); // false
+      hasLetter(222222222222); // false
+    </script>
+  </body>
+</html>
