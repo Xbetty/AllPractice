@@ -1,0 +1,94 @@
+<!--
+ * @Author: xiongziting
+ * @Date: 2020-10-26 16:29:08
+ * @LastEditors: xiongziting
+ * @LastEditTime: 2020-10-26 17:52:46
+ * @Description: 数组
+ * @FilePath: /AllPractice/Javascript/数据结构/学习JavaScript数据结构与算法/array.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      /** 一. 创建和初始化数组 **/
+      console.log('一. 创建和初始化数组');
+      //   1. 使用new关键字
+      let week = new Array();
+      //   指定长度的数组
+      let week1 = new Array(7);
+      //   2. 使用元素初始化数组
+      let week2 = [1, 2, 3, 4, 5, 6, 7];
+      console.log('week', week, 'week1', week1, 'week2', week2);
+
+      /** 二. 访问元素和迭代数组 **/
+      // 求斐波那契数列的前20个数
+      console.log('二. 访问元素和迭代数组: 求斐波那契数列的前20个数');
+      const fibonacci = [];
+      fibonacci[0] = 0;
+      fibonacci[1] = 1;
+      fibonacci[2] = 1;
+      for (let i = 3; i < 20; i++) {
+        fibonacci[i] = fibonacci[i - 1] + fibonacci[i - 2];
+      }
+      console.log('fibonacci: ', fibonacci); // [0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987, 1597, 2584, 4181]
+
+      /** 三. 添加元素 **/
+      console.log('三. 添加元素');
+      let addNumbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+
+      //  在数组末尾插入元素
+      console.log('1. 在数组末尾插入元素');
+      // 1. 把值赋给数组中最后一个空位即可
+      // addNumbers[addNumbers.length] = 10;
+      // 2. 使用push方法
+      addNumbers.push(10);
+      console.log('addNumbers: ', addNumbers); // [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+      //   在数组开头插入元素
+      console.log('2. 在数组开头插入元素');
+      // 1. 封装成函数，并添加到Array原型上，使所有数组的实例都能访问到
+      Array.prototype.insertFirstPosition = function (value) {
+        for (let i = this.length; i > 0; i--) {
+          this[i] = this[i - 1];
+        }
+        this[0] = value;
+        console.log('this', this); // [-1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+      };
+      addNumbers.insertFirstPosition(-1);
+      // 2. 使用unshift方法
+      addNumbers.unshift(-2);
+      console.log('addNumbers', addNumbers); // [-2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+      /** 多维数组 **/
+      let averageTemp = [];
+      averageTemp[0] = [];
+      averageTemp[0][0] = 71;
+      averageTemp[0][1] = 72;
+      averageTemp[0][2] = 73;
+      averageTemp[0][3] = 74;
+      averageTemp[0][4] = 75;
+
+      averageTemp[1] = [];
+      averageTemp[1][0] = 81;
+      averageTemp[1][1] = 82;
+      averageTemp[1][2] = 83;
+      averageTemp[1][3] = 84;
+      averageTemp[1][4] = 85;
+
+      function printMatrix(myMatrix) {
+        for (let i = 0; i < myMatrix.length; i++) {
+          for (let j = 0; j < myMatrix[i].length; j++) {
+            // console.log('myMatrix[i][j]: ', myMatrix[i][j]);
+          }
+        }
+      }
+      printMatrix(averageTemp);
+      console.table('averageTemp', averageTemp);
+    </script>
+  </body>
+</html>

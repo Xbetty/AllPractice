@@ -1,0 +1,40 @@
+<!--
+ * @Author: xiongziting
+ * @Date: 2020-10-27 16:20:13
+ * @LastEditors: xiongziting
+ * @LastEditTime: 2020-10-27 16:30:52
+ * @Description: 
+ * @FilePath: /AllPractice/Javascript/数据结构/学习JavaScript数据结构与算法/Stack.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      /* 1. 把十进制的数转化成二进制的数字 */
+      function decimalToBinary(decNumber) {
+        let remStack = new Stack();
+        let number = decNumber;
+        let rem;
+        let result;
+
+        while (number > 0) {
+          rem = number % 2;
+          remStack.push(rem);
+          number = number / 2;
+        }
+
+        while (!remStack.isEmpty) {
+          result = remStack.toString();
+        }
+        return result;
+      }
+
+      console.log('decimalToBinary(10);',decimalToBinary(10))
+    </script>
+  </body>
+</html>
