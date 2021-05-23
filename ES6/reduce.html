@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>reduce</title>
+</head>
+<body>
+<script type="text/javascript">
+// array.reduce(function(total, currentValue, currentIndex, arr), initialValue)
+
+// 1. 数组的累加计算
+const arr = [1,2,3,4]
+// 基础累加
+let total = 0
+arr.forEach(item=>{
+    total += item
+})
+console.log('total1',total)
+
+//  2. reduce
+/*
+数组的reduce方法，会循环当前的数组，侧重于进行“滚雪球”操作
+数组.reduce（函数，初始值）
+数组.reduce（(上次计算的结果，当前循环的item项)=>{},0)
+const 累加的结果 = 数组.reduce（(上次计算的结果，当前循环的item项)=>{return 上次的结果+当前循环的item项},0）
+*/
+const total2=arr.reduce((total,current)=>{
+    return total+current
+},0)
+console.log('total2',total2)
+
+
+// 2. 链式获取对象属性的值
+const obj = {
+    name: 'xzt',
+    info: {
+        address: {
+            location: '浙江杭州'
+        }
+    }
+}
+// const location = obj.info.address.location
+// console.log('location',location)
+
+const attrs = ['info', 'address', 'location']
+// attrs.reduce(()=>{},obj)
+/*
+ * 第一次reduce ：
+ * 初始值是obj这个对象
+ * 当前的item项是info
+ * 第一次reduce的结果是obj.info属性对应的对象
+ * 
+ * 第二次reduce ：
+ * 初始值是obj.info这个对象
+ * 当前的item项是address
+ * 第二次reduce的结果是obj.info.address属性对应的对象
+ * 
+ * 第三次reduce ：
+ * 初始值是obj.info.location这个对象
+ * 当前的item项是location
+ * 第三次reduce的结果是obj.info.address.location属性对应的对象
+ * 
+ */
+ const location1 = attrs.reduce((newObj,k)=>{
+     return newObj[k]
+ },obj)
+
+ console.log('location',location1)
+
+ const attrs2="info.address.location"
+ const location2 = attrs2.split('.').reduce((newObj,k)=>newObj[k],obj)
+console.log('location2',location2)
+</script>
+</body>
+</html>
