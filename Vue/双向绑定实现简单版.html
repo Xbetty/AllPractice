@@ -4,7 +4,90 @@
 	<title>双向绑定原理简易版</title>
 </head>
 <body>
+	<!-- 简单的发布-订阅模式 -->
 	<script type="text/javascript">
+		// 收集依赖/收集订阅者
+		class Dep{
+			constructor(){
+				// 这个subs数组，用来存放所有订阅者的信息
+				this.subs = []
+			}
+
+			// 向subs数组中，添加订阅者的消息
+			addSub(watcher){
+				this.subs.push(watcher)
+			}
+
+			// 发布通知的方法
+			notify(){
+				this.subs.forEach(watcher=>{
+					watcher.update()
+				})
+			}
+		}
+
+		// 订阅者的类
+		class Watcher{
+			constructor(cb){
+				this.cb = cb
+			}
+
+			// 触发回调的方法
+			update(){
+				this.cb()
+			}
+		}
+
+		const w1 = new Watcher(()=>{
+			console.log('我是第一个订阅者')
+		})
+		const w2 = new Watcher(()=>{
+			console.log('我是第二个订阅者')
+		})
+
+		const dep = new Dep()
+		dep.addSub(w1)
+		dep.addSub(w2)
+
+		dep.notify()
+
+		// 只要我们为vue中的data数据重新赋值了，这个赋值的动作，就会被vue监听到
+		// 然后vue要把数据的变化，通知到每个订阅者
+		// 接下来，订阅者（dom元素）要根据最新的数据，更新自己的内容
+		// 1. 谁是订阅者
+		// 2. 为什么要订阅
+	</script>
+	<!-- 数据劫持Object.defineProperty -->
+	<script type="text/javascript">
+	const obj = {
+		name: 'xzt',
+		age: 23
+	}
+	// // 取值操作
+	// console.log(obj.name)
+	// // 赋值操作
+	// obj.name='xxx'
+
+	// 操作添加监听，拦截取值赋值操作
+	Object.defineProperty(obj,'name', {
+		enumerable: true, // 当前属性，允许被循环
+		configurable: true, // 当前属性，允许被配置 delete
+		get() {
+			// getter
+			console.log('有人获取了obj.name的值')
+			return '我不是name属性'
+		},
+		set(newVal) {
+			// setter
+			console.log('我不要你给的值')
+		}
+	})
+	console.log('obj.name',obj.name) // 有人获取了obj.name的值 // obj.name 我不是name属性
+	obj.name='x' // console.log('我不要你给的值')
+	</script>
+
+
+	<!-- <script type="text/javascript">
 		// get set
 		var person = {
 			_name: 'xzt',
@@ -72,6 +155,7 @@
 		myEvent.listen(xiaohong)
 		myEvent.trigger()
 		// 我是小明，我订阅了这个事件 我是小红，我订阅了这个事件
-	</script>
+	</script> -->
+	
 </body>
 </html>
