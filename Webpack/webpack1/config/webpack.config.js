@@ -6,6 +6,7 @@
 
 //  resolve用来拼接绝对路径的方法
 const path = require('path'); // 调用node.js中的路径
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 // webpack配置
 module.exports = {
@@ -21,7 +22,7 @@ module.exports = {
         // __dirname nodejs的变量，代表当前文件的目录的绝对路径
         path: path.resolve(__dirname,'../output') // 指定生成的文件目录
     },
-    // loader的配置
+    // loader的配置：1. 下载 2. 使用（配置loader）
     module: {
         rules: [
             // 详细的loader配置
@@ -50,9 +51,16 @@ module.exports = {
             }
         ]
     },
-    // plugins的配置
+    // plugins的配置：1. 下载 2. 引入 3. 使用 
     plugins: [
         // 详细plugins的配置
+        // html-webpack-plugin
+        // 功能：默认会创建一个空的HTML，自动引入打包输出的所有资源（JS/CSS）
+        // 需求：需要有结构的html文件
+        new HtmlWebpackPlugin({
+            // 复制'./src/index.html'，并自动引入打包输出的所有资源（JS/CSS）
+            template: './src/index.html'
+        })
     ],
     mode: 'development' // 开发模式，没有对js等文件压缩，默认生成的是压缩文件
 }
