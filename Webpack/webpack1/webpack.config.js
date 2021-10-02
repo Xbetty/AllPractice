@@ -6,7 +6,8 @@
 
 //  resolve用来拼接绝对路径的方法
 const path = require('path'); // 调用node.js中的路径
-const HtmlWebpackPlugin = require('html-webpack-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { resolve } = require('path');
 
 // webpack配置
 module.exports = {
@@ -20,7 +21,7 @@ module.exports = {
         filename: '[name].js', // 输入的文件名是什么，生成的文件名也是什么
         // 输出的路径 （绝对路径，避免出错）
         // __dirname nodejs的变量，代表当前文件的目录的绝对路径
-        path: path.resolve(__dirname,'../output') // 指定生成的文件目录
+        path: path.resolve(__dirname,'output') // 指定生成的文件目录
     },
     // loader的配置：1. 下载 2. 使用（配置loader）
     module: {
@@ -99,5 +100,18 @@ module.exports = {
             template: './src/index.html'
         })
     ],
-    mode: 'development' // 开发模式，没有对js等文件压缩，默认生成的是压缩文件
+    mode: 'development', // 开发模式，没有对js等文件压缩，默认生成的是压缩文件
+
+    // 开发服务器 devServer：用来自动化（自动编译，自动打开浏览器，自动刷新浏览器）
+    // 特点：只会在内存中编译打包，不会有任何输出
+    // 启动devServer指令为：npx webpack-dev-server
+    devServer: {
+        static: resolve(__dirname,'output'), // 运行项目的目录-构建后的目录 // 报错：options has an unknown property 'contentbase'. 解决： Use static in place of contentBase
+        // 启动gzip压缩
+        compress: true,
+        // 端口号
+        port: 3000,
+        // 自动打开浏览器
+        open: true
+    }
 }
