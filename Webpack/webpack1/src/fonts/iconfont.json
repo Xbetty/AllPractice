@@ -1,0 +1,37 @@
+{
+  "id": "",
+  "name": "",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "24365615",
+      "name": "沙滩_背包",
+      "font_class": "shatan_beibao",
+      "unicode": "e6c1",
+      "unicode_decimal": 59073
+    },
+    {
+      "icon_id": "24365616",
+      "name": "沙滩_照相机",
+      "font_class": "shatan_zhaoxiangji",
+      "unicode": "e6c2",
+      "unicode_decimal": 59074
+    },
+    {
+      "icon_id": "24365618",
+      "name": "沙滩_帆船",
+      "font_class": "shatan_fanchuan",
+      "unicode": "e6c3",
+      "unicode_decimal": 59075
+    },
+    {
+      "icon_id": "24365619",
+      "name": "沙滩_椰子汁",
+      "font_class": "shatan_yezizhi",
+      "unicode": "e6c4",
+      "unicode_decimal": 59076
+    }
+  ]
+}

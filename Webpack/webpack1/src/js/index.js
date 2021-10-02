@@ -14,6 +14,7 @@
 import data from './data.json'
 import '../css/index.css'
 import '../css/index.less'
+import '../fonts/iconfont.css'
 
 console.log('data',data)
 document.write('webpack1')
