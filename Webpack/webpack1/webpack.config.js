@@ -18,7 +18,7 @@ module.exports = {
     // 输出
     output: {
         // 输出文件名
-        filename: '[name].js', // 输入的文件名是什么，生成的文件名也是什么
+        filename: 'js/[name].js', // 输入的文件名是什么，生成的文件名也是什么 （添加js/ 指定输出文件路径）
         // 输出的路径 （绝对路径，避免出错）
         // __dirname nodejs的变量，代表当前文件的目录的绝对路径
         path: path.resolve(__dirname,'output') // 指定生成的文件目录
@@ -69,7 +69,8 @@ module.exports = {
             //         // 给图片重命名
             //         // [hash:10]取图片的hash的前10位
             //         // [ext]取文件原来扩展名
-            //         name: '[hash:10].[ext]'
+            //         name: '[hash:10].[ext]',
+            //         outputPath: 'imgs', // 输出文件路径
             //     }
             // },
             // {
@@ -80,13 +81,13 @@ module.exports = {
             // // 打包其他资源（除了html/js/css资源以外的资源）
             // {
             //     // 排除css/js/html资源
-            //     exclude: /\.(css|js|html|less)$/,
+            //     exclude: /\.(css|js|html|less|jpg|png|gif)$/,
             //     loader: 'file-loader',
             //     options: {
-            //         name: '[hash:10].[ext]'
+            //         name: '[hash:10].[ext]',
+            //         outputPath: 'medias', // 输出文件路径
             //     }
-            // },
-            
+            // }
         ]
     },
     // plugins的配置：1. 下载 2. 引入 3. 使用 
