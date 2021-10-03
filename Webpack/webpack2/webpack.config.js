@@ -1,9 +1,11 @@
 const { resolve } = require("path");
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin') // 生成html模版
+const MiniCssExtractPlugin = require('mini-css-extract-plugin') // 提取js中的css成单独文件
+const OptimizeCssAssetsWebpackPlugin = require('optimize-css-assets-webpack-plugin') // 压缩css
+
 
 // 设置node环境变量: 
-process.env.NODE_ENV = 'development'
+// process.env.NODE_ENV = 'development'
 
 module.exports = {
   entry: './src/js/index.js',
@@ -67,7 +69,9 @@ module.exports = {
     new MiniCssExtractPlugin({
       // 对输出的css文件进行重命名
       filename: 'css/built.css'
-    }) 
+    }),
+    // 压缩css
+    new OptimizeCssAssetsWebpackPlugin()
   ],
   mode: 'development'
 }
