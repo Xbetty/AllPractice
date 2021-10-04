@@ -1,20 +1,38 @@
-const { resolve } = require("path");
-const HtmlWebpackPlugin = require('html-webpack-plugin') // 生成html模版
-const MiniCssExtractPlugin = require('mini-css-extract-plugin') // 提取js中的css成单独文件
-const OptimizeCssAssetsWebpackPlugin = require('optimize-css-assets-webpack-plugin') // 压缩css
+const { resolve } = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin'); // 生成html模版
+const MiniCssExtractPlugin = require('mini-css-extract-plugin'); // 提取js中的css成单独文件
+const OptimizeCssAssetsWebpackPlugin = require('optimize-css-assets-webpack-plugin'); // 压缩css
 
-
-// 设置node环境变量: 
+// 设置node环境变量:
 // process.env.NODE_ENV = 'development'
 
 module.exports = {
   entry: './src/js/index.js',
   output: {
     filename: 'js/built.js',
-    path: resolve(__dirname, 'build')
+    path: resolve(__dirname, 'build'),
   },
   module: {
     rules: [
+      /**
+       * 语法检查：eslint-loader eslint
+       * 注意：只检查自己写的源代码，第三方的库是不用检查的
+       * 设置检查规则：package.json中eslintConfig中配置～
+       * "eslintConfig": {
+          "extends": "airbnb-base"
+        }
+       * airbnb规则（github） --> eslint-config-airbnb-base  eslint-plugin-import  eslint
+      */
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: 'eslint-loader',
+        options: {
+          // 自动修复eslint的错误
+          fix: true,
+        },
+      },
+      // 样式处理
       {
         test: /\.css$/,
         use: [
@@ -24,7 +42,7 @@ module.exports = {
           MiniCssExtractPlugin.loader,
           // 将css文件变成commonjs模块加载到js中，里面内容是样式字符串
           'css-loader',
-          /** 
+          /**
            * css兼容性处理: post-css --> postcss-loader postcss-preset-env
            * 帮postcss找到package.json中browserslist里面的配置，通过配置加载指定的css兼容性样式
            * browserslist具体配置可去github里面找
@@ -55,23 +73,23 @@ module.exports = {
             //     require('postcss-preset-env')()
             //   }
             // }
-          }
-        ]
-      }
-    ]
+          },
+        ],
+      },
+    ],
   },
   plugins: [
     // 生成html模版
     new HtmlWebpackPlugin({
-      template: './src/index.html'
+      template: './src/index.html',
     }),
     // 提取js中的css成单独文件
     new MiniCssExtractPlugin({
       // 对输出的css文件进行重命名
-      filename: 'css/built.css'
+      filename: 'css/built.css',
     }),
     // 压缩css
-    new OptimizeCssAssetsWebpackPlugin()
+    new OptimizeCssAssetsWebpackPlugin(),
   ],
-  mode: 'development'
-}
+  mode: 'development',
+};
