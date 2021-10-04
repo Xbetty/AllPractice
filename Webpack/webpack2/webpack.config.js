@@ -120,6 +120,13 @@ module.exports = {
     // 生成html模版
     new HtmlWebpackPlugin({
       template: './src/index.html',
+      // 压缩html代码
+      minify: {
+        // 移除空格
+        collapseWhitespace: true,
+        // 移除注释
+        removeComments: true,
+      },
     }),
     // 提取js中的css成单独文件
     new MiniCssExtractPlugin({
@@ -129,5 +136,6 @@ module.exports = {
     // 压缩css
     new OptimizeCssAssetsWebpackPlugin(),
   ],
-  mode: 'development',
+  // 生产环境下会自动压缩代码。
+  mode: 'production',
 };
