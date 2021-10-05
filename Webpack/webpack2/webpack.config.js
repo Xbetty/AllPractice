@@ -53,6 +53,10 @@ module.exports = {
 
       },
       /**
+       * 正常来讲，一个文件只能被一个loader处理
+       * 当一个文件要被多个loader处理，那么一定要指定loader执行的先后顺序：先执行eslint，再执行babel
+      */
+      /**
        * 语法检查：eslint-loader eslint
        * 注意：只检查自己写的源代码，第三方的库是不用检查的
        * 设置检查规则：package.json中eslintConfig中配置～
@@ -64,6 +68,8 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
+        // 优先执行
+        enforce: 'pre',
         loader: 'eslint-loader',
         options: {
           // 自动修复eslint的错误
