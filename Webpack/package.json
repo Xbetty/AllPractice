@@ -49,9 +49,11 @@
     ]
   },
   "eslintConfig": {
-    "extends": "airbnb-base"
+    "extends": "airbnb-base",
+    "parser": "babel-eslint"
   },
   "dependencies": {
+    "babel-eslint": "^10.1.0",
     "express": "^4.17.1"
   }
 }
