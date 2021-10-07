@@ -7,9 +7,19 @@ const OptimizeCssAssetsWebpackPlugin = require('optimize-css-assets-webpack-plug
 process.env.NODE_ENV = 'production';
 
 module.exports = {
+  // 单入口
   entry: './src/js/index.js',
+  // 多入口：有一个入口，最终输出就有一个bundle
+  // entry: {
+  //   main: './src/js/index.js',
+  //   test: './src/js/testTreeShaking.js',
+  // },
+
   output: {
+    // 单入口对应输出文件
     filename: 'js/built.[contenthash:10].js',
+    // 多入口对应输出文件：取文件名
+    // filename: 'js/[name].[contenthash:10].js',
     path: resolve(__dirname, 'build'),
   },
   module: {
@@ -150,6 +160,16 @@ module.exports = {
     // 压缩css
     new OptimizeCssAssetsWebpackPlugin(),
   ],
+  // 代码分割
+  /**
+   * 1. 单入口：可以将node_modules中代码单独打包一个chunk最终输出
+   * 2. 多入口：自动分析多入口chunk中，有没有公共的文件。如果有会打包成单独一个chunk
+   */
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
+    },
+  },
   // 生产环境下会自动压缩代码。
   mode: 'production',
 };

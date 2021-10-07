@@ -5,6 +5,17 @@ import { mul } from './testTreeShaking';
 
 console.log('mul:', mul(1, 1));
 
+// import动态导入语法
+// 通过js代码，让某个文件被单独打包为chunk
+// 默认根据id命名，通过webpackChunkName参数更改
+import(
+  /* webpackChunkName: "test" */'./testCodeSplit'
+).then((res) => {
+  console.log('res', res);
+}).catch(() => {
+  console.log('文件加载失败～');
+});
+
 function add(x, y) {
   if (x === '2') {
     return x + y;
