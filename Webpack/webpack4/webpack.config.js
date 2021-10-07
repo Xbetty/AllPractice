@@ -4,12 +4,12 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin'); // 提取js中�
 const OptimizeCssAssetsWebpackPlugin = require('optimize-css-assets-webpack-plugin'); // 压缩css
 
 // 设置node环境变量:
-// process.env.NODE_ENV = 'development'
+process.env.NODE_ENV = 'production';
 
 module.exports = {
   entry: './src/js/index.js',
   output: {
-    filename: 'js/built.js',
+    filename: 'js/built.[contenthash:10].js',
     path: resolve(__dirname, 'build'),
   },
   module: {
@@ -77,8 +77,10 @@ module.exports = {
                   },
                 ],
               ],
+              // 开启babel缓存
+              // 第二次构建时，会读取之前的缓存
+              cacheDirectory: true,
             },
-
           },
           // 样式处理
           {
@@ -143,7 +145,7 @@ module.exports = {
     // 提取js中的css成单独文件
     new MiniCssExtractPlugin({
       // 对输出的css文件进行重命名
-      filename: 'css/built.css',
+      filename: 'css/built.[contenthash:10].css',
     }),
     // 压缩css
     new OptimizeCssAssetsWebpackPlugin(),

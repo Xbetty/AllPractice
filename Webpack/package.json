@@ -50,5 +50,8 @@
   },
   "eslintConfig": {
     "extends": "airbnb-base"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
   }
 }
