@@ -1,6 +1,9 @@
 import '../css/a.css';
 import '../css/b.css';
+import { mul } from './testTreeShaking';
 // import '@babel/polyfill'; // 使用core-js按需加载需注释
+
+console.log('mul:', mul(1, 1));
 
 function add(x, y) {
   if (x === '2') {
