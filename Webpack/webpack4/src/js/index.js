@@ -1,9 +1,11 @@
 import '../css/a.css';
 import '../css/b.css';
+import $ from 'jquery';
 import { mul } from './testTreeShaking';
 // import '@babel/polyfill'; // 使用core-js按需加载需注释
 
 console.log('mul:', mul(1, 1));
+console.log('$', $);
 
 // import动态导入语法
 // 通过js代码，让某个文件被单独打包为chunk
@@ -46,7 +48,7 @@ promise.then((res) => {
   // eslint-disable-next-line
   console.log('err', err);
 });
-/** 
+/**
  * 1. eslint不认识window，navigator全局变量
  * 解决：需要修改package.json中eslintConfig配置
  * "env": {
@@ -59,14 +61,14 @@ promise.then((res) => {
 */
 // 注册serviceWorker
 // 处理兼容性问题
-if('serviceWorker' in navigator){
-  window.addEventListener('load', ()=>{
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
     navigator.serviceWorker.register('/service-worker.js')
-    .then(()=>{
-      console.log('sw注册成功了')
-    })
-    .catch(()=>{
-      console.log('sw注册失败了')
-    })
-  })
+      .then(() => {
+        console.log('sw注册成功了');
+      })
+      .catch(() => {
+        console.log('sw注册失败了');
+      });
+  });
 }

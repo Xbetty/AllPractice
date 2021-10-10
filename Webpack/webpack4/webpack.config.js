@@ -70,7 +70,7 @@ module.exports = {
                * 进程启动大概为600ms，进程通信也有开销
                * 只有工作消耗时间比较长，才需要多进程打包
               */
-              'thread-loader',
+              // 'thread-loader',
               // {
               //   loader: 'thread-loader',
               //   options: {
@@ -199,4 +199,11 @@ module.exports = {
   },
   // 生产环境下会自动压缩代码。
   mode: 'production',
+  // 防止将一些包打包输出到bundle中
+  externals: {
+    // 忽略库名 -- npm包名
+    // 拒绝jQuery被打包进来
+    jquery: 'jquery',
+
+  },
 };
