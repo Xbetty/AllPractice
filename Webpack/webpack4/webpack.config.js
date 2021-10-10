@@ -64,34 +64,50 @@ module.exports = {
           {
             test: /\.js$/,
             exclude: /node_modules/,
-            loader: 'babel-loader',
-            options: {
-              // 预设：指示babel做怎么样的兼容性处理
-              presets: [
-                [
-                  '@babel/preset-env',
-                  {
-                    // 按需加载
-                    useBuiltIns: 'usage',
-                    // 指定core-js版本
-                    corejs: {
-                      version: 3,
-                    },
-                    // 指定兼容性做到哪个版本浏览器
-                    targets: {
-                      chrome: '60',
-                      firefox: '60',
-                      ie: '9',
-                      safari: '10',
-                      edge: '17',
-                    },
-                  },
-                ],
-              ],
-              // 开启babel缓存
-              // 第二次构建时，会读取之前的缓存
-              cacheDirectory: true,
-            },
+            use: [
+              /**
+               * 开启多进程打包
+               * 进程启动大概为600ms，进程通信也有开销
+               * 只有工作消耗时间比较长，才需要多进程打包
+              */
+              'thread-loader',
+              // {
+              //   loader: 'thread-loader',
+              //   options: {
+              //     workers: 2, // 进程2个
+              //   },
+              // },
+              {
+                loader: 'babel-loader',
+                options: {
+                // 预设：指示babel做怎么样的兼容性处理
+                  presets: [
+                    [
+                      '@babel/preset-env',
+                      {
+                      // 按需加载
+                        useBuiltIns: 'usage',
+                        // 指定core-js版本
+                        corejs: {
+                          version: 3,
+                        },
+                        // 指定兼容性做到哪个版本浏览器
+                        targets: {
+                          chrome: '60',
+                          firefox: '60',
+                          ie: '9',
+                          safari: '10',
+                          edge: '17',
+                        },
+                      },
+                    ],
+                  ],
+                  // 开启babel缓存
+                  // 第二次构建时，会读取之前的缓存
+                  cacheDirectory: true,
+                },
+              },
+            ],
           },
           // 样式处理
           {
@@ -168,8 +184,8 @@ module.exports = {
        * 生成一个serviceWorker配置文件（在入口文件中注册配置）
        */
       clientsClaim: true,
-      skipWaiting: true
-    })
+      skipWaiting: true,
+    }),
   ],
   // 代码分割
   /**
