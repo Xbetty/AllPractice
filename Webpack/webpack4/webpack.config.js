@@ -2,6 +2,7 @@ const { resolve } = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin'); // 生成html模版
 const MiniCssExtractPlugin = require('mini-css-extract-plugin'); // 提取js中的css成单独文件
 const OptimizeCssAssetsWebpackPlugin = require('optimize-css-assets-webpack-plugin'); // 压缩css
+const WorkboxWebpackPlugin = require('workbox-webpack-plugin'); // pwa
 
 // 设置node环境变量:
 process.env.NODE_ENV = 'production';
@@ -159,6 +160,16 @@ module.exports = {
     }),
     // 压缩css
     new OptimizeCssAssetsWebpackPlugin(),
+    // PWA
+    new WorkboxWebpackPlugin.GenerateSW({
+      /**
+       * 1. 帮助serviceWorker快速启动
+       * 2. 删除旧的serviceWorker
+       * 生成一个serviceWorker配置文件（在入口文件中注册配置）
+       */
+      clientsClaim: true,
+      skipWaiting: true
+    })
   ],
   // 代码分割
   /**

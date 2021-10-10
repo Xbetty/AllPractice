@@ -1,0 +1,1 @@
+(self.webpackChunk=self.webpackChunk||[]).push([[43],{6847:(e,s,c)=>{"use strict";function l(){console.log("code split")}c.r(s),c.d(s,{default:()=>l})}}]);

@@ -21,3 +21,8 @@ contenthash： 根据文件的内容生成hash值。不同文件hash值一定不
 "sideEffects": false  所有代码都没有副作用（都可以进行tree shaking）
 问题：可能会把css/@bable/polyfill（副作用）文件干掉
 "sideEffects": ["*.css", "*.less"] (css文件和less文件不会被tree shaking)
+
+4. 懒加载和预加载（待补充）
+
+5. PWA：
+workbox  --> workbox-webpack-plugin
