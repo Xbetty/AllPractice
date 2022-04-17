@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>CSS 逐帧动画</title>
+    <meta
+      name="viewport"
+      content="width=device-width,user-scalable=no,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0"
+    />
+    <style>
+      .box{
+        /*宽度 px长度单位*/
+        width: 760px;
+        /*高度*/
+        height: 240px;
+        /*背景颜色*/
+        /*background-color: green;*/
+        /*外边距 上下 左右(自动居中)*/
+        margin: 300px auto;
+      }
+      .west{
+        /*宽度 px长度单位*/
+        width: 190px;
+        /*高度*/
+        height: 240px;
+        /*背景颜色*/
+        /*background-color: pink;*/
+        /*元素分类 div块元素 性格*/
+        float: left;/*竖排变横排*/
+        /*垂直居中*/
+        background-position-y: center;
+        /*背景图片平铺/重复:不重复*/
+        background-repeat: no-repeat;
+      }
+      /* 图片来源https://mp.weixin.qq.com/s/u8B3EbkrgJK3VHqQ4SUBww */
+      .west01{
+        /*背景图片*/
+        background-image: url('https://mmbiz.qpic.cn/mmbiz_png/oDIPicN5n2QHLLH9PCVRxDxfKqUGU7WIdjnE0jamuZShtkzRl8AibJ7RyJBc7fSibQibtU1iaPksLPB3nxpzurCiaia9Q/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1');
+        /*动画播放:动画名称 时间 脚步(8) 次数(循环)*/
+        animation: swk 1s steps(8) infinite;
+      }
+      .west02{
+        /*背景图片*/
+        background-image: url('https://mmbiz.qpic.cn/mmbiz_png/oDIPicN5n2QHLLH9PCVRxDxfKqUGU7WIdibIlsLYm0fn6V7o2vMchVHJjjl9eJYicXFanFBZWubyTJy89ga6c1fYg/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1');
+        /*动画播放:动画名称 时间 脚步(8) 次数(循环)*/
+        animation: zbj 1s steps(8) infinite;
+      }
+      .west03{
+        /*背景图片*/
+        background-image: url('https://mmbiz.qpic.cn/mmbiz_png/oDIPicN5n2QHLLH9PCVRxDxfKqUGU7WIdf32OEWn3pMx0ZEIN9d5KrTibox1VnJvZ4mshfqGibiaiaHVJSKHp5K8LBQ/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1');
+        /*动画播放:动画名称 时间 脚步(8) 次数(循环)*/
+        animation: ts 1s steps(8) infinite;
+      }
+      .west04{
+        /*背景图片*/
+        background-image: url('https://mmbiz.qpic.cn/mmbiz_png/oDIPicN5n2QHLLH9PCVRxDxfKqUGU7WIdILrupX2szSgNMUX2OcIIyZLXvbGkC9VgbBuhF0ibhibaL1GJ55Etuk1w/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1');
+        /*动画播放:动画名称 时间 脚步(8) 次数(循环)*/
+        animation: ss 1s steps(8) infinite;
+      }
+
+@keyframes swk{
+        0%{
+          /*动画开始*/
+          background-position-x: 0px;
+        }
+        100%{
+          /*动画结束*/
+          background-position-x:-1600px;
+        }
+      }
+      @keyframes zbj{
+        0%{
+          /*动画开始*/
+          background-position-x: 0px;
+        }
+        100%{
+          /*动画结束*/
+          background-position-x:-1600px;
+        }
+      }
+      @keyframes ts{
+        0%{
+          /*动画开始*/
+          background-position-x: 0px;
+        }
+        100%{
+          /*动画结束*/
+          background-position-x:-1360px;
+        }
+      }
+      @keyframes ss{
+        0%{
+          /*动画开始*/
+          background-position-x: 0px;
+        }
+        100%{
+          /*动画结束*/
+          background-position-x:-1680px;
+        }
+      }
+  </style>
+  
+  </head>
+  <body>
+    <div class="box">
+      <div class="west west01"></div>
+      <div class="west west02"></div>
+      <div class="west west03"></div>
+      <div class="west west04"></div>
+    </div>
+  </body>
+</html>

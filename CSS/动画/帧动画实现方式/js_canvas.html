@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>绘制序列帧动画</title>
+  </head>
+  <body>
+    <canvas id="demo"></canvas>
+    <button type="button" id="up">↑</button>
+    <button type="button" id="right">→</button>
+    <button type="button" id="down">↓</button>
+    <button type="button" id="left">←</button>
+    <script type="text/javascript">
+      ;(function () {
+        var canvas = document.getElementById('demo')
+        var up = document.getElementById('up')
+        var right = document.getElementById('right')
+        var down = document.getElementById('down')
+        var left = document.getElementById('left')
+        //设置宽高不从css中设置
+        canvas.width = 200 //设置canvas宽
+        canvas.height = 200 //设置canvas高
+        canvas.style.border = '1px solid red'
+        //获取上下文
+        var ctx = canvas.getContext('2d')
+        //加载图片
+        var img = new Image()
+        img.src =
+          'https://img2018.cnblogs.com/blog/1366070/201811/1366070-20181129155710153-700147084.png'
+        var frameIndex = 0,
+          dirIndex = 0
+        up.onclick = function (ev) {
+          dirIndex = 3
+        }
+        right.onclick = function (ev) {
+          dirIndex = 2
+        }
+        down.onclick = function (ev) {
+          dirIndex = 0
+        }
+        left.onclick = function (ev) {
+          dirIndex = 1
+        }
+        img.onload = function () {
+          setInterval(function () {
+            //清除 之前的 图片墨迹。
+            ctx.clearRect(0, 0, canvas.width, canvas.height)
+            ctx.drawImage(
+              img,
+              frameIndex * 40, //截取原始图片的 x坐标
+              dirIndex * 65, //截取原始图片的 y坐标
+              40, //截取原始图片的 宽度
+              65, // 截取的高度
+              20, //图片在canvas画布上的x坐标
+              20, //图片在canvas画布上的y坐标
+              80, //绘制图片的宽度
+              65 * 2 //绘制图片的高度
+            )
+            frameIndex++ // 添加到下一帧
+            frameIndex %= 4 // 取余数   7 %4 = 3   3%4 =3  4%4 =0
+            console.log(frameIndex)
+          }, 100)
+        }
+      })()
+    </script>
+  </body>
+</html>

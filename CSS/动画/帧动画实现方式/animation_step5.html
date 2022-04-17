@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>CSS 逐帧动画</title>
+    <meta
+      name="viewport"
+      content="width=device-width,user-scalable=no,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0"
+    />
+    <style type="text/css">
+      img {
+        animation: loading 1s infinite steps(12, start);
+      }
+
+      @keyframes loading {
+        0% {
+          transform: rotate(0deg);
+        }
+
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <img
+        src="https://mmbiz.qpic.cn/mmbiz_png/3SUMRa41sQQh1PfgHGibdhF8scxI0D5AjhLMiclsZicX7BIKUhpetV9IKibvkoMDS3icF5sONDdicUPTuibLB0XaNfAibw/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1"
+      />
+    </div>
+  </body>
+</html>

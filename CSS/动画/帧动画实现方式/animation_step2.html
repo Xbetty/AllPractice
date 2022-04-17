@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>css3逐帧动画</title>
+    <style>
+      div {
+        width: 300px;
+        height: 300px;
+        background-repeat: no-repeat;
+        background: url('https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2019/3/3/16943ad82b00b280~tplv-t2oaga2asx-watermark.awebp');
+        /* animation: frame 333ms steps(1, end) both infinite;
+        -webkit-animation: frame 333ms steps(1, end) both infinite; */
+        animation: frame1 333ms steps(20) both infinite;
+        -webkit-animation: frame1 333ms steps(20) both infinite;
+      }
+      @keyframes frame1 {
+        0% {
+          background-position: 0 0;
+        }
+        100% {
+            background-position: -6000px 0;
+        }
+      }
+      @keyframes frame {
+        0% {
+          background-position: 0 0;
+        }
+        5% {
+          background-position: -300px 0;
+        }
+        10% {
+          background-position: -600px 0;
+        }
+        15% {
+          background-position: -900px 0;
+        }
+        20% {
+          background-position: -1200px 0;
+        }
+        25% {
+          background-position: -1500px 0;
+        }
+        30% {
+          background-position: -1800px 0;
+        }
+        35% {
+          background-position: -2100px 0;
+        }
+        40% {
+          background-position: -2400px 0;
+        }
+        45% {
+          background-position: -2700px 0;
+        }
+        50% {
+          background-position: -3000px 0;
+        }
+        55% {
+          background-position: -3300px 0;
+        }
+        60% {
+          background-position: -3600px 0;
+        }
+        65% {
+          background-position: -3900px 0;
+        }
+        70% {
+          background-position: -4200px 0;
+        }
+        75% {
+          background-position: -4500px 0;
+        }
+        80% {
+          background-position: -4800px 0;
+        }
+        85% {
+          background-position: -5100px 0;
+        }
+        90% {
+          background-position: -5400px 0;
+        }
+        95% {
+          background-position: -5700px 0;
+        }
+        100% {
+          background-position: -6000px 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div></div>
+  </body>
+</html>

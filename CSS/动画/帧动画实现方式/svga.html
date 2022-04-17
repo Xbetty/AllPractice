@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>动画</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <style>
+        #box{margin: 0px;   padding: 0px; border: 1px violet solid; }
+        #ssss{ width: 100vh;  height: 100vh;  }
+        #demoCanvas{  width: 300px;  height: 300px;  margin: 0 auto;  border: 1px salmon solid;}
+    </style>
+<script src="https://cdn.jsdelivr.net/npm/svgaplayerweb@2.3.1/build/svga.min.js"></script>
+</head>
+<body id="box">
+<div id="ssss" >
+<button onclick="pauseAnimation()">暂停在当前帧</button>
+<button onclick="stopAnimation()">停止播放动画</button>
+<div id="demoCanvas" ></div>
+</div>
+
+<script>
+var player = new SVGA.Player('#demoCanvas');
+player.loops=1;
+player.clearsAfterStop=false;
+var parser = new SVGA.Parser('#demoCanvas'); // 如果你需要支持 IE6+，那么必须把同样的选择器传给 Parser。
+parser.load('https://file.nidong.com/upload/gift/20200520/upload_l3xlns9v1in4heomhwgbndzxt8quc9yb.svga', function(videoItem) {
+    player.setVideoItem(videoItem);
+    player.startAnimation();
+    player.onFinished(function(){
+        console.log("11111")
+        alert("动画停止了！")
+    });
+})
+
+//暂停在当前帧
+function pauseAnimation(){
+    player.pauseAnimation();
+}
+//停止播放动画，如果 clearsAfterStop === true，将会清空画布
+function stopAnimation(){
+    player.stopAnimation();
+}
+//继续播放动画，如果 clearsAfterStop === true，将会清空画布
+function stopAnimation(){
+    player.stopAnimation();
+}
+</script>
+</body>
+</html>

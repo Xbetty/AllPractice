@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .sprite {
+        width: 300px;
+        height: 300px;
+        background: url('https://img1.3s78.com/codercto/eb93eba47caa3ad960b665f9fc1e8138') no-repeat 0 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="sprite" id="sprite"></div>
+    <script>
+      ;(function () {
+        var sprite = document.getElementById('sprite'),
+          picWidth = 300,
+          k = 20,
+          i = 0,
+          timer = null
+        // 重置背景图片位置
+        sprite.style = 'background-position: 0 0'
+        // 改变背景图位置
+        function changePosition() {
+          sprite.style = 'background-position: ' + -picWidth * i + 'px 0'
+          i++
+          if (i == k) {
+            i = 0
+          }
+        }
+        timer = setInterval(changePosition, 50)
+      })()
+    </script>
+  </body>
+</html>

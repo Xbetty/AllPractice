@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>CSS 逐帧动画</title>
+    <meta
+      name="viewport"
+      content="width=device-width,user-scalable=no,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0"
+    />
+    <style>
+      div {
+        width: 300px;
+        height: 150px;
+        background: url('https://tech.voiceads.cn/usr/uploads/2018/10/2207460853.png');
+        /* animation: jump1 3s steps(1, start) infinite; */
+        animation: jump1 3s steps(5) infinite
+      }
+      @keyframes jump {
+        0%{
+            background-position:  0px 0px;
+        }
+        17%{
+            background-position:  0px 0px;
+        }
+        34%{
+            background-position:  -300px 0px;
+        }
+        51%{
+            background-position: -600px 0px;
+        }
+        68%{
+            background-position: -900px 0px;
+        }
+        84%{
+            background-position: -1200px 0px;
+        }
+        100% {
+            background-position: -1500px 0px;
+        }
+      } 
+      @keyframes jump1 {
+        0%{
+            background-position:  0px 0px;
+        }
+        100%{
+            background-position:  -1500px 0px;
+        }
+      }
+  </style>
+  
+  </head>
+  <body>
+    <div id="box"></div>
+  </body>
+</html>

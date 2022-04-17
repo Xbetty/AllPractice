@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>demo for animation</title>
+        <style>
+            div{
+                background-image: url('https://img-blog.csdn.net/20171204162731086?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvam95Y2VfbGN5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast');
+                background-repeat: no-repeat;
+                height: 345px;
+                width: 235px;
+                animation: girlRun 1s steps(1,end) infinite;
+                -webkit-animation: girlRun 1s steps(1,end) infinite;
+            }
+            @keyframes girlRun{
+                0%{
+                    background-position: 0px 0;
+                }
+                14.285%{
+                    background-position: -180px 0;
+                }
+                28.571%{
+                    background-position: -369px 0;
+                }
+                42.857%{
+                    background-position: -609px 0;
+                }
+                57.143%{
+                    background-position: -35px -424px;
+                }
+                71.429%{
+                    background-position: -235px -424px;
+                }
+                85.714%{
+                    background-position: -435px -424px;
+                }
+                100%{
+                }
+            }
+            @-webkit-keyframes girlRun{
+                0%{
+                    background-position: 0px 0;
+                }
+                14.285%{
+                    background-position: -180px 0;
+                }
+                28.571%{
+                    background-position: -369px 0;
+                }
+                42.857%{
+                    background-position: -609px 0;
+                }
+                57.143%{
+                    background-position: -35px -424px;
+                }
+                71.429%{
+                    background-position: -235px -424px;
+                }
+                85.714%{
+                    background-position: -435px -424px;
+                }
+                100%{
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div></div>
+    </body>
+</html>
