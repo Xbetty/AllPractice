@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script type="text/javascript">
+    // 参考：哔哩哔哩 《尚硅谷vue3技术之vue3响应式原理》
+    // 源数据
+    let person = {
+      name: 'xzt',
+      age: 25
+    }
+    // 模拟vue3中实现响应式
+    // vue3源码实现实际上使用的是Reflect去修改对象，原因是为了代码的健壮性，处理异常
+    const p = new Proxy(person,{
+      // 有人读取p的某个属性时调用
+      get(target,propName){
+        console.log(`有人读取了p身上的${propName}属性，`,'target：',target)
+        // return target[propName]
+        return Reflect.get(target,propName)
+      },
+      // 有人修改p的某个属性或给p追加某个属性时调用
+      set(target,propName,value){
+        console.log(`有人更新了p身上的${propName}属性值为${value}，我要去更新界面了`,'target：',target)
+        // target[propName] = value
+        Reflect.set(target,propName,value)
+      },
+      // 有人删除p的某个属性时调用
+      deleteProperty(target,propName){
+        console.log(`有人删除了p身上的${propName}属性，我要去更新界面了`,'target：',target)
+        // return delete target[propName]
+        return Reflect.deleteProperty(target,propName)
+      }
+    })
+
+    // 模拟Vue2中实现响应式
+    //#region （折叠注释）
+    // let p = {}
+    // name属性
+    // Object.defineProperty(p, 'name', {
+    //   get() {
+    //     // 有人读取name时调用
+    //     return person.name
+    //   },
+    //   set(value) {
+    //     // 有人修改name时调用
+    //     console.log('有人修改了name属性，我发现了，我要去更新界面！')
+    //     person.name = value
+    //   }
+    // })
+    // age属性
+    // Object.defineProperty(p, 'age', {
+    //   get() {
+    //     // 有人读取age时调用
+    //     return person.age
+    //   },
+    //   set(value) {
+    //     // 有人修改name时调用
+    //     console.log('有人修改了age属性，我发现了，我要去更新界面！')
+    //     person.age = value
+    //   }
+    // })
+    // 由于只有set和get只能监听读取和修改，并不能监听到对象的属性新增和删除，所以新增删除属性无法实现响应式
+    //#endregion
+  </script>
+</body>
+</html>

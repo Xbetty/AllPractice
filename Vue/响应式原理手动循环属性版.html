@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script type="text/javascript">
+    // 源数据
+    let person = {
+      name: 'xzt',
+      age: 25
+    }
+
+    // 模拟Vue2中实现响应式
+    let p = {}
+    // name属性
+    Object.defineProperty(p, 'name', {
+      get() {
+        // 有人读取name时调用
+        return person.name
+      },
+      set(value) {
+        // 有人修改name时调用
+        console.log('有人修改了name属性，我发现了，我要去更新界面！')
+        person.name = value
+      }
+    })
+    // age属性
+    Object.defineProperty(p, 'age', {
+      get() {
+        // 有人读取age时调用
+        return person.age
+      },
+      set(value) {
+        // 有人修改name时调用
+        console.log('有人修改了age属性，我发现了，我要去更新界面！')
+        person.age = value
+      }
+    })
+
+    // 由于只有set和get只能监听读取和修改，并不能监听到对象的属性新增和删除，所以新增删除属性无法实现响应式
+  </script>
+</body>
+</html>
