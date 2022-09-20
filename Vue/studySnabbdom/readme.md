@@ -1,3 +1,5 @@
+https://blog.csdn.net/weixin_44972008/article/details/115620198
+
 npm init 
 npm i -S snabbdom 
 snabbdom: https://github.com/snabbdom/snabbdom
