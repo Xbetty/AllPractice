@@ -1,0 +1,48 @@
+<!--
+ * @Author: xbetty
+ * @Date: 2022-11-01 22:35:09
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2022-11-01 22:45:55
+ * @Description: 发布订阅模式
+ * @FilePath: /AllPractice/Javascript/设计模式/发布订阅模式.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>发布订阅模式</title>
+  </head>
+  <body></body>
+  <script>
+    class Publisher {
+      constructor() {
+        this.observers = [];
+      }
+      //添加订阅者
+      add(observer) {
+        this.observers.push(observer);
+      }
+
+      // 通知所有订阅者
+      notify() {
+        this.observers.forEach((observer) => {
+          //调用订阅者的函数
+          observer.update(this);
+        });
+      }
+    }
+    // 订阅者类 顾客
+    class CunstomerObserver {
+      constructor() {}
+      update() {
+        console.log("顾客：我收到消息了，我马上就来买");
+      }
+    }
+    const cunstomer = new CunstomerObserver() // 创建订阅者：顾客
+    const amazon = new Publisher() // 创建发布者：亚马逊
+    amazon.add(cunstomer) // 订阅到货消息
+    amazon.notify() // 货物到达通知顾客
+  </script>
+</html>

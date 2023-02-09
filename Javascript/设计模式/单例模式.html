@@ -1,0 +1,64 @@
+<!--
+ * @Author: xbetty
+ * @Date: 2022-11-01 22:25:39
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2022-11-01 22:34:12
+ * @Description: 单例模式
+ * @FilePath: /AllPractice/Javascript/设计模式/单例模式.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>单例模式</title>
+</head>
+<body>
+  <input type="button" id="btn1" value="成功">
+  <input type="button" id="btn2" value="失败">
+  <input type="button" id="btn3" value="警告">
+</body>
+<script>
+  /**
+   * 单例模式：保证仅有一个实例，并提供一个访问他的全局访问点，这样的模式就叫做单例模式。
+   * 优点：适用于单一对象，只生成一个对象实例，避免频繁创建和销毁实例，减少内存占用。
+   * 缺点：不适用动态扩展对象，或需创建多个相似对象的场景。
+  */
+  const obj = {
+      init:function(){
+          this.ele = document.createElement("dialog"),
+          document.body.appendChild(this.ele);
+      },
+      show:function(c, t){
+          // 每次显示之前先判断是否已经存在弹出框元素，如果不存在就创建，如果已经存在就不用重新创建，只需要修改样式和显示即可
+          if(!this.ele){
+              this.init();
+          }
+          this.ele.style.borderColor = c;
+          this.ele.style.color = c;
+          this.ele.innerHTML = t;
+          this.ele.style.display = "block";
+          clearTimeout(this.t);
+          this.t = setTimeout(()=>{
+              this.hide();
+          }, 2000);
+      },
+      hide:function(){
+          this.ele.style.display = "none";
+      }
+  }
+  const obtn1 = document.getElementById("btn1")
+  const obtn2 = document.getElementById("btn2")
+  const obtn3 = document.getElementById("btn3")
+  obtn1.onclick = function(){
+      obj.show("green", "成功");
+  }
+  obtn2.onclick = function(){
+      obj.show("red", "失败");
+  }
+  obtn3.onclick = function(){
+      obj.show("yellow", "警告");
+  }
+</script>
+</html>

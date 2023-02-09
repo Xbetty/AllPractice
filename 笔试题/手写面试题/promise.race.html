@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>promise.race手写</title>
+  </head>
+  <body></body>
+  <script>
+    function promiseRace(promises) {
+      return new Promise((resolve, reject) => {
+        for (let i = 0; i < promises.length; i++) {
+          promises[i].then(
+            (v) => {
+              resolve(v);
+            },
+            (r) => {
+              reject(r);
+            }
+          );
+        }
+      });
+    }
+
+    let P1 = new Promise((resolve) => {
+      setInterval(() => {
+        resolve("test: I'm P1");
+      }, 1000);
+    });
+    let P2 = new Promise((resolve, reject) => {
+      setInterval(() => {
+        reject("test: I'm P2");
+      }, 500);
+    });
+    promiseRace([P1, P2])
+      .then((value) => {
+        console.log('value',value);
+      })
+      .catch((e) => {
+        console.log('e',e)
+        throw(e)
+      });
+  </script>
+</html>

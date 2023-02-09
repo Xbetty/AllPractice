@@ -1,3 +1,11 @@
+<!--
+ * @Author: xbetty
+ * @Date: 2020-08-24 22:09:01
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2022-11-05 11:51:58
+ * @Description: 
+ * @FilePath: /AllPractice/Javascript/节流和防抖/节流.html
+-->
 <!DOCTYPE html>
 <html>
 <head>
@@ -66,16 +74,17 @@
 			当触发事件的时候,我们设置一个定时器,再触发事件的时候,如果定时器存在,就不执行,直到定时器执行,然后执行函数,清空定时器,这样我们就可以设置下一个定时器
 		*/
 		function throttle(func, wait) {
-			var timeout;
-			var previous = 0;
+			let timeout, context, args
 
 			return function() {
 				context = this;
 				args = arguments;
+				// 如果timeout没有值，就开启延时器
 				if (!timeout) {
 					timeout = setTimeout(function() {
+						func.apply(context, args)
+						// 延时器执行之后清空timeout的值
 						timeout = null;
-						func.apply(context, arguments)
 					}, wait);
 				}
 			}
